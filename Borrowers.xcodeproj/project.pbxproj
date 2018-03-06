@@ -13,6 +13,7 @@
 		0A10ECBE204DB9D200226B92 /* Borrowers.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0A10ECBC204DB9D200226B92 /* Borrowers.xcdatamodeld */; };
 		0A10ECC0204DB9D200226B92 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A10ECBF204DB9D200226B92 /* Assets.xcassets */; };
 		0A10ECC3204DB9D200226B92 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A10ECC1204DB9D200226B92 /* LaunchScreen.storyboard */; };
+		0A631B7B204DD2C700E8213F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A631B7A204DD2C700E8213F /* LoginViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		0A10ECBF204DB9D200226B92 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0A10ECC2204DB9D200226B92 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0A10ECC4204DB9D200226B92 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0A631B7A204DD2C700E8213F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +59,7 @@
 			isa = PBXGroup;
 			children = (
 				0A10ECB5204DB9D200226B92 /* AppDelegate.swift */,
+				0A631B7A204DD2C700E8213F /* LoginViewController.swift */,
 				0A10ECB7204DB9D200226B92 /* ViewController.swift */,
 				0A10ECB9204DB9D200226B92 /* Main.storyboard */,
 				0A10ECBF204DB9D200226B92 /* Assets.xcassets */,
@@ -139,6 +142,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A631B7B204DD2C700E8213F /* LoginViewController.swift in Sources */,
 				0A10ECB8204DB9D200226B92 /* ViewController.swift in Sources */,
 				0A10ECBE204DB9D200226B92 /* Borrowers.xcdatamodeld in Sources */,
 				0A10ECB6204DB9D200226B92 /* AppDelegate.swift in Sources */,
@@ -279,9 +283,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ZGDLRRP3MT;
 				INFOPLIST_FILE = Borrowers/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.gncompass.ios.Borrowers;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gncompass.ios.BorrowersTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -293,9 +299,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ZGDLRRP3MT;
 				INFOPLIST_FILE = Borrowers/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.gncompass.ios.Borrowers;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gncompass.ios.BorrowersTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
