@@ -1,0 +1,6 @@
+framework module Pods_Borrowers {
+  umbrella header "Pods-Borrowers-umbrella.h"
+
+  export *
+  module * { export * }
+}
