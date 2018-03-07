@@ -6,9 +6,11 @@
 //  Copyright © 2018 GN Compass. All rights reserved.
 //
 
+import HTTPStatusCodes
+import NVActivityIndicatorView
 import UIKit
 
-class LoginViewController: UIViewController, UITextFieldDelegate {
+class LoginViewController: UIViewController, UITextFieldDelegate, NVActivityIndicatorViewable {
     // UI
     @IBOutlet weak var textEmail: UITextField!
     @IBOutlet weak var textEmailError: UITextView!
@@ -20,7 +22,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     // Control
     var attemptingLogin = false
     var borderColorDefault = UIColor.init(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.5)
-    var borderColorError = UIColor.init(red: 1.0, green: 0.0, blue: 0.0, alpha: 1.0)
+    var borderColorError = UIColor.init(red: 1.0, green: 0.255, blue: 0.212, alpha: 1.0)
     var borderColorSelected = UIColor.init(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
     var borderEmail: CALayer?
     var borderPassword: CALayer?
@@ -106,7 +108,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         if emailValid && passwordValid {
             attemptStarted = attemptLoginToServer()
         }
-        if !attemptStarted {
+        if attemptStarted {
+            startAnimating(CGSize.init(width: 90, height: 90), type: NVActivityIndicatorType.orbit)
+        } else {
             attemptingLogin = false
         }
     }
@@ -201,7 +205,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    // MARK: - Helpers
+    // MARK: - Internals
     
     func attemptLoginToServer() -> Bool {
         let Url = "https://first-project-196541.appspot.com/core/v1/borrowers/login"
@@ -217,47 +221,49 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 
         let session = URLSession.shared
         session.dataTask(with: request) { (data, response, error) in
-            if let response = response {
-                print(response)
-            }
-            if let data = data {
-                do {
-                    let json = try JSONSerialization.jsonObject(with: data, options: [])
-                    print(json)
-                }catch {
-                    print(error)
+            var authResponse: AuthResponse?
+            var errorString: String?
+            var noNetwork = false
+
+            // Determine if the result is valid
+            if let response = response as? HTTPURLResponse, let data = data {
+                // Check the HTTP result
+                if response.statusCodeEnum == HTTPStatusCode.ok {
+                    authResponse = AuthResponse.init(data)
+                    if !authResponse!.isValid() {
+                        errorString = "The server received invalid response for the log in request"
+                    }
+                } else if response.statusCodeEnum == HTTPStatusCode.unauthorized {
+                    errorString = "The username or password is invalid"
+                } else {
+                    let errorResult = ErrorResult.init(data)
+                    if errorResult.isValid() {
+                        print(errorResult)
+                    }
+                    errorString = "The server failed to process the log in request"
                 }
+            } else {
+                noNetwork = true
+            }
+
+            // Notify the main thread of the result
+            DispatchQueue.main.async {
+                self.updateLoginResult(result: authResponse, error: errorString, noNetwork: noNetwork)
             }
         }.resume()
- 
-//        let urlString = "https://first-project-196541.appspot.com/core/v1/borrowers/login"
-//        guard let url = URL(string: urlString) else { return }
-//
-//        URLSession.shared.
-//        URLSession.shared.dataTask(with: url) { (data, response, error) in
-//            if error != nil {
-//                print(error!.localizedDescription)
-//            }
-//
-//            guard let data = data else { return }
-            //Implement JSON decoding and parsing
-//            do {
-//                //Decode retrived data with JSONDecoder and assing type of Article object
-//                let articlesData = try JSONDecoder().decode([Article].self, from: data)
-//
-//                //Get back to the main queue
-//                DispatchQueue.main.async {
-//                    //print(articlesData)
-//                    self.articles = articlesData
-//                    self.collectionView?.reloadData()
-//                }
-//
-//            } catch let jsonError {
-//                print(jsonError)
-//            }
-//        }.resume()
         
         return true
+    }
+
+    func getJsonAsDictionary(with data: Data) -> NSDictionary? {
+        do {
+            if let json = try JSONSerialization.jsonObject(with: data, options: []) as? NSDictionary {
+                return json
+            }
+        } catch {
+            print("JSON response parsing failure: \(error)")
+        }
+        return nil
     }
 
     func isValidEmail(_ testStr: String) -> Bool {
@@ -275,13 +281,37 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         textEmailError.text = "A valid email is required"
     }
     
-    func setPasswordError(preValidation: Bool) {
+    func setPasswordError(preValidation: Bool, error: String? = nil) {
         borderPassword?.backgroundColor = borderColorError.cgColor
         textPasswordError.textColor = borderColorError
+        textPasswordError.text = error
         if preValidation {
             textPasswordError.text = "A valid password is required"
         } else {
-            textPasswordError.text = "The username or password is invalid"
+            if error != nil {
+                textPasswordError.text = error!
+            } else {
+                textPasswordError.text = "The username or password is invalid"
+            }
+        }
+    }
+
+    func updateLoginResult(result: AuthResponse?, error: String?, noNetwork: Bool) {
+        if result != nil && result!.isValid() {
+            
+            // TODO: Process the result!
+            
+        } else {
+            attemptingLogin = false
+            stopAnimating()
+            
+            if noNetwork {
+                let alert = UIAlertController(title: "No Network", message: "A network connection is required to log in", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            } else {
+                setPasswordError(preValidation: false, error: error)
+            }
         }
     }
 }

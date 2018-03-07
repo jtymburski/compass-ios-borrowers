@@ -7,4 +7,5 @@ target 'Borrowers' do
 
   # Pods for Borrowers
   pod 'NVActivityIndicatorView'
+  pod 'HTTPStatusCodes', '~> 3.2.0'
 end

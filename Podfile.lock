@@ -1,14 +1,17 @@
 PODS:
+  - HTTPStatusCodes (3.2.0)
   - NVActivityIndicatorView (4.1.1):
     - NVActivityIndicatorView/Presenter (= 4.1.1)
   - NVActivityIndicatorView/Presenter (4.1.1)
 
 DEPENDENCIES:
+  - HTTPStatusCodes (~> 3.2.0)
   - NVActivityIndicatorView
 
 SPEC CHECKSUMS:
+  HTTPStatusCodes: 69f50d229c4b5d6dcb48fad9c86e32ded975bcd3
   NVActivityIndicatorView: 60109b9bf46efc2e71ab81453196ccdfdfeea870
 
-PODFILE CHECKSUM: 38198e34005b830c1d784e629e2b323880afd9b7
+PODFILE CHECKSUM: 5898a4770ac4d4c2a417ffd3bdca3dc1f648334a
 
 COCOAPODS: 1.4.0
