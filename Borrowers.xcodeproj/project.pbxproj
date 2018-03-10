@@ -18,6 +18,8 @@
 		0A10ECC0204DB9D200226B92 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A10ECBF204DB9D200226B92 /* Assets.xcassets */; };
 		0A10ECC3204DB9D200226B92 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A10ECC1204DB9D200226B92 /* LaunchScreen.storyboard */; };
 		0A631B7B204DD2C700E8213F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A631B7A204DD2C700E8213F /* LoginViewController.swift */; };
+		0A9800F4205475DA00CC5166 /* AuthRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9800F3205475DA00CC5166 /* AuthRequest.swift */; };
+		0A9800F72054782600CC5166 /* StringHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9800F62054782600CC5166 /* StringHelper.swift */; };
 		0AC757E12050651F00D152F1 /* ErrorResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC757E02050651F00D152F1 /* ErrorResult.swift */; };
 		652006DDDFCB7459B2E1ED5F /* Pods_Borrowers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C9D7EADB5EA69AB3D069A15 /* Pods_Borrowers.framework */; };
 /* End PBXBuildFile section */
@@ -36,6 +38,8 @@
 		0A10ECC2204DB9D200226B92 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0A10ECC4204DB9D200226B92 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A631B7A204DD2C700E8213F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		0A9800F3205475DA00CC5166 /* AuthRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRequest.swift; sourceTree = "<group>"; };
+		0A9800F62054782600CC5166 /* StringHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringHelper.swift; sourceTree = "<group>"; };
 		0AC757E02050651F00D152F1 /* ErrorResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResult.swift; sourceTree = "<group>"; };
 		433F034570E5BE75BEA1EDF2 /* Pods-Borrowers.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Borrowers.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Borrowers/Pods-Borrowers.debug.xcconfig"; sourceTree = "<group>"; };
 		9C9D7EADB5EA69AB3D069A15 /* Pods_Borrowers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Borrowers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -66,6 +70,7 @@
 			isa = PBXGroup;
 			children = (
 				0A0464692050604900BA5690 /* AbstractProtocol.swift */,
+				0A9800F3205475DA00CC5166 /* AuthRequest.swift */,
 				0A04646720505F2600BA5690 /* AuthResponse.swift */,
 				0A04646520505E6D00BA5690 /* BaseModel.swift */,
 				0AC757E02050651F00D152F1 /* ErrorResult.swift */,
@@ -95,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				0A04646320505E4500BA5690 /* API */,
+				0A9800F52054781700CC5166 /* Util */,
 				0A10ECB5204DB9D200226B92 /* AppDelegate.swift */,
 				0A631B7A204DD2C700E8213F /* LoginViewController.swift */,
 				0A10ECB7204DB9D200226B92 /* ViewController.swift */,
@@ -106,6 +112,14 @@
 				0A0254A4204FC31700B2D2C7 /* Podfile */,
 			);
 			path = Borrowers;
+			sourceTree = "<group>";
+		};
+		0A9800F52054781700CC5166 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				0A9800F62054782600CC5166 /* StringHelper.swift */,
+			);
+			path = Util;
 			sourceTree = "<group>";
 		};
 		648A248EAA080F0B853CEB36 /* Frameworks */ = {
@@ -257,9 +271,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A9800F72054782600CC5166 /* StringHelper.swift in Sources */,
 				0A631B7B204DD2C700E8213F /* LoginViewController.swift in Sources */,
 				0A10ECB8204DB9D200226B92 /* ViewController.swift in Sources */,
 				0A04646620505E6D00BA5690 /* BaseModel.swift in Sources */,
+				0A9800F4205475DA00CC5166 /* AuthRequest.swift in Sources */,
 				0A04646A2050604900BA5690 /* AbstractProtocol.swift in Sources */,
 				0A10ECBE204DB9D200226B92 /* Borrowers.xcdatamodeld in Sources */,
 				0AC757E12050651F00D152F1 /* ErrorResult.swift in Sources */,

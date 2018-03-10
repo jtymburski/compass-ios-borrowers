@@ -82,7 +82,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, NVActivityIndi
         // Email validation
         var emailValid = false
         if let emailText = textEmail.text {
-            if isValidEmail(emailText) {
+            if StringHelper.isValidEmail(emailText) {
                 emailValid = true
             }
         }
@@ -94,7 +94,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, NVActivityIndi
         var passwordValid = false
         if emailValid {
             if let passwordText = textPassword.text {
-                if isValidPassword(passwordText) {
+                if StringHelper.isValidPassword(passwordText) {
                     passwordValid = true
                 }
             }
@@ -145,7 +145,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, NVActivityIndi
         if textField == textEmail {
             var isError = false
             if let emailText = textField.text {
-                if !isValidEmail(emailText) {
+                if !StringHelper.isValidEmail(emailText) {
                     isError = true
                 }
             } else {
@@ -160,7 +160,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, NVActivityIndi
         else if textField == textPassword {
             var isError = false
             if let passwordText = textField.text {
-                if !isValidPassword(passwordText) {
+                if !StringHelper.isValidPassword(passwordText) {
                     isError = true
                 }
             } else {
@@ -210,14 +210,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate, NVActivityIndi
     func attemptLoginToServer() -> Bool {
         let Url = "https://first-project-196541.appspot.com/core/v1/borrowers/login"
         guard let serviceUrl = URL(string: Url) else { return false }
-        let inputJson = ["email" : textEmail.text!, "password" : textPassword.text!, "device_id" : "e7f9b371-74fa-4532-900d-2983b6e0e8ac"]
         var request = URLRequest(url: serviceUrl)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        guard let httpBody = try? JSONSerialization.data(withJSONObject: inputJson, options: []) else {
-            return false
-        }
-        request.httpBody = httpBody
+        request.httpBody = AuthRequest.init(email: textEmail.text!, password: textPassword.text!, deviceId: "e7f9b371-74fa-4532-900d-2983b6e0e8ac").toJsonData()
 
         let session = URLSession.shared
         session.dataTask(with: request) { (data, response, error) in
@@ -244,6 +240,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate, NVActivityIndi
                 }
             } else {
                 noNetwork = true
+                if error != nil {
+                    print("General failure on login attempt: \(error!)")
+                }
             }
 
             // Notify the main thread of the result
@@ -264,15 +263,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate, NVActivityIndi
             print("JSON response parsing failure: \(error)")
         }
         return nil
-    }
-
-    func isValidEmail(_ testStr: String) -> Bool {
-        let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-        return NSPredicate(format: "SELF MATCHES %@", emailRegex).evaluate(with: testStr)
-    }
-    
-    func isValidPassword(_ testStr: String) -> Bool {
-        return testStr.count > 0
     }
 
     func setEmailError() {

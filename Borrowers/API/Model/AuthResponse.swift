@@ -2,7 +2,7 @@
 //  AuthResponse.swift
 //  Borrowers
 //
-//  Created by Kevin Smith on 2018-03-07.
+//  Created by Jordan Tymburski on 2018-03-07.
 //  Copyright © 2018 GN Compass. All rights reserved.
 //
 
@@ -25,16 +25,34 @@ class AuthResponse: BaseModel, AbstractProtocol, CustomStringConvertible {
     }
 
     func isValid() -> Bool {
-        return (sessionKey != nil && sessionKey!.count > 0 && userKey != nil && userKey!.count > 0)
+        return (sessionKey != nil && NSUUID(uuidString: sessionKey!) != nil && userKey != nil && NSUUID(uuidString: userKey!) != nil)
     }
     
     func parse(_ data: Data) {
         if let json = getJsonAsDictionary(with: data) {
             if let sessionKey = json.object(forKey: KEY_SESSION) as? String,
                     let userKey = json.object(forKey: KEY_USER) as? String {
+
                 self.sessionKey = sessionKey
                 self.userKey = userKey
             }
         }
+    }
+    
+    func toJson() -> Any? {
+        if isValid() {
+            return [
+                KEY_SESSION : sessionKey!,
+                KEY_USER : userKey!
+            ]
+        }
+        return nil
+    }
+    
+    func toJsonData() -> Data? {
+        if let json = toJson() {
+            return getJsonAsData(jsonObject: json)
+        }
+        return nil
     }
 }

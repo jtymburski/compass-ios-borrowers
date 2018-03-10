@@ -2,7 +2,7 @@
 //  ErrorResult.swift
 //  Borrowers
 //
-//  Created by Kevin Smith on 2018-03-07.
+//  Created by Jordan Tymburski on 2018-03-07.
 //  Copyright © 2018 GN Compass. All rights reserved.
 //
 
@@ -36,5 +36,22 @@ class ErrorResult: BaseModel, AbstractProtocol, CustomStringConvertible {
                 self.errorString = errorString
             }
         }
+    }
+    
+    func toJson() -> Any? {
+        if isValid() {
+            return [
+                KEY_ERROR_CODE : errorCode!,
+                KEY_ERROR_STRING : errorString!
+            ]
+        }
+        return nil
+    }
+    
+    func toJsonData() -> Data? {
+        if let json = toJson() {
+            return getJsonAsData(jsonObject: json)
+        }
+        return nil
     }
 }
