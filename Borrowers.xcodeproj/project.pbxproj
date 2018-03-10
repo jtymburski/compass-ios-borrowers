@@ -58,15 +58,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0A04646320505E4500BA5690 /* API */ = {
+		0A04646320505E4500BA5690 /* api */ = {
 			isa = PBXGroup;
 			children = (
-				0A04646420505E5A00BA5690 /* Model */,
+				0A04646420505E5A00BA5690 /* model */,
 			);
-			path = API;
+			path = api;
 			sourceTree = "<group>";
 		};
-		0A04646420505E5A00BA5690 /* Model */ = {
+		0A04646420505E5A00BA5690 /* model */ = {
 			isa = PBXGroup;
 			children = (
 				0A0464692050604900BA5690 /* AbstractProtocol.swift */,
@@ -75,7 +75,7 @@
 				0A04646520505E6D00BA5690 /* BaseModel.swift */,
 				0AC757E02050651F00D152F1 /* ErrorResult.swift */,
 			);
-			path = Model;
+			path = model;
 			sourceTree = "<group>";
 		};
 		0A10ECA9204DB9D200226B92 = {
@@ -99,11 +99,10 @@
 		0A10ECB4204DB9D200226B92 /* Borrowers */ = {
 			isa = PBXGroup;
 			children = (
-				0A04646320505E4500BA5690 /* API */,
-				0A9800F52054781700CC5166 /* Util */,
+				0A04646320505E4500BA5690 /* api */,
+				0A9800F82054A85000CC5166 /* ui */,
+				0A9800F52054781700CC5166 /* util */,
 				0A10ECB5204DB9D200226B92 /* AppDelegate.swift */,
-				0A631B7A204DD2C700E8213F /* LoginViewController.swift */,
-				0A10ECB7204DB9D200226B92 /* ViewController.swift */,
 				0A10ECC1204DB9D200226B92 /* LaunchScreen.storyboard */,
 				0A10ECB9204DB9D200226B92 /* Main.storyboard */,
 				0A10ECBF204DB9D200226B92 /* Assets.xcassets */,
@@ -114,12 +113,21 @@
 			path = Borrowers;
 			sourceTree = "<group>";
 		};
-		0A9800F52054781700CC5166 /* Util */ = {
+		0A9800F52054781700CC5166 /* util */ = {
 			isa = PBXGroup;
 			children = (
 				0A9800F62054782600CC5166 /* StringHelper.swift */,
 			);
-			path = Util;
+			path = util;
+			sourceTree = "<group>";
+		};
+		0A9800F82054A85000CC5166 /* ui */ = {
+			isa = PBXGroup;
+			children = (
+				0A631B7A204DD2C700E8213F /* LoginViewController.swift */,
+				0A10ECB7204DB9D200226B92 /* ViewController.swift */,
+			);
+			path = ui;
 			sourceTree = "<group>";
 		};
 		648A248EAA080F0B853CEB36 /* Frameworks */ = {
