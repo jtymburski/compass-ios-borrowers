@@ -6,7 +6,6 @@
 //  Copyright © 2018 GN Compass. All rights reserved.
 //
 
-import HTTPStatusCodes
 import NVActivityIndicatorView
 import UIKit
 
@@ -20,6 +19,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, NVActivityIndi
     @IBOutlet weak var viewPassword: UIView!
     
     // Control
+    var account: Account?
     var attemptingLogin = false
     var borderColorDefault = UIColor.init(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.5)
     var borderColorError = UIColor.init(red: 1.0, green: 0.255, blue: 0.212, alpha: 1.0)
@@ -209,7 +209,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate, NVActivityIndi
     // MARK: - Internals
     
     func attemptLoginToServer() {
-        Session.borrowerLogin(input: AuthRequest.init(email: textEmail.text!, password: textPassword.text!, deviceId: "e7f9b371-74fa-4532-900d-2983b6e0e8ac")) { (response, errorString, noNetwork) in
+        // Fetch the account
+        if account == nil {
+            account = Account.getOrCreate()
+        }
+
+        // Initiate the session
+        Session.borrowerLogin(input: AuthRequest.init(email: textEmail.text!, password: textPassword.text!, deviceId: account!.deviceId!)) { (response, errorString, noNetwork) in
 
             DispatchQueue.main.async {
                 self.updateLoginResult(result: response, error: errorString, noNetwork: noNetwork)
