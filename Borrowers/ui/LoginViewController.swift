@@ -116,6 +116,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate, NVActivityIndi
         }
     }
 
+    @IBAction func showForgotPassword(_ sender: UIButton) {
+        let alert = UIAlertController(title: nil, message: "Coming soon", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+
     // MARK: - Text Field Delegates
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -215,7 +221,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, NVActivityIndi
         }
 
         // Initiate the session
-        Session.borrowerLogin(input: AuthRequest.init(email: textEmail.text!, password: textPassword.text!, deviceId: account!.deviceId!)) { (response, errorString, noNetwork) in
+        Session.borrowerLogin(input: AuthRequest.init(email: textEmail.text!.lowercased(), password: textPassword.text!, deviceId: account!.deviceId!)) { (response, errorString, noNetwork) in
 
             DispatchQueue.main.async {
                 self.updateLoginResult(result: response, error: errorString, noNetwork: noNetwork)
@@ -228,7 +234,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, NVActivityIndi
         textEmailError.textColor = borderColorError
         textEmailError.text = "A valid email is required"
     }
-    
+
     func setPasswordError(preValidation: Bool, error: String? = nil) {
         borderPassword?.backgroundColor = borderColorError.cgColor
         textPasswordError.textColor = borderColorError
