@@ -217,17 +217,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate, NVActivityIndi
         }
     }
 
-    func getJsonAsDictionary(with data: Data) -> NSDictionary? {
-        do {
-            if let json = try JSONSerialization.jsonObject(with: data, options: []) as? NSDictionary {
-                return json
-            }
-        } catch {
-            print("JSON response parsing failure: \(error)")
-        }
-        return nil
-    }
-
     func setEmailError() {
         borderEmail?.backgroundColor = borderColorError.cgColor
         textEmailError.textColor = borderColorError
@@ -268,51 +257,3 @@ class LoginViewController: UIViewController, UITextFieldDelegate, NVActivityIndi
         }
     }
 }
-
-// MARK: - Extensions
-
-extension CALayer {
-    
-    func addBorder(edge: UIRectEdge, color: UIColor, thickness: CGFloat) -> CALayer {
-        
-        let border = CALayer()
-        
-        switch edge {
-        case UIRectEdge.top:
-            border.frame = CGRect.init(x: 0, y: 0, width: frame.width, height: thickness)
-            break
-        case UIRectEdge.bottom:
-            border.frame = CGRect.init(x: 0, y: frame.height - thickness, width: frame.width, height: thickness)
-            break
-        case UIRectEdge.left:
-            border.frame = CGRect.init(x: 0, y: 0, width: thickness, height: frame.height)
-            break
-        case UIRectEdge.right:
-            border.frame = CGRect.init(x: frame.width - thickness, y: 0, width: thickness, height: frame.height)
-            break
-        default:
-            break
-        }
-        
-        border.backgroundColor = color.cgColor;
-
-        self.addSublayer(border)
-        
-        return border
-    }
-}
-
-extension UIView
-{
-    func setGradient(startColor:UIColor,endColor:UIColor)
-    {
-        let gradient:CAGradientLayer = CAGradientLayer()
-        gradient.colors = [startColor.cgColor, endColor.cgColor]
-        gradient.locations = [0.0 , 1.0]
-        gradient.startPoint = CGPoint(x: 0.0, y: 0.0)
-        gradient.endPoint = CGPoint(x: 0.0, y: 1.0)
-        gradient.frame = self.bounds
-        self.layer.insertSublayer(gradient, at: 0)
-    }
-}
-
