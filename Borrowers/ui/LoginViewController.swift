@@ -106,7 +106,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate, NVActivityIndi
         // Proceed if both are valid
         var attemptStarted = false
         if emailValid && passwordValid {
-            attemptStarted = attemptLoginToServer()
+            attemptStarted = true
+            attemptLoginToServer()
         }
         if attemptStarted {
             startAnimating(CGSize.init(width: 90, height: 90), type: NVActivityIndicatorType.orbit)
@@ -207,51 +208,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate, NVActivityIndi
     
     // MARK: - Internals
     
-    func attemptLoginToServer() -> Bool {
-        let Url = "https://first-project-196541.appspot.com/core/v1/borrowers/login"
-        guard let serviceUrl = URL(string: Url) else { return false }
-        var request = URLRequest(url: serviceUrl)
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = AuthRequest.init(email: textEmail.text!, password: textPassword.text!, deviceId: "e7f9b371-74fa-4532-900d-2983b6e0e8ac").toJsonData()
+    func attemptLoginToServer() {
+        Session.borrowerLogin(input: AuthRequest.init(email: textEmail.text!, password: textPassword.text!, deviceId: "e7f9b371-74fa-4532-900d-2983b6e0e8ac")) { (response, errorString, noNetwork) in
 
-        let session = URLSession.shared
-        session.dataTask(with: request) { (data, response, error) in
-            var authResponse: AuthResponse?
-            var errorString: String?
-            var noNetwork = false
-
-            // Determine if the result is valid
-            if let response = response as? HTTPURLResponse, let data = data {
-                // Check the HTTP result
-                if response.statusCodeEnum == HTTPStatusCode.ok {
-                    authResponse = AuthResponse.init(data)
-                    if !authResponse!.isValid() {
-                        errorString = "The server received invalid response for the log in request"
-                    }
-                } else if response.statusCodeEnum == HTTPStatusCode.unauthorized {
-                    errorString = "The username or password is invalid"
-                } else {
-                    let errorResult = ErrorResult.init(data)
-                    if errorResult.isValid() {
-                        print(errorResult)
-                    }
-                    errorString = "The server failed to process the log in request"
-                }
-            } else {
-                noNetwork = true
-                if error != nil {
-                    print("General failure on login attempt: \(error!)")
-                }
-            }
-
-            // Notify the main thread of the result
             DispatchQueue.main.async {
-                self.updateLoginResult(result: authResponse, error: errorString, noNetwork: noNetwork)
+                self.updateLoginResult(result: response, error: errorString, noNetwork: noNetwork)
             }
-        }.resume()
-        
-        return true
+        }
     }
 
     func getJsonAsDictionary(with data: Data) -> NSDictionary? {

@@ -20,6 +20,7 @@
 		0A631B7B204DD2C700E8213F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A631B7A204DD2C700E8213F /* LoginViewController.swift */; };
 		0A9800F4205475DA00CC5166 /* AuthRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9800F3205475DA00CC5166 /* AuthRequest.swift */; };
 		0A9800F72054782600CC5166 /* StringHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9800F62054782600CC5166 /* StringHelper.swift */; };
+		0A9800FA2054A9BA00CC5166 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9800F92054A9BA00CC5166 /* Session.swift */; };
 		0AC757E12050651F00D152F1 /* ErrorResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC757E02050651F00D152F1 /* ErrorResult.swift */; };
 		652006DDDFCB7459B2E1ED5F /* Pods_Borrowers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C9D7EADB5EA69AB3D069A15 /* Pods_Borrowers.framework */; };
 /* End PBXBuildFile section */
@@ -40,6 +41,7 @@
 		0A631B7A204DD2C700E8213F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		0A9800F3205475DA00CC5166 /* AuthRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRequest.swift; sourceTree = "<group>"; };
 		0A9800F62054782600CC5166 /* StringHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringHelper.swift; sourceTree = "<group>"; };
+		0A9800F92054A9BA00CC5166 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		0AC757E02050651F00D152F1 /* ErrorResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResult.swift; sourceTree = "<group>"; };
 		433F034570E5BE75BEA1EDF2 /* Pods-Borrowers.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Borrowers.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Borrowers/Pods-Borrowers.debug.xcconfig"; sourceTree = "<group>"; };
 		9C9D7EADB5EA69AB3D069A15 /* Pods_Borrowers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Borrowers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -62,6 +64,7 @@
 			isa = PBXGroup;
 			children = (
 				0A04646420505E5A00BA5690 /* model */,
+				0A9800F92054A9BA00CC5166 /* Session.swift */,
 			);
 			path = api;
 			sourceTree = "<group>";
@@ -286,6 +289,7 @@
 				0A9800F4205475DA00CC5166 /* AuthRequest.swift in Sources */,
 				0A04646A2050604900BA5690 /* AbstractProtocol.swift in Sources */,
 				0A10ECBE204DB9D200226B92 /* Borrowers.xcdatamodeld in Sources */,
+				0A9800FA2054A9BA00CC5166 /* Session.swift in Sources */,
 				0AC757E12050651F00D152F1 /* ErrorResult.swift in Sources */,
 				0A04646820505F2600BA5690 /* AuthResponse.swift in Sources */,
 				0A10ECB6204DB9D200226B92 /* AppDelegate.swift in Sources */,
