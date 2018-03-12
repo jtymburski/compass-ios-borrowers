@@ -14,7 +14,7 @@ struct StringHelper {
         return testStr != nil && NSPredicate(format: "SELF MATCHES %@", emailRegex).evaluate(with: testStr)
     }
     
-    static func isValidPassword(_ testStr: String?) -> Bool {
-        return testStr != nil && testStr!.count > 0
+    static func isValidPassword(_ testStr: String?, strong: Bool = false) -> Bool {
+        return testStr != nil && testStr!.count > 0 && (strong ? testStr!.count > 8 : true)
     }
 }

@@ -9,7 +9,7 @@
 import Foundation
 
 class BaseModel {
-    func getJsonAsArray(with data: Data) -> NSArray? {
+    static func getJsonAsArray(with data: Data) -> NSArray? {
         do {
             if let json = try JSONSerialization.jsonObject(with: data, options: []) as? NSArray {
                 return json

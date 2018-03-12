@@ -51,6 +51,38 @@ struct Session {
         }
     }
 
+    static func countries(completionHandler: @escaping ([Country]?, String?, Bool) -> Void) {
+        let function = "countries"
+        let method = "GET"
+
+        startRequest(function: function, method: method, body: nil) { (data, response, error) in
+            var countries: [Country]?
+            var errorString: String?
+            var noNetwork = false
+
+            // Determine if the result is valid
+            if let response = response as? HTTPURLResponse, let data = data {
+                // Check the HTTP result
+                if response.statusCodeEnum == HTTPStatusCode.ok {
+                    countries = Country.parseArray(data)
+                } else {
+                    let errorResult = ErrorResult.init(data)
+                    if errorResult.isValid() {
+                        print(errorResult)
+                    }
+                    errorString = "The server failed to process the country list fetch request"
+                }
+            } else {
+                noNetwork = true
+                if error != nil {
+                    print("General failure on country list fetch: \(error!)")
+                }
+            }
+
+            completionHandler(countries, errorString, noNetwork)
+        }
+    }
+
     // MARK: - Internals
 
     static func startRequest(function: String, method: String, body: Data?, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) {

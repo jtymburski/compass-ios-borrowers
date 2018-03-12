@@ -211,7 +211,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, NVActivityIndi
             }
         }
     }
-    
+
     // MARK: - Internals
     
     func attemptLoginToServer() {
