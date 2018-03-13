@@ -11,13 +11,13 @@ import UIKit
 
 class LoginViewController: UIViewController, UITextFieldDelegate, NVActivityIndicatorViewable {
     // UI
+    @IBOutlet weak var labelEmailError: UILabel!
+    @IBOutlet weak var labelPasswordError: UILabel!
     @IBOutlet weak var textEmail: UITextField!
-    @IBOutlet weak var textEmailError: UITextView!
     @IBOutlet weak var textPassword: UITextField!
-    @IBOutlet weak var textPasswordError: UITextView!
     @IBOutlet weak var viewEmail: UIView!
     @IBOutlet weak var viewPassword: UIView!
-    
+
     // Control
     var account: Account?
     var attemptingLogin = false
@@ -136,11 +136,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate, NVActivityIndi
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == textEmail {
             borderEmail?.backgroundColor = borderColorDefault.cgColor
-            textEmailError.text = nil
+            labelEmailError.isHidden = true
         }
         else if textField == textPassword {
             borderPassword?.backgroundColor = borderColorDefault.cgColor
-            textPasswordError.text = nil
+            labelPasswordError.isHidden = true
         }
     }
     
@@ -231,30 +231,31 @@ class LoginViewController: UIViewController, UITextFieldDelegate, NVActivityIndi
 
     func setEmailError() {
         borderEmail?.backgroundColor = borderColorError.cgColor
-        textEmailError.textColor = borderColorError
-        textEmailError.text = "A valid email is required"
+        labelEmailError.textColor = borderColorError
+        labelEmailError.text = "A valid email is required"
+        labelEmailError.isHidden = false
     }
 
     func setPasswordError(preValidation: Bool, error: String? = nil) {
         borderPassword?.backgroundColor = borderColorError.cgColor
-        textPasswordError.textColor = borderColorError
-        textPasswordError.text = error
+        labelPasswordError.textColor = borderColorError
         if preValidation {
-            textPasswordError.text = "A valid password is required"
+            labelPasswordError.text = "A valid password is required"
         } else {
             if error != nil {
-                textPasswordError.text = error!
+                labelPasswordError.text = error!
             } else {
-                textPasswordError.text = "The username or password is invalid"
+                labelPasswordError.text = "The username or password is invalid"
             }
         }
+        labelPasswordError.isHidden = false
     }
 
     func updateLoginResult(result: AuthResponse?, error: String?, noNetwork: Bool) {
         if result != nil && result!.isValid() {
-            
+
             // TODO: Process the result!
-            
+
         } else {
             attemptingLogin = false
             stopAnimating()
