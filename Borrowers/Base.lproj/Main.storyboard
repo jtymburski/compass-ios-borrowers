@@ -561,18 +561,24 @@
                         <viewLayoutGuide key="safeArea" id="6NJ-mv-Zqa"/>
                     </view>
                     <connections>
+                        <outlet property="buttonBack" destination="vIn-dY-XgE" id="mV0-em-mvO"/>
                         <outlet property="labelCountryError" destination="4f7-k5-YWM" id="AAi-uL-z9I"/>
                         <outlet property="labelEmailError" destination="xcP-WZ-jqC" id="jV0-QC-MnZ"/>
                         <outlet property="labelNameError" destination="Jae-42-RG7" id="gg6-yR-oq3"/>
                         <outlet property="labelPasswordError" destination="2ti-Ef-Wj2" id="FT9-4k-tdC"/>
+                        <outlet property="labelTitle" destination="eKJ-Ns-qe3" id="ysR-RT-EtW"/>
                         <outlet property="textCountry" destination="nO1-zq-Bzk" id="rwM-aB-bh4"/>
                         <outlet property="textEmail" destination="gJS-C3-9Yr" id="nKE-eR-arP"/>
                         <outlet property="textName" destination="yHv-eA-kjl" id="56C-UF-GHL"/>
                         <outlet property="textPassword" destination="d8B-zP-h4f" id="Qq3-cL-nfd"/>
                         <outlet property="viewCountry" destination="dNr-qT-YfO" id="a9R-Ay-b8k"/>
+                        <outlet property="viewCountrySection" destination="Oew-R9-z2G" id="86s-Wf-9Xg"/>
                         <outlet property="viewEmail" destination="tMe-t9-h1z" id="iqD-5c-9rp"/>
+                        <outlet property="viewEmailSection" destination="lSv-au-ko1" id="16A-nY-ToM"/>
                         <outlet property="viewName" destination="qQ0-E9-B06" id="bgw-Mh-lsY"/>
+                        <outlet property="viewNameSection" destination="5No-0T-JWI" id="aaG-PA-xLe"/>
                         <outlet property="viewPassword" destination="Jbq-Ud-ZlB" id="R8R-BX-6eq"/>
+                        <outlet property="viewPasswordSection" destination="tGg-0D-nxf" id="PSn-7u-21M"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6nY-f3-JOT" userLabel="First Responder" sceneMemberID="firstResponder"/>

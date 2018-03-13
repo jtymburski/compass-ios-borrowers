@@ -198,18 +198,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate, NVActivityIndi
 
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            if self.view.frame.origin.y == 0{
-                self.view.frame.origin.y -= keyboardSize.height
-            }
+            self.view.frame.origin.y = -keyboardSize.height
         }
     }
     
     @objc func keyboardWillHide(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            if self.view.frame.origin.y != 0{
-                self.view.frame.origin.y += keyboardSize.height
-            }
-        }
+        self.view.frame.origin.y = 0
     }
 
     // MARK: - Internals

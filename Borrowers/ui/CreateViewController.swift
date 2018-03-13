@@ -11,20 +11,28 @@ import UIKit
 
 class CreateViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, NVActivityIndicatorViewable {
     private let ANIMATION_SIZE = 90
+    private let KEYBOARD_COVERAGE = 100 // This matches the amount that would be shown by the button
 
     // UI
+    @IBOutlet weak var buttonBack: UIButton!
     @IBOutlet weak var labelCountryError: UILabel!
     @IBOutlet weak var labelEmailError: UILabel!
     @IBOutlet weak var labelNameError: UILabel!
     @IBOutlet weak var labelPasswordError: UILabel!
+    @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var textCountry: UITextField!
     @IBOutlet weak var textEmail: UITextField!
     @IBOutlet weak var textName: UITextField!
     @IBOutlet weak var textPassword: UITextField!
     @IBOutlet weak var viewCountry: UIView!
+    @IBOutlet weak var viewCountrySection: UIView!
     @IBOutlet weak var viewEmail: UIView!
+    @IBOutlet weak var viewEmailSection: UIView!
     @IBOutlet weak var viewName: UIView!
+    @IBOutlet weak var viewNameSection: UIView!
     @IBOutlet weak var viewPassword: UIView!
+    @IBOutlet weak var viewPasswordSection: UIView!
+    weak var viewActive: UIView?
 
     // Control
     var account: Account?
@@ -68,6 +76,17 @@ class CreateViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
         pickerCountry.dataSource = self
         pickerCountry.delegate = self
         pickerCountry.backgroundColor = UIColor.white
+        // ToolBar
+        let toolBar = UIToolbar()
+        toolBar.barStyle = .default
+        toolBar.isTranslucent = false
+        toolBar.sizeToFit()
+        // Adding Button ToolBar
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(CreateViewController.pickerDone))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        toolBar.setItems([spaceButton, doneButton], animated: false)
+        toolBar.isUserInteractionEnabled = true
+        textCountry.inputAccessoryView = toolBar
 
         // Connects the text fields to this class as delegates
         textCountry.delegate = self
@@ -110,7 +129,15 @@ class CreateViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
     }
 
     @IBAction func goBack(_ sender: UIButton) {
+        // Resign any responders
+        // TODO: Fix. This leaves the keyboard up!
+        self.view.endEditing(true)
+
         dismiss(animated: true, completion: nil)
+    }
+
+    @objc func pickerDone() {
+        textCountry.resignFirstResponder()
     }
 
     // MARK: - Picker Delegates
@@ -140,6 +167,7 @@ class CreateViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == textCountry {
+            viewActive = viewCountrySection
             borderCountry?.backgroundColor = borderColorSelected.cgColor
             if countrySelected < 0 && countryList != nil && countryList!.count > 0 {
                 textField.text = countryList![0].name
@@ -147,17 +175,23 @@ class CreateViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
             }
         }
         else if textField == textEmail {
+            viewActive = viewEmailSection
             borderEmail?.backgroundColor = borderColorSelected.cgColor
         }
         else if textField == textName {
+            viewActive = viewNameSection
             borderName?.backgroundColor = borderColorSelected.cgColor
         }
         else if textField == textPassword {
+            viewActive = viewPasswordSection
             borderPassword?.backgroundColor = borderColorSelected.cgColor
         }
+
+        // TODO: Need to update the keyboard checks even if the size doesn't change
     }
 
     func textFieldDidEndEditing(_ textField: UITextField) {
+        viewActive = nil
         if textField == textCountry {
             borderCountry?.backgroundColor = borderColorDefault.cgColor
             labelCountryError.isHidden = true
@@ -266,18 +300,22 @@ class CreateViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
 
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            if self.view.frame.origin.y == 0 {
-                self.view.frame.origin.y -= keyboardSize.height
+            if viewActive != nil {
+                let textBottom = viewActive!.frame.origin.y + viewActive!.frame.height
+                let validScreen = self.view.frame.height - keyboardSize.height
+                if validScreen < textBottom {
+                    self.view.frame.origin.y = (-keyboardSize.height + CGFloat.init(KEYBOARD_COVERAGE))
+                    buttonBack.isHidden = true
+                    labelTitle.isHidden = true
+                }
             }
         }
     }
 
     @objc func keyboardWillHide(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            if self.view.frame.origin.y != 0 {
-                self.view.frame.origin.y += keyboardSize.height
-            }
-        }
+        self.view.frame.origin.y = 0
+        buttonBack.isHidden = false
+        labelTitle.isHidden = false
     }
 
     // MARK: - Internals
