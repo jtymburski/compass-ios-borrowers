@@ -32,11 +32,13 @@ class CreateViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
     @IBOutlet weak var viewNameSection: UIView!
     @IBOutlet weak var viewPassword: UIView!
     @IBOutlet weak var viewPasswordSection: UIView!
+    weak var textActive: UITextField?
     weak var viewActive: UIView?
 
     // Control
     var account: Account?
     var attemptingCreate = false
+    var backClicked = false
     let backgroundColor = UIColor.init(red: 74.0/255.0, green: 162.0/255.0, blue: 119.0/255.0, alpha: 1.0)
     let borderColorDefault = UIColor.init(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.5)
     let borderColorError = UIColor.init(red: 1.0, green: 0.255, blue: 0.212, alpha: 1.0)
@@ -45,6 +47,7 @@ class CreateViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
     var borderEmail: CALayer?
     var borderName: CALayer?
     var borderPassword: CALayer?
+    var keyboardRect: CGRect?
 
     // Picker control
     var countryList: [Country]?
@@ -129,11 +132,13 @@ class CreateViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
     }
 
     @IBAction func goBack(_ sender: UIButton) {
-        // Resign any responders
-        // TODO: Fix. This leaves the keyboard up!
-        self.view.endEditing(true)
-
-        dismiss(animated: true, completion: nil)
+        // Drop keyboard first
+        if textActive != nil {
+            backClicked = true
+            textActive!.resignFirstResponder()
+        } else {
+            dismiss(animated: true, completion: nil)
+        }
     }
 
     @objc func pickerDone() {
@@ -166,6 +171,8 @@ class CreateViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
     // MARK: - Text Field Delegates
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        textActive = textField
+
         if textField == textCountry {
             viewActive = viewCountrySection
             borderCountry?.backgroundColor = borderColorSelected.cgColor
@@ -187,31 +194,42 @@ class CreateViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
             borderPassword?.backgroundColor = borderColorSelected.cgColor
         }
 
-        // TODO: Need to update the keyboard checks even if the size doesn't change
+        // Update the origin location, if relevant
+        updateViewForKeyboard()
     }
 
     func textFieldDidEndEditing(_ textField: UITextField) {
+        textActive = nil
         viewActive = nil
+
         if textField == textCountry {
             borderCountry?.backgroundColor = borderColorDefault.cgColor
+            labelCountryError.text = "Error text"
             labelCountryError.isHidden = true
         }
         else if textField == textEmail {
             borderEmail?.backgroundColor = borderColorDefault.cgColor
+            labelEmailError.text = "Error text"
             labelEmailError.isHidden = true
         }
         else if textField == textName {
             borderName?.backgroundColor = borderColorDefault.cgColor
+            labelNameError.text = "Error text"
             labelNameError.isHidden = true
         }
         else if textField == textPassword {
             borderPassword?.backgroundColor = borderColorDefault.cgColor
+            labelPasswordError.text = "Error text"
             labelPasswordError.isHidden = true
         }
     }
 
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         if attemptingCreate {
+            return true
+        }
+        if backClicked {
+            backClicked = false
             return true
         }
 
@@ -299,20 +317,14 @@ class CreateViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
     // MARK: - Keyboard Control
 
     @objc func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            if viewActive != nil {
-                let textBottom = viewActive!.frame.origin.y + viewActive!.frame.height
-                let validScreen = self.view.frame.height - keyboardSize.height
-                if validScreen < textBottom {
-                    self.view.frame.origin.y = (-keyboardSize.height + CGFloat.init(KEYBOARD_COVERAGE))
-                    buttonBack.isHidden = true
-                    labelTitle.isHidden = true
-                }
-            }
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            keyboardRect = keyboardSize
+            updateViewForKeyboard()
         }
     }
 
     @objc func keyboardWillHide(notification: NSNotification) {
+        keyboardRect = nil
         self.view.frame.origin.y = 0
         buttonBack.isHidden = false
         labelTitle.isHidden = false
@@ -372,6 +384,18 @@ class CreateViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
                 }
             }))
             self.present(alert, animated: true, completion: nil)
+        }
+    }
+
+    func updateViewForKeyboard() {
+        if keyboardRect != nil && viewActive != nil {
+            let textBottom = viewActive!.frame.origin.y + viewActive!.frame.height
+            let validScreen = self.view.frame.height - keyboardRect!.height
+            if validScreen < textBottom {
+                self.view.frame.origin.y = (-keyboardRect!.height + CGFloat.init(KEYBOARD_COVERAGE))
+                buttonBack.isHidden = true
+                labelTitle.isHidden = true
+            }
         }
     }
 }

@@ -136,10 +136,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate, NVActivityIndi
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == textEmail {
             borderEmail?.backgroundColor = borderColorDefault.cgColor
+            labelEmailError.text = "Error text"
             labelEmailError.isHidden = true
         }
         else if textField == textPassword {
             borderPassword?.backgroundColor = borderColorDefault.cgColor
+            labelPasswordError.text = "Error text"
             labelPasswordError.isHidden = true
         }
     }
