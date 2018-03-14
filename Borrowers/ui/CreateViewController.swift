@@ -132,13 +132,11 @@ class CreateViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
     }
 
     @IBAction func goBack(_ sender: UIButton) {
-        // Drop keyboard first
+        backClicked = true
         if textActive != nil {
-            backClicked = true
             textActive!.resignFirstResponder()
-        } else {
-            dismiss(animated: true, completion: nil)
         }
+        dismiss(animated: true, completion: nil)
     }
 
     @objc func pickerDone() {
