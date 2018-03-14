@@ -574,11 +574,9 @@
                         <outlet property="viewCountry" destination="dNr-qT-YfO" id="a9R-Ay-b8k"/>
                         <outlet property="viewCountrySection" destination="Oew-R9-z2G" id="86s-Wf-9Xg"/>
                         <outlet property="viewEmail" destination="tMe-t9-h1z" id="iqD-5c-9rp"/>
-                        <outlet property="viewEmailSection" destination="lSv-au-ko1" id="16A-nY-ToM"/>
                         <outlet property="viewName" destination="qQ0-E9-B06" id="bgw-Mh-lsY"/>
-                        <outlet property="viewNameSection" destination="5No-0T-JWI" id="aaG-PA-xLe"/>
                         <outlet property="viewPassword" destination="Jbq-Ud-ZlB" id="R8R-BX-6eq"/>
-                        <outlet property="viewPasswordSection" destination="tGg-0D-nxf" id="PSn-7u-21M"/>
+                        <outlet property="viewTitle" destination="H1F-Eo-JM0" id="gkz-bq-6wy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6nY-f3-JOT" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -11,7 +11,6 @@ import UIKit
 
 class CreateViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, NVActivityIndicatorViewable {
     private let ANIMATION_SIZE = 90
-    private let KEYBOARD_COVERAGE = 100 // This matches the amount that would be shown by the button
 
     // UI
     @IBOutlet weak var buttonBack: UIButton!
@@ -27,18 +26,14 @@ class CreateViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
     @IBOutlet weak var viewCountry: UIView!
     @IBOutlet weak var viewCountrySection: UIView!
     @IBOutlet weak var viewEmail: UIView!
-    @IBOutlet weak var viewEmailSection: UIView!
     @IBOutlet weak var viewName: UIView!
-    @IBOutlet weak var viewNameSection: UIView!
     @IBOutlet weak var viewPassword: UIView!
-    @IBOutlet weak var viewPasswordSection: UIView!
+    @IBOutlet weak var viewTitle: UIView!
     weak var textActive: UITextField?
-    weak var viewActive: UIView?
 
     // Control
     var account: Account?
     var attemptingCreate = false
-    var backClicked = false
     let backgroundColor = UIColor.init(red: 74.0/255.0, green: 162.0/255.0, blue: 119.0/255.0, alpha: 1.0)
     let borderColorDefault = UIColor.init(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.5)
     let borderColorError = UIColor.init(red: 1.0, green: 0.255, blue: 0.212, alpha: 1.0)
@@ -47,7 +42,7 @@ class CreateViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
     var borderEmail: CALayer?
     var borderName: CALayer?
     var borderPassword: CALayer?
-    var keyboardRect: CGRect?
+    var checkIgnored = false
 
     // Picker control
     var countryList: [Country]?
@@ -97,6 +92,10 @@ class CreateViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
         textName.delegate = self
         textPassword.delegate = self
 
+        // Connect the view title click
+        let gesture = UITapGestureRecognizer(target: self, action:  #selector(self.titleClick))
+        viewTitle.addGestureRecognizer(gesture)
+
         // Add observers for the keyboard showing and hiding
         NotificationCenter.default.addObserver(self, selector: #selector(CreateViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(CreateViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
@@ -132,7 +131,7 @@ class CreateViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
     }
 
     @IBAction func goBack(_ sender: UIButton) {
-        backClicked = true
+        checkIgnored = true
         if textActive != nil {
             textActive!.resignFirstResponder()
         }
@@ -141,6 +140,13 @@ class CreateViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
 
     @objc func pickerDone() {
         textCountry.resignFirstResponder()
+    }
+
+    @objc func titleClick() {
+        checkIgnored = true
+        if textActive != nil {
+            textActive!.resignFirstResponder()
+        }
     }
 
     // MARK: - Picker Delegates
@@ -172,7 +178,6 @@ class CreateViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
         textActive = textField
 
         if textField == textCountry {
-            viewActive = viewCountrySection
             borderCountry?.backgroundColor = borderColorSelected.cgColor
             if countrySelected < 0 && countryList != nil && countryList!.count > 0 {
                 textField.text = countryList![0].name
@@ -180,25 +185,18 @@ class CreateViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
             }
         }
         else if textField == textEmail {
-            viewActive = viewEmailSection
             borderEmail?.backgroundColor = borderColorSelected.cgColor
         }
         else if textField == textName {
-            viewActive = viewNameSection
             borderName?.backgroundColor = borderColorSelected.cgColor
         }
         else if textField == textPassword {
-            viewActive = viewPasswordSection
             borderPassword?.backgroundColor = borderColorSelected.cgColor
         }
-
-        // Update the origin location, if relevant
-        updateViewForKeyboard()
     }
 
     func textFieldDidEndEditing(_ textField: UITextField) {
         textActive = nil
-        viewActive = nil
 
         if textField == textCountry {
             borderCountry?.backgroundColor = borderColorDefault.cgColor
@@ -226,8 +224,8 @@ class CreateViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
         if attemptingCreate {
             return true
         }
-        if backClicked {
-            backClicked = false
+        if checkIgnored {
+            checkIgnored = false
             return true
         }
 
@@ -316,13 +314,16 @@ class CreateViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
 
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            keyboardRect = keyboardSize
-            updateViewForKeyboard()
+            let viewBottom = viewCountrySection.frame.origin.y + viewCountrySection.frame.height
+            let viewChange = keyboardSize.origin.y - viewBottom
+            self.view.frame.origin.y = viewChange
+
+            buttonBack.isHidden = true
+            labelTitle.isHidden = true
         }
     }
 
     @objc func keyboardWillHide(notification: NSNotification) {
-        keyboardRect = nil
         self.view.frame.origin.y = 0
         buttonBack.isHidden = false
         labelTitle.isHidden = false
@@ -382,18 +383,6 @@ class CreateViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
                 }
             }))
             self.present(alert, animated: true, completion: nil)
-        }
-    }
-
-    func updateViewForKeyboard() {
-        if keyboardRect != nil && viewActive != nil {
-            let textBottom = viewActive!.frame.origin.y + viewActive!.frame.height
-            let validScreen = self.view.frame.height - keyboardRect!.height
-            if validScreen < textBottom {
-                self.view.frame.origin.y = (-keyboardRect!.height + CGFloat.init(KEYBOARD_COVERAGE))
-                buttonBack.isHidden = true
-                labelTitle.isHidden = true
-            }
         }
     }
 }
