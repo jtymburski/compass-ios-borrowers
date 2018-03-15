@@ -12,7 +12,6 @@
 		0A04646820505F2600BA5690 /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A04646720505F2600BA5690 /* AuthResponse.swift */; };
 		0A04646A2050604900BA5690 /* AbstractProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0464692050604900BA5690 /* AbstractProtocol.swift */; };
 		0A10ECB6204DB9D200226B92 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A10ECB5204DB9D200226B92 /* AppDelegate.swift */; };
-		0A10ECB8204DB9D200226B92 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A10ECB7204DB9D200226B92 /* ViewController.swift */; };
 		0A10ECBB204DB9D200226B92 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A10ECB9204DB9D200226B92 /* Main.storyboard */; };
 		0A10ECBE204DB9D200226B92 /* Borrowers.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0A10ECBC204DB9D200226B92 /* Borrowers.xcdatamodeld */; };
 		0A10ECC0204DB9D200226B92 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A10ECBF204DB9D200226B92 /* Assets.xcassets */; };
@@ -28,6 +27,7 @@
 		0AB48E9720550118008E11D3 /* CreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB48E9620550118008E11D3 /* CreateViewController.swift */; };
 		0AC757E12050651F00D152F1 /* ErrorResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC757E02050651F00D152F1 /* ErrorResult.swift */; };
 		0AED28DC2057053A0031B26F /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AED28DB2057053A0031B26F /* Country.swift */; };
+		0AEE6F87205AEFFF000B2CE6 /* BankViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEE6F86205AEFFF000B2CE6 /* BankViewController.swift */; };
 		652006DDDFCB7459B2E1ED5F /* Pods_Borrowers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C9D7EADB5EA69AB3D069A15 /* Pods_Borrowers.framework */; };
 /* End PBXBuildFile section */
 
@@ -38,7 +38,6 @@
 		0A0464692050604900BA5690 /* AbstractProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractProtocol.swift; sourceTree = "<group>"; };
 		0A10ECB2204DB9D200226B92 /* Borrowers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Borrowers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A10ECB5204DB9D200226B92 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0A10ECB7204DB9D200226B92 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		0A10ECBA204DB9D200226B92 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0A10ECBD204DB9D200226B92 /* Borrowers.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Borrowers.xcdatamodel; sourceTree = "<group>"; };
 		0A10ECBF204DB9D200226B92 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -55,6 +54,7 @@
 		0AB48E9620550118008E11D3 /* CreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateViewController.swift; sourceTree = "<group>"; };
 		0AC757E02050651F00D152F1 /* ErrorResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResult.swift; sourceTree = "<group>"; };
 		0AED28DB2057053A0031B26F /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
+		0AEE6F86205AEFFF000B2CE6 /* BankViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankViewController.swift; sourceTree = "<group>"; };
 		433F034570E5BE75BEA1EDF2 /* Pods-Borrowers.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Borrowers.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Borrowers/Pods-Borrowers.debug.xcconfig"; sourceTree = "<group>"; };
 		9C9D7EADB5EA69AB3D069A15 /* Pods_Borrowers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Borrowers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E65ED82AF6AA3E91907E5BE2 /* Pods-Borrowers.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Borrowers.release.xcconfig"; path = "Pods/Target Support Files/Pods-Borrowers/Pods-Borrowers.release.xcconfig"; sourceTree = "<group>"; };
@@ -144,8 +144,8 @@
 			children = (
 				0AB48E9620550118008E11D3 /* CreateViewController.swift */,
 				0A631B7A204DD2C700E8213F /* LoginViewController.swift */,
-				0A10ECB7204DB9D200226B92 /* ViewController.swift */,
 				0A32001E2059A0E70021FE4A /* DetailsViewController.swift */,
+				0AEE6F86205AEFFF000B2CE6 /* BankViewController.swift */,
 			);
 			path = ui;
 			sourceTree = "<group>";
@@ -311,7 +311,6 @@
 				0A9800F72054782600CC5166 /* StringHelper.swift in Sources */,
 				0AB48E932054BD75008E11D3 /* Account.swift in Sources */,
 				0A631B7B204DD2C700E8213F /* LoginViewController.swift in Sources */,
-				0A10ECB8204DB9D200226B92 /* ViewController.swift in Sources */,
 				0A9800FC2054B69000CC5166 /* UiExtensions.swift in Sources */,
 				0A32001F2059A0E70021FE4A /* DetailsViewController.swift in Sources */,
 				0AB48E9720550118008E11D3 /* CreateViewController.swift in Sources */,
@@ -321,6 +320,7 @@
 				0A04646A2050604900BA5690 /* AbstractProtocol.swift in Sources */,
 				0A10ECBE204DB9D200226B92 /* Borrowers.xcdatamodeld in Sources */,
 				0A9800FA2054A9BA00CC5166 /* Session.swift in Sources */,
+				0AEE6F87205AEFFF000B2CE6 /* BankViewController.swift in Sources */,
 				0AED28DC2057053A0031B26F /* Country.swift in Sources */,
 				0AC757E12050651F00D152F1 /* ErrorResult.swift in Sources */,
 				0A04646820505F2600BA5690 /* AuthResponse.swift in Sources */,

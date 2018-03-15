@@ -10,13 +10,18 @@ import NVActivityIndicatorView
 import UIKit
 
 class LoginViewController: UIViewController, UITextFieldDelegate, NVActivityIndicatorViewable {
+    // Statics
+    let SMALL_PHONE_HEIGHT: CGFloat = 500.0
+
     // UI
+    @IBOutlet weak var imageLogo: UIImageView!
     @IBOutlet weak var labelEmailError: UILabel!
     @IBOutlet weak var labelPasswordError: UILabel!
     @IBOutlet weak var textEmail: UITextField!
     @IBOutlet weak var textPassword: UITextField!
     @IBOutlet weak var viewEmail: UIView!
     @IBOutlet weak var viewPassword: UIView!
+    @IBOutlet weak var viewPasswordSection: UIView!
 
     // Control
     var account: Account?
@@ -200,12 +205,20 @@ class LoginViewController: UIViewController, UITextFieldDelegate, NVActivityIndi
 
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            self.view.frame.origin.y = -keyboardSize.height
+            imageLogo.isHidden = true
+            if self.view.frame.height < SMALL_PHONE_HEIGHT {
+                let passBottom = viewPasswordSection.frame.origin.y + viewPasswordSection.frame.height
+                let diffFromBottom = self.view.frame.height - passBottom
+                self.view.frame.origin.y = -keyboardSize.height + diffFromBottom
+            } else {
+                self.view.frame.origin.y = -keyboardSize.height
+            }
         }
     }
-    
+
     @objc func keyboardWillHide(notification: NSNotification) {
         self.view.frame.origin.y = 0
+        imageLogo.isHidden = false
     }
 
     // MARK: - Internals
