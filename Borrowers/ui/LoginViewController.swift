@@ -19,12 +19,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate, NVActivityIndi
     @IBOutlet weak var labelPasswordError: UILabel!
     @IBOutlet weak var textEmail: UITextField!
     @IBOutlet weak var textPassword: UITextField!
+    @IBOutlet weak var viewControl: UIView!
     @IBOutlet weak var viewEmail: UIView!
     @IBOutlet weak var viewPassword: UIView!
     @IBOutlet weak var viewPasswordSection: UIView!
 
     // Control
-    var account: Account?
     var attemptingLogin = false
     var borderColorDefault = UIColor.init(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.5)
     var borderColorError = UIColor.init(red: 1.0, green: 0.255, blue: 0.212, alpha: 1.0)
@@ -32,12 +32,18 @@ class LoginViewController: UIViewController, UITextFieldDelegate, NVActivityIndi
     var borderEmail: CALayer?
     var borderPassword: CALayer?
 
+    // Model
+    var coreModel: CoreModelController!
+
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        // Load the initial core model
+        coreModel = CoreModelController()
 
         // Add gradient to main background
         let colorGreen = UIColor.init(red: 74.0/255.0, green: 162.0/255.0, blue: 119.0/255.0, alpha: 1.0)
@@ -58,20 +64,43 @@ class LoginViewController: UIViewController, UITextFieldDelegate, NVActivityIndi
         NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        // Check if log in needs to be displayed
+        if !coreModel.isLoggedIn() {
+            showControls()
+        } else {
+            // TODO!
+        }
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        // Hide the view control until it can be determined if a login is required
+        if coreModel.isLoggedIn() {
+            viewControl.isHidden = true
+        }
+    }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        // Create view
+        if let createViewController = segue.destination as? CreateViewController {
+            createViewController.coreModel = coreModel
+        }
     }
-    */
+
+    @IBAction func unwindToLogin(segue: UIStoryboardSegue) {
+        // Create view
+        if let createViewController = segue.source as? CreateViewController {
+            coreModel = createViewController.coreModel
+        }
+    }
 
     // MARK: - Button Actions
     
@@ -224,13 +253,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate, NVActivityIndi
     // MARK: - Internals
     
     func attemptLoginToServer() {
-        // Fetch the account
-        if account == nil {
-            account = Account.getOrCreate()
-        }
-
         // Initiate the session
-        Session.borrowerLogin(input: AuthRequest.init(email: textEmail.text!.lowercased(), password: textPassword.text!, deviceId: account!.deviceId!)) { (response, errorString, noNetwork) in
+        Session.borrowerLogin(input: AuthRequest.init(email: textEmail.text!.lowercased(), password: textPassword.text!, deviceId: coreModel.account.deviceId!)) { (response, errorString, noNetwork) in
 
             DispatchQueue.main.async {
                 self.updateLoginResult(result: response, error: errorString, noNetwork: noNetwork)
@@ -258,6 +282,16 @@ class LoginViewController: UIViewController, UITextFieldDelegate, NVActivityIndi
             }
         }
         labelPasswordError.isHidden = false
+    }
+
+    func showControls() {
+        if viewControl.isHidden {
+            viewControl.alpha = 0.0
+            viewControl.isHidden = false
+            UIView.animate(withDuration: 0.5, animations: {
+                self.viewControl.alpha = 1.0
+            }, completion:  nil)
+        }
     }
 
     func updateLoginResult(result: AuthResponse?, error: String?, noNetwork: Bool) {

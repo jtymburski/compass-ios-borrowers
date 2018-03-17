@@ -11,6 +11,14 @@ import Foundation
 
 extension Account {
 
+    // MARK: - Functions
+
+    func isLoggedIn() -> Bool {
+        return (sessionKey != nil && NSUUID(uuidString: sessionKey!) != nil && userKey != nil && NSUUID(uuidString: userKey!) != nil)
+    }
+
+    // MARK: - Statics
+
     static func create() -> Account {
         // Delete all
         deleteAll()

@@ -14,6 +14,45 @@ struct Session {
 
     // MARK: - Functions
 
+    static func borrowerCreate(input: RegisterRequest, completionHandler: @escaping (AuthResponse?, String?, Bool, Bool) -> Void) {
+        let function = "borrowers"
+        let method = "POST"
+
+        startRequest(function: function, method: method, body: input.toJsonData()) { (data, response, error) in
+            var authResponse: AuthResponse?
+            var emailExists = false
+            var errorString: String?
+            var noNetwork = false
+
+            // Determine if the result is valid
+            if let response = response as? HTTPURLResponse, let data = data {
+                // Check the HTTP result
+                if response.statusCodeEnum == HTTPStatusCode.created {
+                    authResponse = AuthResponse.init(data)
+                    if !authResponse!.isValid() {
+                        errorString = "The server received invalid response for the create request"
+                    }
+                } else if response.statusCodeEnum == HTTPStatusCode.conflict {
+                    errorString = "The email is already tied to an existing account"
+                    emailExists = true
+                } else {
+                    let errorResult = ErrorResult.init(data)
+                    if errorResult.isValid() {
+                        print(errorResult)
+                    }
+                    errorString = "The server failed to process the create request"
+                }
+            } else {
+                noNetwork = true
+                if error != nil {
+                    print("General failure on create attempt: \(error!)")
+                }
+            }
+
+            completionHandler(authResponse, errorString, noNetwork, emailExists)
+        }
+    }
+
     static func borrowerLogin(input: AuthRequest, completionHandler: @escaping (AuthResponse?, String?, Bool) -> Void) {
         let function = "borrowers/login"
         let method = "POST"

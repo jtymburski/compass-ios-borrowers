@@ -9,7 +9,7 @@
 import Foundation
 
 class Country: BaseModel, AbstractProtocol, CustomStringConvertible {
-    private let CODE_LENGTH = 2
+    static let CODE_LENGTH = 2
     private let KEY_CODE = "code"
     private let KEY_NAME = "name"
 
@@ -31,7 +31,7 @@ class Country: BaseModel, AbstractProtocol, CustomStringConvertible {
     }
 
     func isValid() -> Bool {
-        return code != nil && code!.count == CODE_LENGTH && name != nil && name!.count > 0
+        return code != nil && code!.count == Country.CODE_LENGTH && name != nil && name!.count > 0
     }
 
     func parse(_ data: Data) {

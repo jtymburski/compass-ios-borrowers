@@ -11,6 +11,7 @@ import UIKit
 
 class CreateViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, NVActivityIndicatorViewable {
     private let ANIMATION_SIZE = 90
+    private let UNWIND_SEGUE = "unwindToLogin"
 
     // UI
     @IBOutlet weak var buttonBack: UIButton!
@@ -44,6 +45,9 @@ class CreateViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
     var borderPassword: CALayer?
     var checkIgnored = false
 
+    // Model
+    var coreModel: CoreModelController!
+
     // Picker control
     var countryList: [Country]?
     var countrySelected = -1
@@ -54,6 +58,9 @@ class CreateViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        // Load the country data, if relevant
+        countryList = coreModel.supportedCountries
 
         // Add gradient to main background
         self.view.setGradient(startColor: backgroundColor, endColor: UIColor.black)
@@ -100,11 +107,13 @@ class CreateViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
         NotificationCenter.default.addObserver(self, selector: #selector(CreateViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(CreateViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
 
-        // Fetch the list of countries
-        startAnimating(CGSize.init(width: ANIMATION_SIZE, height: ANIMATION_SIZE), type: NVActivityIndicatorType.orbit)
-        Session.countries() { (list, errorString, noNetwork) in
-            DispatchQueue.main.async {
-                self.updateCountriesList(result: list, error: errorString, noNetwork: noNetwork)
+        // Fetch the list of countries, if it hasn't been fetched already
+        if countryList == nil || countryList!.count == 0 {
+            startAnimating(CGSize.init(width: ANIMATION_SIZE, height: ANIMATION_SIZE), type: NVActivityIndicatorType.orbit)
+            Session.countries() { (list, errorString, noNetwork) in
+                DispatchQueue.main.async {
+                    self.updateCountriesList(result: list, error: errorString, noNetwork: noNetwork)
+                }
             }
         }
     }
@@ -127,7 +136,50 @@ class CreateViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
     // MARK: - Button Actions
 
     @IBAction func attemptCreate(_ sender: UIButton) {
-        // TODO!
+        if attemptingCreate {
+            return
+        }
+        attemptingCreate = true
+
+        // Resign any responders
+        self.view.endEditing(true)
+        textFieldReset(border: borderCountry, label: labelCountryError)
+        textFieldReset(border: borderEmail, label: labelEmailError)
+        textFieldReset(border: borderName, label: labelNameError)
+        textFieldReset(border: borderPassword, label: labelPasswordError)
+
+        // Name validation
+        let nameValid = textFieldIsValid(textName)
+
+        // Email validation
+        var emailValid = false
+        if nameValid {
+            emailValid = textFieldIsValid(textEmail)
+        }
+
+        // Password validation
+        var passwordValid = false
+        if emailValid {
+            passwordValid = textFieldIsValid(textPassword)
+        }
+
+        // Country validation
+        var countryValid = false
+        if passwordValid {
+            countryValid = textFieldIsValid(textCountry)
+        }
+
+        // Proceed if all are valid
+        var attemptStarted = false
+        if nameValid && emailValid && passwordValid && countryValid {
+            attemptStarted = true
+            attemptCreateToServer()
+        }
+        if attemptStarted {
+            startAnimating(CGSize.init(width: 90, height: 90), type: NVActivityIndicatorType.orbit)
+        } else {
+            attemptingCreate = false
+        }
     }
 
     @IBAction func goBack(_ sender: UIButton) {
@@ -135,7 +187,7 @@ class CreateViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
         if textActive != nil {
             textActive!.resignFirstResponder()
         }
-        dismiss(animated: true, completion: nil)
+        performSegue(withIdentifier: UNWIND_SEGUE, sender: self)
     }
 
     @objc func pickerDone() {
@@ -199,24 +251,16 @@ class CreateViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
         textActive = nil
 
         if textField == textCountry {
-            borderCountry?.backgroundColor = borderColorDefault.cgColor
-            labelCountryError.text = "Error text"
-            labelCountryError.isHidden = true
+            textFieldReset(border: borderCountry, label: labelCountryError)
         }
         else if textField == textEmail {
-            borderEmail?.backgroundColor = borderColorDefault.cgColor
-            labelEmailError.text = "Error text"
-            labelEmailError.isHidden = true
+            textFieldReset(border: borderEmail, label: labelEmailError)
         }
         else if textField == textName {
-            borderName?.backgroundColor = borderColorDefault.cgColor
-            labelNameError.text = "Error text"
-            labelNameError.isHidden = true
+            textFieldReset(border: borderName, label: labelNameError)
         }
         else if textField == textPassword {
-            borderPassword?.backgroundColor = borderColorDefault.cgColor
-            labelPasswordError.text = "Error text"
-            labelPasswordError.isHidden = true
+            textFieldReset(border: borderPassword, label: labelPasswordError)
         }
     }
 
@@ -229,6 +273,106 @@ class CreateViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
             return true
         }
 
+        return textFieldIsValid(textField)
+    }
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == textName {
+            textEmail.becomeFirstResponder()
+        }
+        else if textField == textEmail {
+            textPassword.becomeFirstResponder()
+        }
+        else if textField == textPassword {
+            textCountry.becomeFirstResponder()
+        }
+        else if textField == textCountry {
+            textCountry.resignFirstResponder()
+        }
+
+        return true
+    }
+
+    // MARK: - Keyboard Control
+
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            let viewBottom = viewCountrySection.frame.origin.y + viewCountrySection.frame.height
+            let viewChange = keyboardSize.origin.y - viewBottom
+            self.view.frame.origin.y = viewChange
+
+            buttonBack.isHidden = true
+            labelTitle.isHidden = true
+        }
+    }
+
+    @objc func keyboardWillHide(notification: NSNotification) {
+        self.view.frame.origin.y = 0
+        buttonBack.isHidden = false
+        labelTitle.isHidden = false
+    }
+
+    // MARK: - Internals
+
+    func attemptCreateToServer() {
+        // Create the register request
+        coreModel.userInfo = UserInfo(name: textName.text!, email: textEmail.text!.lowercased(), countryCode: countryList![countrySelected].code!)
+        let registerRequest = RegisterRequest.init(name: coreModel.userInfo!.name!, email: coreModel.userInfo!.email, password: textPassword.text!, country: coreModel.userInfo!.countryCode!, deviceId: coreModel.account.deviceId!)
+
+        // Start the request
+        Session.borrowerCreate(input: registerRequest) { (response, errorString, noNetwork, emailExists) in
+
+            DispatchQueue.main.async {
+                self.updateCreateResult(result: response, error: errorString, noNetwork: noNetwork, emailExists: emailExists)
+            }
+        }
+    }
+
+    func isValidCountry(_ country: String) -> Bool {
+        return countrySelected >= 0 && countrySelected < countryList!.count && countryList![countrySelected].name == country
+    }
+
+    func isValidName(_ name: String) -> Bool {
+        return name.count > 1
+    }
+
+    func setCountryError(_ error: String?) {
+        borderCountry?.backgroundColor = borderColorError.cgColor
+        labelCountryError.textColor = borderColorError
+        if error != nil {
+            labelCountryError.text = error
+        } else {
+            labelCountryError.text = "Your home country is required"
+        }
+        labelCountryError.isHidden = false
+    }
+
+    func setEmailError(preValidation: Bool) {
+        borderEmail?.backgroundColor = borderColorError.cgColor
+        labelEmailError.textColor = borderColorError
+        if preValidation {
+            labelEmailError.text = "A valid email is required"
+        } else {
+            labelEmailError.text = "This email is already in use"
+        }
+        labelEmailError.isHidden = false
+    }
+
+    func setNameError() {
+        borderName?.backgroundColor = borderColorError.cgColor
+        labelNameError.textColor = borderColorError
+        labelNameError.text = "Your name is required"
+        labelNameError.isHidden = false
+    }
+
+    func setPasswordError() {
+        borderPassword?.backgroundColor = borderColorError.cgColor
+        labelPasswordError.textColor = borderColorError
+        labelPasswordError.text = "The password must be at least 8 characters"
+        labelPasswordError.isHidden = false
+    }
+
+    func textFieldIsValid(_ textField: UITextField) -> Bool {
         if textField == textCountry {
             var isError = false
             if let countryText = textField.text {
@@ -240,7 +384,7 @@ class CreateViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
             }
 
             if isError {
-                setCountryError()
+                setCountryError(nil)
                 return false
             }
         }
@@ -293,88 +437,39 @@ class CreateViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
         return true
     }
 
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField == textName {
-            textEmail.becomeFirstResponder()
-        }
-        else if textField == textEmail {
-            textPassword.becomeFirstResponder()
-        }
-        else if textField == textPassword {
-            textCountry.becomeFirstResponder()
-        }
-        else if textField == textCountry {
-            textCountry.resignFirstResponder()
-        }
-
-        return true
+    func textFieldReset(border: CALayer?, label: UILabel) {
+        border?.backgroundColor = borderColorDefault.cgColor
+        label.text = "Error text"
+        label.isHidden = true
     }
 
-    // MARK: - Keyboard Control
+    func updateCreateResult(result: AuthResponse?, error: String?, noNetwork: Bool, emailExists: Bool) {
+        stopAnimating()
 
-    @objc func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            let viewBottom = viewCountrySection.frame.origin.y + viewCountrySection.frame.height
-            let viewChange = keyboardSize.origin.y - viewBottom
-            self.view.frame.origin.y = viewChange
+        if result != nil && result!.isValid() {
+            coreModel.account.sessionKey = result!.sessionKey
+            coreModel.account.userKey = result!.userKey
 
-            buttonBack.isHidden = true
-            labelTitle.isHidden = true
-        }
-    }
-
-    @objc func keyboardWillHide(notification: NSNotification) {
-        self.view.frame.origin.y = 0
-        buttonBack.isHidden = false
-        labelTitle.isHidden = false
-    }
-
-    // MARK: - Internals
-
-    func isValidCountry(_ country: String) -> Bool {
-        // TODO: Replace with list validation!
-        return country.count > 1
-    }
-
-    func isValidName(_ name: String) -> Bool {
-        return name.count > 1
-    }
-
-    func setCountryError() {
-        borderCountry?.backgroundColor = borderColorError.cgColor
-        labelCountryError.textColor = borderColorError
-        labelCountryError.text = "Your home country is required"
-        labelCountryError.isHidden = false
-    }
-
-    func setEmailError(preValidation: Bool) {
-        borderEmail?.backgroundColor = borderColorError.cgColor
-        labelEmailError.textColor = borderColorError
-        if preValidation {
-            labelEmailError.text = "A valid email is required"
+            performSegue(withIdentifier: UNWIND_SEGUE, sender: self)
         } else {
-            labelEmailError.text = "This email is already in use"
+            attemptingCreate = false
+
+            if noNetwork {
+                let alert = UIAlertController(title: "No Network", message: "A network connection is required to create", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            } else if emailExists {
+                setEmailError(preValidation: false)
+            } else {
+                setCountryError(error)
+            }
         }
-        labelEmailError.isHidden = false
-    }
-
-    func setNameError() {
-        borderName?.backgroundColor = borderColorError.cgColor
-        labelNameError.textColor = borderColorError
-        labelNameError.text = "Your name is required"
-        labelNameError.isHidden = false
-    }
-
-    func setPasswordError() {
-        borderPassword?.backgroundColor = borderColorError.cgColor
-        labelPasswordError.textColor = borderColorError
-        labelPasswordError.text = "The password must be at least 8 characters"
-        labelPasswordError.isHidden = false
     }
 
     func updateCountriesList(result: [Country]?, error: String?, noNetwork: Bool) {
         stopAnimating()
         countryList = result
+        coreModel.supportedCountries = countryList
         if countryList == nil || countryList!.count == 0 {
             let alert = UIAlertController(title: "No Network", message: "A network connection is required to create an account", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in

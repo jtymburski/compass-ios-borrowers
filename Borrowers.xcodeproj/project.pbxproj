@@ -28,6 +28,9 @@
 		0AC757E12050651F00D152F1 /* ErrorResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC757E02050651F00D152F1 /* ErrorResult.swift */; };
 		0AED28DC2057053A0031B26F /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AED28DB2057053A0031B26F /* Country.swift */; };
 		0AEE6F87205AEFFF000B2CE6 /* BankViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEE6F86205AEFFF000B2CE6 /* BankViewController.swift */; };
+		0AFDBD94205C43BB00737BF1 /* CoreModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFDBD93205C43BB00737BF1 /* CoreModelController.swift */; };
+		0AFDBD98205C70AE00737BF1 /* RegisterRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFDBD97205C70AE00737BF1 /* RegisterRequest.swift */; };
+		0AFDBD9A205C97A300737BF1 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFDBD99205C97A300737BF1 /* UserInfo.swift */; };
 		652006DDDFCB7459B2E1ED5F /* Pods_Borrowers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C9D7EADB5EA69AB3D069A15 /* Pods_Borrowers.framework */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +58,9 @@
 		0AC757E02050651F00D152F1 /* ErrorResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResult.swift; sourceTree = "<group>"; };
 		0AED28DB2057053A0031B26F /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		0AEE6F86205AEFFF000B2CE6 /* BankViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankViewController.swift; sourceTree = "<group>"; };
+		0AFDBD93205C43BB00737BF1 /* CoreModelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreModelController.swift; sourceTree = "<group>"; };
+		0AFDBD97205C70AE00737BF1 /* RegisterRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterRequest.swift; sourceTree = "<group>"; };
+		0AFDBD99205C97A300737BF1 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		433F034570E5BE75BEA1EDF2 /* Pods-Borrowers.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Borrowers.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Borrowers/Pods-Borrowers.debug.xcconfig"; sourceTree = "<group>"; };
 		9C9D7EADB5EA69AB3D069A15 /* Pods_Borrowers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Borrowers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E65ED82AF6AA3E91907E5BE2 /* Pods-Borrowers.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Borrowers.release.xcconfig"; path = "Pods/Target Support Files/Pods-Borrowers/Pods-Borrowers.release.xcconfig"; sourceTree = "<group>"; };
@@ -90,6 +96,7 @@
 				0A04646520505E6D00BA5690 /* BaseModel.swift */,
 				0AED28DB2057053A0031B26F /* Country.swift */,
 				0AC757E02050651F00D152F1 /* ErrorResult.swift */,
+				0AFDBD97205C70AE00737BF1 /* RegisterRequest.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -155,6 +162,8 @@
 			children = (
 				0AB48E922054BD75008E11D3 /* Account.swift */,
 				0AB48E942054C161008E11D3 /* CoreDataStack.swift */,
+				0AFDBD93205C43BB00737BF1 /* CoreModelController.swift */,
+				0AFDBD99205C97A300737BF1 /* UserInfo.swift */,
 			);
 			path = data;
 			sourceTree = "<group>";
@@ -310,10 +319,13 @@
 			files = (
 				0A9800F72054782600CC5166 /* StringHelper.swift in Sources */,
 				0AB48E932054BD75008E11D3 /* Account.swift in Sources */,
+				0AFDBD94205C43BB00737BF1 /* CoreModelController.swift in Sources */,
 				0A631B7B204DD2C700E8213F /* LoginViewController.swift in Sources */,
+				0AFDBD98205C70AE00737BF1 /* RegisterRequest.swift in Sources */,
 				0A9800FC2054B69000CC5166 /* UiExtensions.swift in Sources */,
 				0A32001F2059A0E70021FE4A /* DetailsViewController.swift in Sources */,
 				0AB48E9720550118008E11D3 /* CreateViewController.swift in Sources */,
+				0AFDBD9A205C97A300737BF1 /* UserInfo.swift in Sources */,
 				0A04646620505E6D00BA5690 /* BaseModel.swift in Sources */,
 				0A9800F4205475DA00CC5166 /* AuthRequest.swift in Sources */,
 				0AB48E952054C161008E11D3 /* CoreDataStack.swift in Sources */,
