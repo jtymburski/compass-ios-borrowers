@@ -247,9 +247,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate, NVActivityIndi
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             imageLogo.isHidden = true
             if self.view.frame.height < SMALL_PHONE_HEIGHT {
-                let passBottom = viewPasswordSection.frame.origin.y + viewPasswordSection.frame.height
+                let frame = self.view.convert(viewPasswordSection.frame, from: viewControl)
+                let passBottom = frame.origin.y + frame.height
                 let diffFromBottom = self.view.frame.height - passBottom
-                self.view.frame.origin.y = -keyboardSize.height + diffFromBottom
+                self.view.frame.origin.y = -(keyboardSize.height -  diffFromBottom)
             } else {
                 self.view.frame.origin.y = -keyboardSize.height
             }
