@@ -61,6 +61,9 @@ class DetailsViewController: UIViewController, UITextFieldDelegate {
     var borderPostCode: CALayer!
     var borderProvince: CALayer!
 
+    // Model
+    var coreModel: CoreModelController!
+
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }

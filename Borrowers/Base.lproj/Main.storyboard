@@ -249,6 +249,7 @@
                         <outlet property="viewEmail" destination="fHb-Yi-TuM" id="g1u-v5-nyH"/>
                         <outlet property="viewPassword" destination="pte-IC-Wbu" id="iDG-Ps-DSc"/>
                         <outlet property="viewPasswordSection" destination="jo7-pf-6L7" id="NRG-3W-sqW"/>
+                        <segue destination="nsL-hY-UMd" kind="show" identifier="showDetails" id="B9s-ps-7DJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4vS-RV-e1Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -649,7 +650,6 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="attemptCreate:" destination="FyL-M4-Ben" eventType="touchUpInside" id="TEf-eF-xAp"/>
-                                    <segue destination="dLp-am-iQB" kind="show" id="Vk7-7j-Pow"/>
                                 </connections>
                             </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" showsHorizontalScrollIndicator="NO" indicatorStyle="white" translatesAutoresizingMaskIntoConstraints="NO" id="Zt8-Gr-XWY">
@@ -1315,7 +1315,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q86-h6-3RT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="236.25" y="-114.08450704225352"/>
+            <point key="canvasLocation" x="476" y="-938"/>
         </scene>
         <!--Bank View Controller-->
         <scene sceneID="z9d-s4-aaN">
@@ -1330,7 +1330,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="317-BW-ut4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1395" y="-219"/>
+            <point key="canvasLocation" x="1703" y="-939"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -1364,7 +1364,7 @@ Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed 
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-251" y="1182"/>
+            <point key="canvasLocation" x="983" y="411"/>
         </scene>
     </scenes>
     <resources>

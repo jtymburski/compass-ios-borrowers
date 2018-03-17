@@ -10,7 +10,9 @@ import Foundation
 import HTTPStatusCodes
 
 struct Session {
-    static let baseUrl = "https://first-project-196541.appspot.com/core/v1/"
+    // Dev
+    static let host = "https://first-project-196541.appspot.com"
+    static let baseUrl = host + "/core/v1/"
 
     // MARK: - Functions
 
@@ -18,7 +20,7 @@ struct Session {
         let function = "borrowers"
         let method = "POST"
 
-        startRequest(function: function, method: method, body: input.toJsonData()) { (data, response, error) in
+        startRequest(function: function, method: method, accessKey: nil, body: input.toJsonData()) { (data, response, error) in
             var authResponse: AuthResponse?
             var emailExists = false
             var errorString: String?
@@ -53,11 +55,49 @@ struct Session {
         }
     }
 
+    static func borrowerInfo(account: Account, completionHandler: @escaping (BorrowerViewable?, String?, Bool, Bool) -> Void) {
+        let function = "borrowers/" + account.userKey!
+        let method = "GET"
+
+        startRequest(function: function, method: method, accessKey: account.getAccessKey(), body: nil) { (data, response, error) in
+            var borrowerInfo: BorrowerViewable?
+            var errorString: String?
+            var noNetwork = false
+            var unauthorized = false
+
+            // Determine if the result is valid
+            if let response = response as? HTTPURLResponse, let data = data {
+                // Check the HTTP result
+                if response.statusCodeEnum == HTTPStatusCode.ok {
+                    borrowerInfo = BorrowerViewable.init(data)
+                    if !borrowerInfo!.isValid() {
+                        errorString = "The server received invalid response for the borrower info fetch request"
+                    }
+                } else if response.statusCodeEnum == HTTPStatusCode.unauthorized {
+                    unauthorized = true
+                } else {
+                    let errorResult = ErrorResult.init(data)
+                    if errorResult.isValid() {
+                        print(errorResult)
+                    }
+                    errorString = "The server failed to process the borrower info fetch request"
+                }
+            } else {
+                noNetwork = true
+                if error != nil {
+                    print("General failure on borrower info fetch attempt: \(error!)")
+                }
+            }
+
+            completionHandler(borrowerInfo, errorString, noNetwork, unauthorized)
+        }
+    }
+
     static func borrowerLogin(input: AuthRequest, completionHandler: @escaping (AuthResponse?, String?, Bool) -> Void) {
         let function = "borrowers/login"
         let method = "POST"
 
-        startRequest(function: function, method: method, body: input.toJsonData()) { (data, response, error) in
+        startRequest(function: function, method: method, accessKey: nil, body: input.toJsonData()) { (data, response, error) in
             var authResponse: AuthResponse?
             var errorString: String?
             var noNetwork = false
@@ -94,7 +134,7 @@ struct Session {
         let function = "countries"
         let method = "GET"
 
-        startRequest(function: function, method: method, body: nil) { (data, response, error) in
+        startRequest(function: function, method: method, accessKey: nil, body: nil) { (data, response, error) in
             var countries: [Country]?
             var errorString: String?
             var noNetwork = false
@@ -124,10 +164,13 @@ struct Session {
 
     // MARK: - Internals
 
-    static func startRequest(function: String, method: String, body: Data?, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) {
+    static func startRequest(function: String, method: String, accessKey: String?, body: Data?, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) {
         var request = URLRequest(url: URL(string: baseUrl + function)!)
         request.httpMethod = method
         request.setValue("application/json", forHTTPHeaderField: "Accept")
+        if accessKey != nil {
+            request.setValue(accessKey!, forHTTPHeaderField: "access_key")
+        }
         if(body != nil) {
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
             request.httpBody = body

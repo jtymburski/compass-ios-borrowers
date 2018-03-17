@@ -13,6 +13,18 @@ extension Account {
 
     // MARK: - Functions
 
+    func clear() {
+        sessionKey = nil
+        userKey = nil
+    }
+
+    func getAccessKey() -> String? {
+        if isLoggedIn() {
+            return deviceId! + "-" + sessionKey!
+        }
+        return nil
+    }
+
     func isLoggedIn() -> Bool {
         return (sessionKey != nil && NSUUID(uuidString: sessionKey!) != nil && userKey != nil && NSUUID(uuidString: userKey!) != nil)
     }

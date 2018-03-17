@@ -17,7 +17,25 @@ class CoreModelController {
         account = Account.getOrCreate()
     }
 
+    func authenticate(_ response: AuthResponse) {
+        account.sessionKey = response.sessionKey
+        account.userKey = response.userKey
+    }
+
+    func clear() {
+        account.clear()
+        userInfo = nil
+    }
+
     func isLoggedIn() -> Bool {
         return account.isLoggedIn()
+    }
+
+    func updateUserInfo(from info: BorrowerViewable) {
+        if userInfo != nil {
+            userInfo?.update(from: info)
+        } else {
+            userInfo = UserInfo.init(from: info)
+        }
     }
 }

@@ -2,7 +2,7 @@
 //  BankViewController.swift
 //  Borrowers
 //
-//  Created by Kevin Smith on 2018-03-15.
+//  Created by Jordan Tymburski on 2018-03-15.
 //  Copyright © 2018 GN Compass. All rights reserved.
 //
 

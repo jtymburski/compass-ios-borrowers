@@ -9,13 +9,43 @@
 import Foundation
 
 class UserInfo {
+    var address1: String?
+    var address2: String?
+    var address3: String?
+    var city: String?
     var countryCode: String?
     var email: String!
+    var employer: String?
+    var jobTitle: String?
+    var loanCap: Float?
     var name: String?
+    var phone: String?
+    var postCode: String?
+    var province: String?
+
+    init(from info: BorrowerViewable) {
+        update(from: info)
+    }
 
     init(name: String, email: String, countryCode: String) {
         self.name = name
         self.email = email
         self.countryCode = countryCode
+    }
+
+    func update(from info: BorrowerViewable) {
+        address1 = info.address1
+        address2 = info.address2
+        address3 = info.address3
+        city = info.city
+        countryCode = info.country
+        email = info.email
+        employer = info.employer
+        jobTitle = info.jobTitle
+        loanCap = info.loanCap
+        name = info.name
+        phone = info.phone
+        postCode = info.postCode
+        province = info.province
     }
 }

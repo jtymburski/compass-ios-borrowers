@@ -69,7 +69,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, NVActivityIndi
         if !coreModel.isLoggedIn() {
             showControls()
         } else {
-            // TODO!
+            fetchInfo()
         }
     }
 
@@ -92,6 +92,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate, NVActivityIndi
         // Create view
         if let createViewController = segue.destination as? CreateViewController {
             createViewController.coreModel = coreModel
+        }
+
+        // Details view
+        if let detailsViewController = segue.source as? DetailsViewController {
+            detailsViewController.coreModel = coreModel
         }
     }
 
@@ -255,9 +260,34 @@ class LoginViewController: UIViewController, UITextFieldDelegate, NVActivityIndi
     func attemptLoginToServer() {
         // Initiate the session
         Session.borrowerLogin(input: AuthRequest.init(email: textEmail.text!.lowercased(), password: textPassword.text!, deviceId: coreModel.account.deviceId!)) { (response, errorString, noNetwork) in
+            // Process the data
+            var success = false
+            if response != nil && response!.isValid() {
+                self.coreModel.authenticate(response!)
+                success = true
+            }
 
+            // Send the result to the main UI thread
             DispatchQueue.main.async {
-                self.updateLoginResult(result: response, error: errorString, noNetwork: noNetwork)
+                self.updateLoginResult(success: success, error: errorString, noNetwork: noNetwork)
+            }
+        }
+    }
+
+    func fetchInfo() {
+        Session.borrowerInfo(account: coreModel.account) { (borrowerInfo, errorString, noNetwork, unauthorized) in
+            // Process the data
+            var success = false
+            if borrowerInfo != nil && borrowerInfo!.isValid() {
+                self.coreModel.updateUserInfo(from: borrowerInfo!)
+                success = true
+            } else if unauthorized {
+                self.coreModel.clear()
+            }
+
+            // Send the result to the main UI thread
+            DispatchQueue.main.async {
+                self.updateInfoResult(success: success, error: errorString, noNetwork: noNetwork, unauthorized: unauthorized)
             }
         }
     }
@@ -294,19 +324,37 @@ class LoginViewController: UIViewController, UITextFieldDelegate, NVActivityIndi
         }
     }
 
-    func updateLoginResult(result: AuthResponse?, error: String?, noNetwork: Bool) {
-        if result != nil && result!.isValid() {
+    func showErrorAlert() {
+        let alert = UIAlertController(title: "No Network", message: "A network connection is required to log in", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
 
-            // TODO: Process the result!
+    func updateInfoResult(success: Bool, error: String?, noNetwork: Bool, unauthorized: Bool) {
+        attemptingLogin = false
+        stopAnimating()
 
+        if success {
+            // TODO: Segue depending on the state
+            performSegue(withIdentifier: "showDetails", sender: self)
+        } else {
+            if unauthorized {
+                showControls()
+            } else {
+                showErrorAlert()
+            }
+        }
+    }
+
+    func updateLoginResult(success: Bool, error: String?, noNetwork: Bool) {
+        if success {
+            fetchInfo()
         } else {
             attemptingLogin = false
             stopAnimating()
             
             if noNetwork {
-                let alert = UIAlertController(title: "No Network", message: "A network connection is required to log in", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                self.present(alert, animated: true, completion: nil)
+                showErrorAlert()
             } else {
                 setPasswordError(preValidation: false, error: error)
             }
