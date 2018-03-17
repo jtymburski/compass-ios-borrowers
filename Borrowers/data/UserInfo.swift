@@ -33,6 +33,10 @@ class UserInfo {
         self.countryCode = countryCode
     }
 
+    func hasValidDetails() -> Bool {
+        return address1 != nil && address1!.count > 0 && city != nil && city!.count > 0 && employer != nil && employer!.count > 0 && jobTitle != nil && jobTitle!.count > 0 && phone != nil && phone!.count > 0
+    }
+
     func update(from info: BorrowerViewable) {
         address1 = info.address1
         address2 = info.address2

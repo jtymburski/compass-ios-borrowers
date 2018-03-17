@@ -27,6 +27,13 @@ class CoreModelController {
         userInfo = nil
     }
 
+    func hasValidDetails() -> Bool {
+        if userInfo != nil {
+            return userInfo!.hasValidDetails()
+        }
+        return false
+    }
+
     func isLoggedIn() -> Bool {
         return account.isLoggedIn()
     }

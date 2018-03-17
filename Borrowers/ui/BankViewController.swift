@@ -10,6 +10,9 @@ import UIKit
 
 class BankViewController: UIViewController {
 
+    // Model
+    var coreModel: CoreModelController!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 

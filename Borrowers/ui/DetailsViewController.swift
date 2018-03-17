@@ -6,9 +6,10 @@
 //  Copyright © 2018 GN Compass. All rights reserved.
 //
 
+import NVActivityIndicatorView
 import UIKit
 
-class DetailsViewController: UIViewController, UITextFieldDelegate {
+class DetailsViewController: UIViewController, UITextFieldDelegate, NVActivityIndicatorViewable {
     // Constants
     let BACKGROUND_COLOR = UIColor.init(red: 74.0/255.0, green: 162.0/255.0, blue: 119.0/255.0, alpha: 1.0)
     let BORDER_COLOR_ACTIVE = UIColor.init(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
@@ -51,6 +52,7 @@ class DetailsViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var viewSectionProvince: UIView!
 
     // Control
+    var attemptingUpdate = false
     var borderAddress1: CALayer!
     var borderAddress2: CALayer!
     var borderAddress3: CALayer!
@@ -94,6 +96,19 @@ class DetailsViewController: UIViewController, UITextFieldDelegate {
         viewProvince.layoutIfNeeded()
         borderProvince = viewProvince.layer.addBorder(edge: .bottom, color: BORDER_COLOR_DEFAULT, thickness: 1.0)
 
+        // Update the data to the user info state
+        if let userInfo = coreModel.userInfo {
+            textAddress1.text = userInfo.address1
+            textAddress2.text = userInfo.address2
+            textAddress3.text = userInfo.address3
+            textCity.text = userInfo.city
+            textCompany.text = userInfo.employer
+            textJobTitle.text = userInfo.jobTitle
+            textPhone.text = userInfo.phone
+            textPostCode.text = userInfo.postCode
+            textProvince.text = userInfo.province
+        }
+
         // Connects the text fields to this class as delegates
         textAddress1.delegate = self
         textAddress2.delegate = self
@@ -115,15 +130,70 @@ class DetailsViewController: UIViewController, UITextFieldDelegate {
         // Dispose of any resources that can be recreated.
     }
 
-    /*
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        // Bank view
+        if let bankViewController = segue.destination as? BankViewController {
+            bankViewController.coreModel = coreModel
+        }
     }
-    */
+
+    // MARK: - Button Actions
+
+    @IBAction func attemptUpdate(_ sender: UIButton) {
+        if attemptingUpdate {
+            return
+        }
+        attemptingUpdate = true
+
+        // Resign any responders
+        self.view.endEditing(true)
+        textFieldReset(border: borderAddress1, label: labelErrorAddress1)
+        textFieldReset(border: borderCity, label: labelErrorCity)
+        textFieldReset(border: borderCompany, label: labelErrorCompany)
+        textFieldReset(border: borderJobTitle, label: labelErrorJobTitle)
+        textFieldReset(border: borderPhone, label: labelErrorPhone)
+
+        // Address 1 validation
+        let addressValid = !checkForError(textAddress1)
+
+        // City validation
+        var cityValid = false
+        if addressValid {
+            cityValid = !checkForError(textCity)
+        }
+
+        // Phone validation
+        var phoneValid = false
+        if cityValid {
+            phoneValid = !checkForError(textPhone)
+        }
+
+        // Company validation
+        var companyValid = false
+        if phoneValid {
+            companyValid = !checkForError(textCompany)
+        }
+
+        // Job title validation
+        var jobTitleValid = false
+        if companyValid {
+            jobTitleValid = !checkForError(textJobTitle)
+        }
+
+        // Proceed if all are valid
+        var attemptStarted = false
+        if addressValid && cityValid && phoneValid && companyValid && jobTitleValid {
+            attemptStarted = true
+            attemptUpdateToServer()
+        }
+        if attemptStarted {
+            startAnimating(CGSize.init(width: 90, height: 90), type: NVActivityIndicatorType.orbit)
+        } else {
+            attemptingUpdate = false
+        }
+    }
 
     // MARK: - Text Field Delegates
 
@@ -252,6 +322,32 @@ class DetailsViewController: UIViewController, UITextFieldDelegate {
 
     // MARK: - Internals
 
+    func attemptUpdateToServer() {
+        // Create the info set
+        let editableInfo = BorrowerEditable.init(name: (coreModel.userInfo?.name)!, address1: textAddress1.text!, city: textCity.text!, phone: textPhone.text!, employer: textCompany.text!, jobTitle: textJobTitle.text!)
+        editableInfo.address2 = textAddress2.text
+        editableInfo.address3 = textAddress3.text
+        editableInfo.province = textProvince.text
+        editableInfo.postCode = textPostCode.text
+
+        // Make a call to the server
+        Session.borrowerUpdate(account: coreModel.account, input: editableInfo) { (borrowerInfo, errorString, noNetwork, unauthorized) in
+            // Process the data
+            var success = false
+            if borrowerInfo != nil && borrowerInfo!.isValid() {
+                self.coreModel.updateUserInfo(from: borrowerInfo!)
+                success = true
+            } else if unauthorized {
+                self.coreModel.clear()
+            }
+
+            // Send the result to the main UI thread
+            DispatchQueue.main.async {
+                self.updateInfoResult(success: success, error: errorString, noNetwork: noNetwork, unauthorized: unauthorized)
+            }
+        }
+    }
+
     func checkForError(_ textField: UITextField) -> Bool {
         if textField == textAddress1 {
             if let addressText = textField.text, addressText.count > 4 {
@@ -315,5 +411,33 @@ class DetailsViewController: UIViewController, UITextFieldDelegate {
         }
 
         return false
+    }
+
+    func showErrorAlert() {
+        let alert = UIAlertController(title: "No Network", message: "A network connection is required to update account details", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+
+    func textFieldReset(border: CALayer?, label: UILabel) {
+        border?.backgroundColor = BORDER_COLOR_DEFAULT.cgColor
+        label.text = "Error text"
+        label.isHidden = true
+    }
+
+    func updateInfoResult(success: Bool, error: String?, noNetwork: Bool, unauthorized: Bool) {
+        attemptingUpdate = false
+        stopAnimating()
+
+        if success {
+            // TODO: Segue depending on the state
+            performSegue(withIdentifier: "showBank", sender: self)
+        } else {
+            if unauthorized {
+                performSegue(withIdentifier: "unwindToLogin", sender: self)
+            } else {
+                showErrorAlert()
+            }
+        }
     }
 }

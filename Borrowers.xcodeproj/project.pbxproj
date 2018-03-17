@@ -155,10 +155,10 @@
 		0A9800F82054A85000CC5166 /* ui */ = {
 			isa = PBXGroup;
 			children = (
-				0AB48E9620550118008E11D3 /* CreateViewController.swift */,
-				0A631B7A204DD2C700E8213F /* LoginViewController.swift */,
-				0A32001E2059A0E70021FE4A /* DetailsViewController.swift */,
 				0AEE6F86205AEFFF000B2CE6 /* BankViewController.swift */,
+				0AB48E9620550118008E11D3 /* CreateViewController.swift */,
+				0A32001E2059A0E70021FE4A /* DetailsViewController.swift */,
+				0A631B7A204DD2C700E8213F /* LoginViewController.swift */,
 			);
 			path = ui;
 			sourceTree = "<group>";

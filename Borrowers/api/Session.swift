@@ -130,6 +130,44 @@ struct Session {
         }
     }
 
+    static func borrowerUpdate(account: Account, input: BorrowerEditable, completionHandler: @escaping (BorrowerViewable?, String?, Bool, Bool) -> Void) {
+        let function = "borrowers/" + account.userKey!
+        let method = "PUT"
+
+        startRequest(function: function, method: method, accessKey: account.getAccessKey(), body: input.toJsonData()) { (data, response, error) in
+            var borrowerInfo: BorrowerViewable?
+            var errorString: String?
+            var noNetwork = false
+            var unauthorized = false
+
+            // Determine if the result is valid
+            if let response = response as? HTTPURLResponse, let data = data {
+                // Check the HTTP result
+                if response.statusCodeEnum == HTTPStatusCode.ok {
+                    borrowerInfo = BorrowerViewable.init(data)
+                    if !borrowerInfo!.isValid() {
+                        errorString = "The server received invalid response for the borrower info update request"
+                    }
+                } else if response.statusCodeEnum == HTTPStatusCode.unauthorized {
+                    unauthorized = true
+                } else {
+                    let errorResult = ErrorResult.init(data)
+                    if errorResult.isValid() {
+                        print(errorResult)
+                    }
+                    errorString = "The server failed to process the borrower info update request"
+                }
+            } else {
+                noNetwork = true
+                if error != nil {
+                    print("General failure on borrower info update attempt: \(error!)")
+                }
+            }
+
+            completionHandler(borrowerInfo, errorString, noNetwork, unauthorized)
+        }
+    }
+
     static func countries(completionHandler: @escaping ([Country]?, String?, Bool) -> Void) {
         let function = "countries"
         let method = "GET"

@@ -87,15 +87,17 @@ class LoginViewController: UIViewController, UITextFieldDelegate, NVActivityIndi
 
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Bank view
+        if let bankViewController = segue.destination as? BankViewController {
+            bankViewController.coreModel = coreModel
+        }
         // Create view
-        if let createViewController = segue.destination as? CreateViewController {
+        else if let createViewController = segue.destination as? CreateViewController {
             createViewController.coreModel = coreModel
         }
-
         // Details view
-        if let detailsViewController = segue.source as? DetailsViewController {
+        else if let detailsViewController = segue.destination as? DetailsViewController {
             detailsViewController.coreModel = coreModel
         }
     }
@@ -104,6 +106,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate, NVActivityIndi
         // Create view
         if let createViewController = segue.source as? CreateViewController {
             coreModel = createViewController.coreModel
+        }
+        // Details view
+        else if let detailsViewController = segue.source as? DetailsViewController {
+            coreModel = detailsViewController.coreModel
         }
     }
 
@@ -335,8 +341,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate, NVActivityIndi
         stopAnimating()
 
         if success {
-            // TODO: Segue depending on the state
-            performSegue(withIdentifier: "showDetails", sender: self)
+            if coreModel.hasValidDetails() {
+                performSegue(withIdentifier: "showBank", sender: self)
+            } else {
+                performSegue(withIdentifier: "showDetails", sender: self)
+            }
         } else {
             if unauthorized {
                 showControls()
