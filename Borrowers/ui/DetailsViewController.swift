@@ -156,30 +156,30 @@ class DetailsViewController: UIViewController, UITextFieldDelegate, NVActivityIn
         textFieldReset(border: borderPhone, label: labelErrorPhone)
 
         // Address 1 validation
-        let addressValid = !checkForError(textAddress1)
+        let addressValid = !checkForError(textAddress1, mustBeVisible: true)
 
         // City validation
         var cityValid = false
         if addressValid {
-            cityValid = !checkForError(textCity)
+            cityValid = !checkForError(textCity, mustBeVisible: true)
         }
 
         // Phone validation
         var phoneValid = false
         if cityValid {
-            phoneValid = !checkForError(textPhone)
+            phoneValid = !checkForError(textPhone, mustBeVisible: true)
         }
 
         // Company validation
         var companyValid = false
         if phoneValid {
-            companyValid = !checkForError(textCompany)
+            companyValid = !checkForError(textCompany, mustBeVisible: true)
         }
 
         // Job title validation
         var jobTitleValid = false
         if companyValid {
-            jobTitleValid = !checkForError(textJobTitle)
+            jobTitleValid = !checkForError(textJobTitle, mustBeVisible: true)
         }
 
         // Proceed if all are valid
@@ -229,7 +229,7 @@ class DetailsViewController: UIViewController, UITextFieldDelegate, NVActivityIn
 
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == textAddress1 {
-            if !checkForError(textField) {
+            if !checkForError(textField, mustBeVisible: false) {
                 borderAddress1.backgroundColor = BORDER_COLOR_DEFAULT.cgColor
             }
         }
@@ -240,22 +240,22 @@ class DetailsViewController: UIViewController, UITextFieldDelegate, NVActivityIn
             borderAddress3.backgroundColor = BORDER_COLOR_DEFAULT.cgColor
         }
         else if textField == textCity {
-            if !checkForError(textField) {
+            if !checkForError(textField, mustBeVisible: false) {
                 borderCity.backgroundColor = BORDER_COLOR_DEFAULT.cgColor
             }
         }
         else if textField == textCompany {
-            if !checkForError(textField) {
+            if !checkForError(textField, mustBeVisible: false) {
                 borderCompany.backgroundColor = BORDER_COLOR_DEFAULT.cgColor
             }
         }
         else if textField == textJobTitle {
-            if !checkForError(textField) {
+            if !checkForError(textField, mustBeVisible: false) {
                 borderJobTitle.backgroundColor = BORDER_COLOR_DEFAULT.cgColor
             }
         }
         else if textField == textPhone {
-            if !checkForError(textField) {
+            if !checkForError(textField, mustBeVisible: false) {
                 borderPhone.backgroundColor = BORDER_COLOR_DEFAULT.cgColor
             }
         }
@@ -348,7 +348,7 @@ class DetailsViewController: UIViewController, UITextFieldDelegate, NVActivityIn
         }
     }
 
-    func checkForError(_ textField: UITextField) -> Bool {
+    func checkForError(_ textField: UITextField, mustBeVisible: Bool) -> Bool {
         if textField == textAddress1 {
             if let addressText = textField.text, addressText.count > 4 {
                 labelErrorAddress1.isHidden = true
@@ -358,6 +358,9 @@ class DetailsViewController: UIViewController, UITextFieldDelegate, NVActivityIn
                 labelErrorAddress1.text = "A valid address is required"
                 labelErrorAddress1.textColor = BORDER_COLOR_ERROR
                 labelErrorAddress1.isHidden = false
+                if(mustBeVisible) {
+                    scrollToView(viewSectionAddress1)
+                }
                 return true
             }
         }
@@ -370,6 +373,9 @@ class DetailsViewController: UIViewController, UITextFieldDelegate, NVActivityIn
                 labelErrorCity.text = "A valid city name is required"
                 labelErrorCity.textColor = BORDER_COLOR_ERROR
                 labelErrorCity.isHidden = false
+                if(mustBeVisible) {
+                    scrollToView(viewSectionCity)
+                }
                 return true
             }
         }
@@ -382,6 +388,9 @@ class DetailsViewController: UIViewController, UITextFieldDelegate, NVActivityIn
                 labelErrorCompany.text = "A valid company name is required"
                 labelErrorCompany.textColor = BORDER_COLOR_ERROR
                 labelErrorCompany.isHidden = false
+                if(mustBeVisible) {
+                    scrollToView(viewSectionCompany)
+                }
                 return true
             }
         }
@@ -394,6 +403,9 @@ class DetailsViewController: UIViewController, UITextFieldDelegate, NVActivityIn
                 labelErrorJobTitle.text = "A valid job title is required"
                 labelErrorJobTitle.textColor = BORDER_COLOR_ERROR
                 labelErrorJobTitle.isHidden = false
+                if(mustBeVisible) {
+                    scrollToView(viewSectionJobTitle)
+                }
                 return true
             }
         }
@@ -406,6 +418,9 @@ class DetailsViewController: UIViewController, UITextFieldDelegate, NVActivityIn
                 labelErrorPhone.text = "A valid phone number is required"
                 labelErrorPhone.textColor = BORDER_COLOR_ERROR
                 labelErrorPhone.isHidden = false
+                if(mustBeVisible) {
+                    scrollToView(viewSectionPhone)
+                }
                 return true
             }
         }
@@ -417,6 +432,10 @@ class DetailsViewController: UIViewController, UITextFieldDelegate, NVActivityIn
         let alert = UIAlertController(title: "No Network", message: "A network connection is required to update account details", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
+    }
+
+    func scrollToView(_ viewText: UIView) {
+        self.scrollView.scrollRectToVisible(viewText.frame, animated: true)
     }
 
     func textFieldReset(border: CALayer?, label: UILabel) {
