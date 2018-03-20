@@ -37,7 +37,7 @@ class CreateViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
     var attemptingCreate = false
     let backgroundColor = UIColor.init(red: 74.0/255.0, green: 162.0/255.0, blue: 119.0/255.0, alpha: 1.0)
     let borderColorDefault = UIColor.init(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.5)
-    let borderColorError = UIColor.init(red: 1.0, green: 0.255, blue: 0.212, alpha: 1.0)
+    let borderColorError = UIColor.init(red: 1.0, green: 105.0/255.0, blue: 105.0/255.0, alpha: 1.0)
     let borderColorSelected = UIColor.init(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
     var borderCountry: CALayer?
     var borderEmail: CALayer?
@@ -116,6 +116,10 @@ class CreateViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
                 }
             }
         }
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        checkIgnored = false
     }
 
     override func didReceiveMemoryWarning() {

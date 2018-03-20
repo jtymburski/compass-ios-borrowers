@@ -27,10 +27,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate, NVActivityIndi
     // Control
     var attemptingLogin = false
     var borderColorDefault = UIColor.init(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.5)
-    var borderColorError = UIColor.init(red: 1.0, green: 0.255, blue: 0.212, alpha: 1.0)
+    var borderColorError = UIColor.init(red: 1.0, green: 105.0/255.0, blue: 105.0/255.0, alpha: 1.0)
     var borderColorSelected = UIColor.init(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
     var borderEmail: CALayer?
     var borderPassword: CALayer?
+    var checkIgnored = false
 
     // Model
     var coreModel: CoreModelController!
@@ -71,6 +72,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, NVActivityIndi
         } else {
             fetchInfo()
         }
+        checkIgnored = false
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -161,6 +163,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate, NVActivityIndi
         }
     }
 
+    @IBAction func showCreate(_ sender: UIButton) {
+        checkIgnored = true
+        performSegue(withIdentifier: "showCreate", sender: self)
+    }
+
     @IBAction func showForgotPassword(_ sender: UIButton) {
         let alert = UIAlertController(title: nil, message: "Coming soon", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
@@ -195,7 +202,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate, NVActivityIndi
         if attemptingLogin {
             return true
         }
-        
+        if checkIgnored {
+            checkIgnored = false
+            return true
+        }
+
         if textField == textEmail {
             var isError = false
             if let emailText = textField.text {

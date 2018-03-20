@@ -14,7 +14,7 @@ class DetailsViewController: UIViewController, UITextFieldDelegate, NVActivityIn
     let BACKGROUND_COLOR = UIColor.init(red: 74.0/255.0, green: 162.0/255.0, blue: 119.0/255.0, alpha: 1.0)
     let BORDER_COLOR_ACTIVE = UIColor.init(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
     let BORDER_COLOR_DEFAULT = UIColor.init(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.5)
-    let BORDER_COLOR_ERROR = UIColor.init(red: 1.0, green: 0.255, blue: 0.212, alpha: 1.0)
+    let BORDER_COLOR_ERROR = UIColor.init(red: 1.0, green: 105.0/255.0, blue: 105.0/255.0, alpha: 1.0)
 
     // UI
     @IBOutlet weak var labelErrorAddress1: UILabel!
