@@ -21,6 +21,6 @@ struct StringHelper {
     }
 
     static func isValidPassword(_ testStr: String?, strong: Bool = false) -> Bool {
-        return testStr != nil && testStr!.count > 0 && (strong ? testStr!.count > 8 : true)
+        return testStr != nil && testStr!.count > 0 && (strong ? testStr!.count >= 8 : true)
     }
 }

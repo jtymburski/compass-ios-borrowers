@@ -628,8 +628,8 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BackgroundOnboard" translatesAutoresizingMaskIntoConstraints="NO" id="xTM-Qe-PQH">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="765"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Account Details" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lw9-nA-EgW">
-                                <rect key="frame" x="79" y="38" width="163" height="36"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About You" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lw9-nA-EgW">
+                                <rect key="frame" x="107" y="38" width="107" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="36" id="bZg-zD-9kQ"/>
                                 </constraints>
@@ -644,7 +644,7 @@
                                     <constraint firstAttribute="height" constant="48" id="7QM-ga-A9q"/>
                                 </constraints>
                                 <color key="tintColor" red="0.2901960784" green="0.63529411759999999" blue="0.46666666670000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <state key="normal" title="Update"/>
+                                <state key="normal" title="Save Profile"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="24"/>
