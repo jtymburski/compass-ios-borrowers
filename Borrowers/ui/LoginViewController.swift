@@ -47,8 +47,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate, NVActivityIndi
         coreModel = CoreModelController()
 
         // Add gradient to main background
-        let colorGreen = UIColor.init(red: 74.0/255.0, green: 162.0/255.0, blue: 119.0/255.0, alpha: 1.0)
-        self.view.setGradient(startColor: colorGreen, endColor: UIColor.black)
+        //let colorGreen = UIColor.init(red: 74.0/255.0, green: 162.0/255.0, blue: 119.0/255.0, alpha: 1.0)
+        //self.view.setGradient(startColor: colorGreen, endColor: UIColor.black)
 
         // Add borders to the view
         viewEmail.layoutIfNeeded()

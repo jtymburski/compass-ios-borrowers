@@ -74,7 +74,7 @@ class DetailsViewController: UIViewController, UITextFieldDelegate, NVActivityIn
         super.viewDidLoad()
 
         // Add gradient to main background
-        self.view.setGradient(startColor: BACKGROUND_COLOR, endColor: UIColor.black)
+        //self.view.setGradient(startColor: BACKGROUND_COLOR, endColor: UIColor.black)
 
         // Add borders to the view
         viewAddress1.layoutIfNeeded()

@@ -63,7 +63,7 @@ class CreateViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
         countryList = coreModel.supportedCountries
 
         // Add gradient to main background
-        self.view.setGradient(startColor: backgroundColor, endColor: UIColor.black)
+        //self.view.setGradient(startColor: backgroundColor, endColor: UIColor.black)
 
         // Add borders to the view
         viewCountry.layoutIfNeeded()
