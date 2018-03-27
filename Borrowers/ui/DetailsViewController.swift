@@ -133,9 +133,9 @@ class DetailsViewController: UIViewController, UITextFieldDelegate, NVActivityIn
     // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Bank view
-        if let bankViewController = segue.destination as? BankViewController {
-            bankViewController.coreModel = coreModel
+        // Welcome view
+        if let welcomeViewController = segue.destination as? WelcomeViewController {
+            welcomeViewController.coreModel = coreModel
         }
     }
 
@@ -450,7 +450,7 @@ class DetailsViewController: UIViewController, UITextFieldDelegate, NVActivityIn
 
         if success {
             // TODO: Segue depending on the state
-            performSegue(withIdentifier: "showBank", sender: self)
+            performSegue(withIdentifier: "showWelcome", sender: self)
         } else {
             if unauthorized {
                 performSegue(withIdentifier: "unwindToLogin", sender: self)

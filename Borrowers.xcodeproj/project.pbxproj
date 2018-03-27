@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A022A74206AA20D00F05D76 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A022A73206AA20D00F05D76 /* WelcomeViewController.swift */; };
 		0A0254A5204FC31700B2D2C7 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 0A0254A4204FC31700B2D2C7 /* Podfile */; };
 		0A04646620505E6D00BA5690 /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A04646520505E6D00BA5690 /* BaseModel.swift */; };
 		0A04646820505F2600BA5690 /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A04646720505F2600BA5690 /* AuthResponse.swift */; };
@@ -29,7 +30,6 @@
 		0AB48E9720550118008E11D3 /* CreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB48E9620550118008E11D3 /* CreateViewController.swift */; };
 		0AC757E12050651F00D152F1 /* ErrorResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC757E02050651F00D152F1 /* ErrorResult.swift */; };
 		0AED28DC2057053A0031B26F /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AED28DB2057053A0031B26F /* Country.swift */; };
-		0AEE6F87205AEFFF000B2CE6 /* BankViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEE6F86205AEFFF000B2CE6 /* BankViewController.swift */; };
 		0AFDBD94205C43BB00737BF1 /* CoreModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFDBD93205C43BB00737BF1 /* CoreModelController.swift */; };
 		0AFDBD98205C70AE00737BF1 /* RegisterRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFDBD97205C70AE00737BF1 /* RegisterRequest.swift */; };
 		0AFDBD9A205C97A300737BF1 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFDBD99205C97A300737BF1 /* UserInfo.swift */; };
@@ -37,6 +37,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A022A73206AA20D00F05D76 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		0A0254A4204FC31700B2D2C7 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; };
 		0A04646520505E6D00BA5690 /* BaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
 		0A04646720505F2600BA5690 /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponse.swift; sourceTree = "<group>"; };
@@ -61,7 +62,6 @@
 		0AB48E9620550118008E11D3 /* CreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateViewController.swift; sourceTree = "<group>"; };
 		0AC757E02050651F00D152F1 /* ErrorResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResult.swift; sourceTree = "<group>"; };
 		0AED28DB2057053A0031B26F /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
-		0AEE6F86205AEFFF000B2CE6 /* BankViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankViewController.swift; sourceTree = "<group>"; };
 		0AFDBD93205C43BB00737BF1 /* CoreModelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreModelController.swift; sourceTree = "<group>"; };
 		0AFDBD97205C70AE00737BF1 /* RegisterRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterRequest.swift; sourceTree = "<group>"; };
 		0AFDBD99205C97A300737BF1 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
@@ -155,10 +155,10 @@
 		0A9800F82054A85000CC5166 /* ui */ = {
 			isa = PBXGroup;
 			children = (
-				0AEE6F86205AEFFF000B2CE6 /* BankViewController.swift */,
 				0AB48E9620550118008E11D3 /* CreateViewController.swift */,
 				0A32001E2059A0E70021FE4A /* DetailsViewController.swift */,
 				0A631B7A204DD2C700E8213F /* LoginViewController.swift */,
+				0A022A73206AA20D00F05D76 /* WelcomeViewController.swift */,
 			);
 			path = ui;
 			sourceTree = "<group>";
@@ -328,6 +328,7 @@
 				0AFDBD94205C43BB00737BF1 /* CoreModelController.swift in Sources */,
 				0A631B7B204DD2C700E8213F /* LoginViewController.swift in Sources */,
 				0A199B10205D6E7600F4582A /* BorrowerEditable.swift in Sources */,
+				0A022A74206AA20D00F05D76 /* WelcomeViewController.swift in Sources */,
 				0AFDBD98205C70AE00737BF1 /* RegisterRequest.swift in Sources */,
 				0A9800FC2054B69000CC5166 /* UiExtensions.swift in Sources */,
 				0A32001F2059A0E70021FE4A /* DetailsViewController.swift in Sources */,
@@ -340,7 +341,6 @@
 				0A04646A2050604900BA5690 /* AbstractProtocol.swift in Sources */,
 				0A10ECBE204DB9D200226B92 /* Borrowers.xcdatamodeld in Sources */,
 				0A9800FA2054A9BA00CC5166 /* Session.swift in Sources */,
-				0AEE6F87205AEFFF000B2CE6 /* BankViewController.swift in Sources */,
 				0AED28DC2057053A0031B26F /* Country.swift in Sources */,
 				0AC757E12050651F00D152F1 /* ErrorResult.swift in Sources */,
 				0A04646820505F2600BA5690 /* AuthResponse.swift in Sources */,
@@ -490,7 +490,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.gncompass.ios.BorrowersTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -507,7 +507,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.gncompass.ios.BorrowersTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

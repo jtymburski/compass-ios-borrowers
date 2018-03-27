@@ -90,17 +90,17 @@ class LoginViewController: UIViewController, UITextFieldDelegate, NVActivityIndi
     // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Bank view
-        if let bankViewController = segue.destination as? BankViewController {
-            bankViewController.coreModel = coreModel
-        }
         // Create view
-        else if let createViewController = segue.destination as? CreateViewController {
+        if let createViewController = segue.destination as? CreateViewController {
             createViewController.coreModel = coreModel
         }
         // Details view
         else if let detailsViewController = segue.destination as? DetailsViewController {
             detailsViewController.coreModel = coreModel
+        }
+        // Welcome view
+        else if let welcomeViewController = segue.destination as? WelcomeViewController {
+            welcomeViewController.coreModel = coreModel
         }
     }
 
@@ -354,7 +354,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, NVActivityIndi
 
         if success {
             if coreModel.hasValidDetails() {
-                performSegue(withIdentifier: "showBank", sender: self)
+                performSegue(withIdentifier: "showWelcome", sender: self)
             } else {
                 performSegue(withIdentifier: "showDetails", sender: self)
             }

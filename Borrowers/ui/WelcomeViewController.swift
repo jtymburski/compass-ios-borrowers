@@ -1,17 +1,21 @@
 //
-//  BankViewController.swift
+//  WelcomeViewController.swift
 //  Borrowers
 //
-//  Created by Jordan Tymburski on 2018-03-15.
+//  Created by Jordan Tymburski on 2018-03-27.
 //  Copyright © 2018 GN Compass. All rights reserved.
 //
 
 import UIKit
 
-class BankViewController: UIViewController {
+class WelcomeViewController: UIViewController {
 
     // Model
     var coreModel: CoreModelController!
+
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,4 +39,9 @@ class BankViewController: UIViewController {
     }
     */
 
+    // MARK: - Actions
+
+    @IBAction func attemptGetStarted(_ sender: UIButton) {
+
+    }
 }
