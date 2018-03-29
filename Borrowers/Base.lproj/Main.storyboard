@@ -1349,11 +1349,11 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2JE-YL-CWd">
-                                <rect key="frame" x="62" y="404" width="196.5" height="28"/>
+                                <rect key="frame" x="63" y="404" width="195" height="28"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Verify your identity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PCX-Ne-fOI">
-                                        <rect key="frame" x="44" y="4" width="152.5" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <rect key="frame" x="44" y="4" width="151" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -1375,7 +1375,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RMt-Uk-zmk">
-                                <rect key="frame" x="62" y="360" width="196.5" height="28"/>
+                                <rect key="frame" x="63" y="360" width="195" height="28"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IconCircle1" translatesAutoresizingMaskIntoConstraints="NO" id="ovY-f0-iWG">
                                         <rect key="frame" x="0.0" y="0.0" width="28" height="28"/>
@@ -1385,8 +1385,8 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add a bank account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KgW-n1-s7Q">
-                                        <rect key="frame" x="44" y="3.5" width="152.5" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <rect key="frame" x="44" y="3.5" width="151" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -1494,35 +1494,24 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BANK" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lWX-tf-fWr">
-                                                    <rect key="frame" x="32" y="27" width="256" height="18"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
+                                                    <rect key="frame" x="32" y="27" width="256" height="16"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Royal Bank" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CT3-vC-cYo">
-                                                    <rect key="frame" x="32" y="45" width="224" height="29"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Your bank name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0wm-Yu-KVj">
+                                                    <rect key="frame" x="32" y="43" width="256" height="31"/>
                                                     <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cs2-7P-DXt">
-                                                    <rect key="frame" x="32" y="45" width="256" height="29"/>
-                                                    <state key="normal" image="IconDown"/>
-                                                    <connections>
-                                                        <action selector="onBankListClick:" destination="QOJ-fw-mcp" eventType="touchUpInside" id="Zgg-r6-qD9"/>
-                                                    </connections>
-                                                </button>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" returnKeyType="next" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="cc-number"/>
+                                                </textField>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="lWX-tf-fWr" firstAttribute="leading" secondItem="fGj-uy-bXI" secondAttribute="leadingMargin" constant="16" id="0LK-PY-8Rm"/>
-                                                <constraint firstItem="cs2-7P-DXt" firstAttribute="bottom" secondItem="fGj-uy-bXI" secondAttribute="bottomMargin" id="2gb-D3-buu"/>
-                                                <constraint firstItem="CT3-vC-cYo" firstAttribute="top" secondItem="lWX-tf-fWr" secondAttribute="bottom" id="35W-76-aJq"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="CT3-vC-cYo" secondAttribute="trailing" constant="48" id="5Po-HG-cjY"/>
-                                                <constraint firstItem="CT3-vC-cYo" firstAttribute="bottom" secondItem="fGj-uy-bXI" secondAttribute="bottomMargin" id="Bnw-nU-1ek"/>
-                                                <constraint firstItem="CT3-vC-cYo" firstAttribute="leading" secondItem="fGj-uy-bXI" secondAttribute="leadingMargin" constant="16" id="VTd-UY-pB8"/>
-                                                <constraint firstItem="cs2-7P-DXt" firstAttribute="leading" secondItem="fGj-uy-bXI" secondAttribute="leadingMargin" constant="16" id="dvv-aB-Ga1"/>
-                                                <constraint firstItem="cs2-7P-DXt" firstAttribute="top" secondItem="lWX-tf-fWr" secondAttribute="bottom" id="pwv-fM-zwA"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="cs2-7P-DXt" secondAttribute="trailing" constant="16" id="sKA-Qf-DOp"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="0wm-Yu-KVj" secondAttribute="trailing" constant="16" id="8Vb-MD-2RX"/>
+                                                <constraint firstItem="0wm-Yu-KVj" firstAttribute="bottom" secondItem="fGj-uy-bXI" secondAttribute="bottomMargin" id="WRu-0R-67j"/>
+                                                <constraint firstItem="0wm-Yu-KVj" firstAttribute="top" secondItem="lWX-tf-fWr" secondAttribute="bottom" id="WiY-60-o9d"/>
+                                                <constraint firstItem="0wm-Yu-KVj" firstAttribute="leading" secondItem="fGj-uy-bXI" secondAttribute="leadingMargin" constant="16" id="qEG-zb-lUX"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="lWX-tf-fWr" secondAttribute="trailing" constant="16" id="y7I-fS-aIS"/>
                                                 <constraint firstItem="lWX-tf-fWr" firstAttribute="top" secondItem="fGj-uy-bXI" secondAttribute="topMargin" constant="16" id="ydK-z6-A97"/>
                                             </constraints>
@@ -1536,13 +1525,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TRANSIT NUMBER" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zaM-Xs-VV3">
-                                                    <rect key="frame" x="32" y="27" width="256" height="18"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
+                                                    <rect key="frame" x="32" y="27" width="256" height="16"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="5 digit transit number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PGi-Yk-67f">
-                                                    <rect key="frame" x="32" y="45" width="256" height="29"/>
+                                                    <rect key="frame" x="32" y="43" width="256" height="31"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" returnKeyType="next" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="cc-number"/>
@@ -1567,14 +1556,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="7 digit account number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="P1E-nq-byZ">
-                                                    <rect key="frame" x="32" y="45" width="256" height="29"/>
+                                                    <rect key="frame" x="32" y="43" width="256" height="31"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" returnKeyType="done" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="cc-number"/>
                                                 </textField>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ACCOUNT NUMBER" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OYd-pT-tfB">
-                                                    <rect key="frame" x="32" y="27" width="256" height="18"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
+                                                    <rect key="frame" x="32" y="27" width="256" height="16"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -1599,12 +1588,17 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Your Bank Account" id="Hse-DP-ZH4">
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="save" id="Ln3-3p-QVx">
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="save" id="Ln3-3p-QVx">
                             <connections>
                                 <action selector="onBankSave:" destination="QOJ-fw-mcp" id="TMV-wT-yYk"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="textAccount" destination="P1E-nq-byZ" id="rro-da-xno"/>
+                        <outlet property="textBank" destination="0wm-Yu-KVj" id="ZYQ-tB-VXX"/>
+                        <outlet property="textTransit" destination="PGi-Yk-67f" id="on1-Jf-nFW"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4SR-OI-iGg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1669,7 +1663,6 @@ Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed 
         <image name="IconBack" width="42" height="42"/>
         <image name="IconCircle1" width="35" height="35"/>
         <image name="IconCircle2" width="35" height="35"/>
-        <image name="IconDown" width="22" height="12"/>
         <image name="IconEmail" width="41" height="35"/>
         <image name="IconHome" width="50" height="44"/>
         <image name="IconLocation" width="31" height="44"/>

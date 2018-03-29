@@ -16,6 +16,38 @@ struct Session {
 
     // MARK: - Functions
 
+    static func banks(userInfo: UserInfo!, completionHandler: @escaping ([Bank]?, String?, Bool) -> Void) {
+        let function = "countries/" + userInfo.countryCode! + "/banks"
+        let method = "GET"
+
+        startRequest(function: function, method: method, accessKey: nil, body: nil) { (data, response, error) in
+            var banks: [Bank]?
+            var errorString: String?
+            var noNetwork = false
+
+            // Determine if the result is valid
+            if let response = response as? HTTPURLResponse, let data = data {
+                // Check the HTTP result
+                if response.statusCodeEnum == HTTPStatusCode.ok {
+                    banks = Bank.parseArray(data)
+                } else {
+                    let errorResult = ErrorResult.init(data)
+                    if errorResult.isValid() {
+                        print(errorResult)
+                    }
+                    errorString = "The server failed to process the bank list fetch request"
+                }
+            } else {
+                noNetwork = true
+                if error != nil {
+                    print("General failure on bank list fetch: \(error!)")
+                }
+            }
+
+            completionHandler(banks, errorString, noNetwork)
+        }
+    }
+
     static func borrowerCreate(input: RegisterRequest, completionHandler: @escaping (AuthResponse?, String?, Bool, Bool) -> Void) {
         let function = "borrowers"
         let method = "POST"

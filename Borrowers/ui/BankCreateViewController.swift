@@ -6,22 +6,42 @@
 //  Copyright © 2018 GN Compass. All rights reserved.
 //
 
+import NVActivityIndicatorView
 import UIKit
 
-class BankCreateViewController: UITableViewController {
+class BankCreateViewController: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSource, NVActivityIndicatorViewable {
+    private let ANIMATION_SIZE = 90
+
     // UI
+    @IBOutlet weak var textAccount: UITextField!
+    @IBOutlet weak var textBank: UITextField!
+    @IBOutlet weak var textTransit: UITextField!
 
     // Model
     var coreModel: CoreModelController!
 
+    // Picker control
+    var bankList: [Bank]?
+    var bankSelected = -1
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+        // Connect the country text field to a picker
+        let pickerBank = UIPickerView()
+        textBank.inputView = pickerBank
+        pickerBank.dataSource = self
+        pickerBank.delegate = self
 
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        // Fetch the list of banks, if it hasn't been fetched already
+        if bankList == nil || bankList!.count == 0 {
+            startAnimating(CGSize.init(width: ANIMATION_SIZE, height: ANIMATION_SIZE), type: NVActivityIndicatorType.orbit)
+            Session.banks(userInfo: coreModel.userInfo!) { (list, errorString, noNetwork) in
+                DispatchQueue.main.async {
+                    self.updateBanksList(result: list, error: errorString, noNetwork: noNetwork)
+                }
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -47,5 +67,45 @@ class BankCreateViewController: UITableViewController {
 
     @IBAction func onBankSave(_ sender: UIBarButtonItem) {
         print("TODO: on bank save")
+    }
+
+    // MARK: - Picker Delegates
+
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if bankList != nil {
+            return bankList!.count
+        } else {
+            return 0
+        }
+    }
+
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        bankSelected = row
+        return bankList![row].name
+    }
+
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        textBank.text = bankList![row].name
+    }
+
+    // MARK: - Internals
+
+    func updateBanksList(result: [Bank]?, error: String?, noNetwork: Bool) {
+        stopAnimating()
+        bankList = result
+        coreModel.supportedBanks = bankList
+        if bankList == nil || bankList!.count == 0 {
+            let alert = UIAlertController(title: "No Network", message: "A network connection is required to add your bank", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                DispatchQueue.main.async {
+                    self.dismiss(animated: true, completion: nil)
+                }
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
 }

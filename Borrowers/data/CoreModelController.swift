@@ -11,6 +11,7 @@ import Foundation
 class CoreModelController {
     var account: Account!
     var supportedCountries: [Country]?
+    var supportedBanks: [Bank]?
     var userInfo: UserInfo?
 
     init() {

@@ -98,9 +98,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate, NVActivityIndi
         else if let detailsViewController = segue.destination as? DetailsViewController {
             detailsViewController.coreModel = coreModel
         }
-        // Welcome view
-        else if let welcomeViewController = segue.destination as? WelcomeViewController {
-            welcomeViewController.coreModel = coreModel
+        // Welcome navigation
+        else if let welcomeNavController = segue.destination as? WelcomeNavController {
+            welcomeNavController.coreModel = coreModel
         }
     }
 

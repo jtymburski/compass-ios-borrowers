@@ -20,6 +20,7 @@ class WelcomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        //print("How is the model: \(coreModel.hasValidDetails())")
         // Do any additional setup after loading the view.
     }
 
