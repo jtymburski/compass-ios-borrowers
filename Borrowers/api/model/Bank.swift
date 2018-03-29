@@ -52,7 +52,7 @@ class Bank: BaseModel, AbstractProtocol, CustomStringConvertible {
         }
     }
 
-    static func parseArray(_ data: Data) -> [Bank] {
+    static func parseArray(_ data: Data, sort: Bool) -> [Bank] {
         var banks = [Bank]()
 
         if let arrayData = BaseModel.getJsonAsArray(with: data) {
@@ -61,6 +61,10 @@ class Bank: BaseModel, AbstractProtocol, CustomStringConvertible {
                     banks.append(Bank.init(json))
                 }
             }
+        }
+
+        if sort {
+            banks = banks.sorted(by: { $0.name! < $1.name! })
         }
 
         return banks

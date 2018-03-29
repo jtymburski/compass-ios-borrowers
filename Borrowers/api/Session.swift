@@ -29,7 +29,7 @@ struct Session {
             if let response = response as? HTTPURLResponse, let data = data {
                 // Check the HTTP result
                 if response.statusCodeEnum == HTTPStatusCode.ok {
-                    banks = Bank.parseArray(data)
+                    banks = Bank.parseArray(data, sort: true)
                 } else {
                     let errorResult = ErrorResult.init(data)
                     if errorResult.isValid() {

@@ -133,9 +133,9 @@ class DetailsViewController: UIViewController, UITextFieldDelegate, NVActivityIn
     // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Welcome view
-        if let welcomeViewController = segue.destination as? WelcomeViewController {
-            welcomeViewController.coreModel = coreModel
+        // Welcome navigation
+        if let welcomeNavController = segue.destination as? WelcomeNavController {
+            welcomeNavController.coreModel = coreModel
         }
     }
 

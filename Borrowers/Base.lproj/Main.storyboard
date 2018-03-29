@@ -1349,7 +1349,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2JE-YL-CWd">
-                                <rect key="frame" x="63" y="404" width="195" height="28"/>
+                                <rect key="frame" x="62.5" y="404" width="195" height="28"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Verify your identity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PCX-Ne-fOI">
                                         <rect key="frame" x="44" y="4" width="151" height="21"/>
@@ -1375,7 +1375,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RMt-Uk-zmk">
-                                <rect key="frame" x="63" y="360" width="195" height="28"/>
+                                <rect key="frame" x="62.5" y="360" width="195" height="28"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IconCircle1" translatesAutoresizingMaskIntoConstraints="NO" id="ovY-f0-iWG">
                                         <rect key="frame" x="0.0" y="0.0" width="28" height="28"/>
@@ -1480,7 +1480,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="xoG-6d-JPk">
-                            <rect key="frame" x="0.0" y="255" width="320" height="44"/>
+                            <rect key="frame" x="0.0" y="255" width="320" height="1"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </view>
                         <sections>
@@ -1598,9 +1598,11 @@
                         <outlet property="textAccount" destination="P1E-nq-byZ" id="rro-da-xno"/>
                         <outlet property="textBank" destination="0wm-Yu-KVj" id="ZYQ-tB-VXX"/>
                         <outlet property="textTransit" destination="PGi-Yk-67f" id="on1-Jf-nFW"/>
+                        <segue destination="tTH-cn-cz2" kind="unwind" identifier="unwindToWelcome" unwindAction="unwindToWelcomeWithSegue:" id="GFf-sU-ogG"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4SR-OI-iGg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="tTH-cn-cz2" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2655" y="-1020.4225352112676"/>
         </scene>

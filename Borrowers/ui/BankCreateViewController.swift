@@ -11,6 +11,7 @@ import UIKit
 
 class BankCreateViewController: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSource, NVActivityIndicatorViewable {
     private let ANIMATION_SIZE = 90
+    private let UNWIND_SEGUE = "unwindToWelcome"
 
     // UI
     @IBOutlet weak var textAccount: UITextField!
@@ -26,6 +27,9 @@ class BankCreateViewController: UITableViewController, UIPickerViewDelegate, UIP
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        // Load the country data, if relevant
+        bankList = coreModel.supportedBanks
 
         // Connect the country text field to a picker
         let pickerBank = UIPickerView()
@@ -102,7 +106,7 @@ class BankCreateViewController: UITableViewController, UIPickerViewDelegate, UIP
             let alert = UIAlertController(title: "No Network", message: "A network connection is required to add your bank", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
                 DispatchQueue.main.async {
-                    self.dismiss(animated: true, completion: nil)
+                    self.performSegue(withIdentifier: self.UNWIND_SEGUE, sender: self)
                 }
             }))
             self.present(alert, animated: true, completion: nil)
