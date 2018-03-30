@@ -113,6 +113,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate, NVActivityIndi
         else if let detailsViewController = segue.source as? DetailsViewController {
             coreModel = detailsViewController.coreModel
         }
+        // Bank create view
+        else if let bankCreateViewController = segue.source as? BankCreateViewController {
+            coreModel = bankCreateViewController.coreModel
+        }
     }
 
     // MARK: - Button Actions

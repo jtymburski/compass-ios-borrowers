@@ -9,6 +9,10 @@
 import UIKit
 
 class WelcomeViewController: UIViewController {
+    // UI
+    @IBOutlet weak var buttonNext: UIButton!
+    @IBOutlet weak var iconAddBank: UIImageView!
+    @IBOutlet weak var iconVerifyIdentity: UIImageView!
 
     // Model
     var coreModel: CoreModelController!
@@ -19,9 +23,11 @@ class WelcomeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        //print("How is the model: \(coreModel.hasValidDetails())")
         // Do any additional setup after loading the view.
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        updateView()
     }
 
     override func didReceiveMemoryWarning() {
@@ -50,5 +56,32 @@ class WelcomeViewController: UIViewController {
 
     @IBAction func attemptGetStarted(_ sender: UIButton) {
         performSegue(withIdentifier: "showBankCreate", sender: self)
+    }
+
+    // MARK: - Internals
+
+    func updateView() {
+        var hasBank = false
+        let hasVerified = false
+
+        // Bank connections icon
+        if coreModel.hasBankConnections() {
+            hasBank = true
+            iconAddBank.image = #imageLiteral(resourceName: "IconCircleCheck")
+        } else {
+            iconAddBank.image = #imageLiteral(resourceName: "IconCircle1")
+        }
+
+        // Verify identity icon
+        // TODO
+
+        // Button text
+        if hasBank && hasVerified {
+            buttonNext.setTitle("Submit Your Application", for: .normal)
+        } else if hasBank {
+            buttonNext.setTitle("Keep Going", for: .normal)
+        } else {
+            buttonNext.setTitle("Get Started", for: .normal)
+        }
     }
 }

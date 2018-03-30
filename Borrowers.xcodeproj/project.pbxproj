@@ -23,6 +23,8 @@
 		0A199B12205D796700F4582A /* BorrowerViewable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A199B11205D796700F4582A /* BorrowerViewable.swift */; };
 		0A32001F2059A0E70021FE4A /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A32001E2059A0E70021FE4A /* DetailsViewController.swift */; };
 		0A631B7B204DD2C700E8213F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A631B7A204DD2C700E8213F /* LoginViewController.swift */; };
+		0A6421A1206DF5870086FF8B /* BankConnectionSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6421A0206DF5870086FF8B /* BankConnectionSummary.swift */; };
+		0A6421A3206DF8210086FF8B /* BankConnectionNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6421A2206DF8210086FF8B /* BankConnectionNew.swift */; };
 		0A9800F4205475DA00CC5166 /* AuthRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9800F3205475DA00CC5166 /* AuthRequest.swift */; };
 		0A9800F72054782600CC5166 /* StringHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9800F62054782600CC5166 /* StringHelper.swift */; };
 		0A9800FA2054A9BA00CC5166 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9800F92054A9BA00CC5166 /* Session.swift */; };
@@ -58,6 +60,8 @@
 		0A199B11205D796700F4582A /* BorrowerViewable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorrowerViewable.swift; sourceTree = "<group>"; };
 		0A32001E2059A0E70021FE4A /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		0A631B7A204DD2C700E8213F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		0A6421A0206DF5870086FF8B /* BankConnectionSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankConnectionSummary.swift; sourceTree = "<group>"; };
+		0A6421A2206DF8210086FF8B /* BankConnectionNew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankConnectionNew.swift; sourceTree = "<group>"; };
 		0A9800F3205475DA00CC5166 /* AuthRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRequest.swift; sourceTree = "<group>"; };
 		0A9800F62054782600CC5166 /* StringHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringHelper.swift; sourceTree = "<group>"; };
 		0A9800F92054A9BA00CC5166 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
@@ -104,6 +108,8 @@
 				0A9800F3205475DA00CC5166 /* AuthRequest.swift */,
 				0A04646720505F2600BA5690 /* AuthResponse.swift */,
 				0AFF4D70206D6AA10002BB37 /* Bank.swift */,
+				0A6421A2206DF8210086FF8B /* BankConnectionNew.swift */,
+				0A6421A0206DF5870086FF8B /* BankConnectionSummary.swift */,
 				0A04646520505E6D00BA5690 /* BaseModel.swift */,
 				0A199B0F205D6E7600F4582A /* BorrowerEditable.swift */,
 				0A199B11205D796700F4582A /* BorrowerViewable.swift */,
@@ -344,6 +350,7 @@
 				0A022A76206AAB0100F05D76 /* WelcomeNavController.swift in Sources */,
 				0A9800FC2054B69000CC5166 /* UiExtensions.swift in Sources */,
 				0A32001F2059A0E70021FE4A /* DetailsViewController.swift in Sources */,
+				0A6421A3206DF8210086FF8B /* BankConnectionNew.swift in Sources */,
 				0A199B12205D796700F4582A /* BorrowerViewable.swift in Sources */,
 				0AB48E9720550118008E11D3 /* CreateViewController.swift in Sources */,
 				0AFDBD9A205C97A300737BF1 /* UserInfo.swift in Sources */,
@@ -354,6 +361,7 @@
 				0A10ECBE204DB9D200226B92 /* Borrowers.xcdatamodeld in Sources */,
 				0A9800FA2054A9BA00CC5166 /* Session.swift in Sources */,
 				0AED28DC2057053A0031B26F /* Country.swift in Sources */,
+				0A6421A1206DF5870086FF8B /* BankConnectionSummary.swift in Sources */,
 				0AC757E12050651F00D152F1 /* ErrorResult.swift in Sources */,
 				0A04646820505F2600BA5690 /* AuthResponse.swift in Sources */,
 				0A10ECB6204DB9D200226B92 /* AppDelegate.swift in Sources */,

@@ -9,14 +9,20 @@
 import NVActivityIndicatorView
 import UIKit
 
-class BankCreateViewController: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSource, NVActivityIndicatorViewable {
+class BankCreateViewController: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate, NVActivityIndicatorViewable {
     private let ANIMATION_SIZE = 90
+    private let MIN_ACCOUNT_LENGTH = 5
+    private let MIN_TRANSIT_LENGTH = 3
     private let UNWIND_SEGUE = "unwindToWelcome"
 
     // UI
+    @IBOutlet weak var buttonSave: UIBarButtonItem!
     @IBOutlet weak var textAccount: UITextField!
     @IBOutlet weak var textBank: UITextField!
     @IBOutlet weak var textTransit: UITextField!
+
+    // Control
+    var attemptingCreate = false
 
     // Model
     var coreModel: CoreModelController!
@@ -24,6 +30,10 @@ class BankCreateViewController: UITableViewController, UIPickerViewDelegate, UIP
     // Picker control
     var bankList: [Bank]?
     var bankSelected = -1
+
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +46,12 @@ class BankCreateViewController: UITableViewController, UIPickerViewDelegate, UIP
         textBank.inputView = pickerBank
         pickerBank.dataSource = self
         pickerBank.delegate = self
+
+        // Text field delegates
+        textAccount.addTarget(self, action: #selector(BankCreateViewController.textFieldDidChange(_:)), for: .editingChanged)
+        textBank.addTarget(self, action: #selector(BankCreateViewController.textFieldDidChange(_:)), for: .editingChanged)
+        textBank.delegate = self
+        textTransit.addTarget(self, action: #selector(BankCreateViewController.textFieldDidChange(_:)), for: .editingChanged)
 
         // Fetch the list of banks, if it hasn't been fetched already
         if bankList == nil || bankList!.count == 0 {
@@ -53,24 +69,30 @@ class BankCreateViewController: UITableViewController, UIPickerViewDelegate, UIP
         // Dispose of any resources that can be recreated.
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
     // MARK: - Actions
 
-    @IBAction func onBankListClick(_ sender: UIButton) {
-        print("TODO: on bank list click")
-    }
-
     @IBAction func onBankSave(_ sender: UIBarButtonItem) {
-        print("TODO: on bank save")
+        if attemptingCreate {
+            return
+        }
+        attemptingCreate = true
+        self.view.endEditing(true)
+        startAnimating(CGSize.init(width: 90, height: 90), type: NVActivityIndicatorType.orbit)
+
+        // Create the bank create info
+        let bankId = bankList![bankSelected].id
+        let transit = Int(textTransit.text!)
+        let account = Int(textAccount.text!)
+        // TODO: This login ID should be a real value from flinks.io
+        let loginId = UUID().uuidString
+        let bankInfo = BankConnectionNew(bankId: bankId, transit: transit, account: account, loginId: loginId)
+
+        // Start the request
+        Session.bankCreate(account: coreModel.account, input: bankInfo) { (response, errorString, noNetwork, unauthorized) in
+            DispatchQueue.main.async {
+                self.updateCreateResult(result: response, error: errorString, noNetwork: noNetwork, unauthorized: unauthorized)
+            }
+        }
     }
 
     // MARK: - Picker Delegates
@@ -96,7 +118,28 @@ class BankCreateViewController: UITableViewController, UIPickerViewDelegate, UIP
         textBank.text = bankList![row].name
     }
 
+    // MARK: - Text Field Delegates
+
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == textBank {
+            if bankSelected < 0 && bankList != nil && bankList!.count > 0 {
+                textField.text = bankList![0].name
+                bankSelected = 0
+            }
+        }
+    }
+
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        buttonSave.isEnabled = textAccount.text != nil && textAccount.text!.count >= MIN_ACCOUNT_LENGTH && textBank.text != nil && textBank.text!.count > 0 && textTransit.text != nil && textTransit.text!.count >= MIN_TRANSIT_LENGTH
+    }
+
     // MARK: - Internals
+
+    func showErrorAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
 
     func updateBanksList(result: [Bank]?, error: String?, noNetwork: Bool) {
         stopAnimating()
@@ -110,6 +153,26 @@ class BankCreateViewController: UITableViewController, UIPickerViewDelegate, UIP
                 }
             }))
             self.present(alert, animated: true, completion: nil)
+        }
+    }
+
+    func updateCreateResult(result: BankConnectionSummary?, error: String?, noNetwork: Bool, unauthorized: Bool) {
+        attemptingCreate = false
+        stopAnimating()
+
+        if result != nil && result!.isValid() {
+            coreModel.addBankSummary(result!)
+            performSegue(withIdentifier: UNWIND_SEGUE, sender: self)
+        } else {
+            attemptingCreate = false
+
+            if noNetwork {
+                showErrorAlert(title: "No Network", message: "A network connection is required to add a bank account")
+            } else if unauthorized {
+                performSegue(withIdentifier: "unwindToLogin", sender: self)
+            } else {
+                showErrorAlert(title: "Failed To Create", message: "A new bank account failed to be created. Try again later")
+            }
         }
     }
 }

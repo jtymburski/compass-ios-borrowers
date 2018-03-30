@@ -1464,6 +1464,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="idr-I2-E1L"/>
                     <connections>
+                        <outlet property="buttonNext" destination="TQD-Ic-BjT" id="M4V-Xw-5RA"/>
+                        <outlet property="iconAddBank" destination="ovY-f0-iWG" id="0Qk-bc-ouA"/>
+                        <outlet property="iconVerifyIdentity" destination="URc-Kr-aVU" id="7ER-i8-T9L"/>
                         <segue destination="QOJ-fw-mcp" kind="show" identifier="showBankCreate" id="DEk-yI-3KQ"/>
                     </connections>
                 </viewController>
@@ -1505,10 +1508,19 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" returnKeyType="next" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="cc-number"/>
                                                 </textField>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IconDown" translatesAutoresizingMaskIntoConstraints="NO" id="PhB-dL-ezj">
+                                                    <rect key="frame" x="276" y="52" width="12" height="12"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="12" id="Dyp-0d-Xvh"/>
+                                                        <constraint firstAttribute="height" constant="12" id="JVN-i2-9x4"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="lWX-tf-fWr" firstAttribute="leading" secondItem="fGj-uy-bXI" secondAttribute="leadingMargin" constant="16" id="0LK-PY-8Rm"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="0wm-Yu-KVj" secondAttribute="trailing" constant="16" id="8Vb-MD-2RX"/>
+                                                <constraint firstItem="PhB-dL-ezj" firstAttribute="centerY" secondItem="0wm-Yu-KVj" secondAttribute="centerY" id="Fci-IQ-jto"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="PhB-dL-ezj" secondAttribute="trailing" constant="16" id="Gtc-7f-lWe"/>
                                                 <constraint firstItem="0wm-Yu-KVj" firstAttribute="bottom" secondItem="fGj-uy-bXI" secondAttribute="bottomMargin" id="WRu-0R-67j"/>
                                                 <constraint firstItem="0wm-Yu-KVj" firstAttribute="top" secondItem="lWX-tf-fWr" secondAttribute="bottom" id="WiY-60-o9d"/>
                                                 <constraint firstItem="0wm-Yu-KVj" firstAttribute="leading" secondItem="fGj-uy-bXI" secondAttribute="leadingMargin" constant="16" id="qEG-zb-lUX"/>
@@ -1588,17 +1600,19 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Your Bank Account" id="Hse-DP-ZH4">
-                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="save" id="Ln3-3p-QVx">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" style="done" systemItem="save" id="Ln3-3p-QVx">
                             <connections>
                                 <action selector="onBankSave:" destination="QOJ-fw-mcp" id="TMV-wT-yYk"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="buttonSave" destination="Ln3-3p-QVx" id="U7t-Y4-Nfx"/>
                         <outlet property="textAccount" destination="P1E-nq-byZ" id="rro-da-xno"/>
                         <outlet property="textBank" destination="0wm-Yu-KVj" id="ZYQ-tB-VXX"/>
                         <outlet property="textTransit" destination="PGi-Yk-67f" id="on1-Jf-nFW"/>
                         <segue destination="tTH-cn-cz2" kind="unwind" identifier="unwindToWelcome" unwindAction="unwindToWelcomeWithSegue:" id="GFf-sU-ogG"/>
+                        <segue destination="tTH-cn-cz2" kind="unwind" identifier="unwindToLogin" unwindAction="unwindToLoginWithSegue:" id="AZM-l2-iLd"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4SR-OI-iGg" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1665,6 +1679,7 @@ Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed 
         <image name="IconBack" width="42" height="42"/>
         <image name="IconCircle1" width="35" height="35"/>
         <image name="IconCircle2" width="35" height="35"/>
+        <image name="IconDown" width="22" height="12"/>
         <image name="IconEmail" width="41" height="35"/>
         <image name="IconHome" width="50" height="44"/>
         <image name="IconLocation" width="31" height="44"/>

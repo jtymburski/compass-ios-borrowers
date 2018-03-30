@@ -9,13 +9,25 @@
 import Foundation
 
 class CoreModelController {
+    // Borrower
     var account: Account!
+    var bankConnections: [BankConnectionSummary]?
+    var userInfo: UserInfo?
+
+    // Info
     var supportedCountries: [Country]?
     var supportedBanks: [Bank]?
-    var userInfo: UserInfo?
 
     init() {
         account = Account.getOrCreate()
+    }
+
+    func addBankSummary(_ summary: BankConnectionSummary) {
+        if(bankConnections == nil) {
+            bankConnections = [summary]
+        } else {
+            bankConnections!.append(summary)
+        }
     }
 
     func authenticate(_ response: AuthResponse) {
@@ -26,6 +38,10 @@ class CoreModelController {
     func clear() {
         account.clear()
         userInfo = nil
+    }
+
+    func hasBankConnections() -> Bool {
+        return bankConnections != nil && bankConnections!.count > 0
     }
 
     func hasValidDetails() -> Bool {
