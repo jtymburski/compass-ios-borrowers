@@ -9,6 +9,7 @@
 import Foundation
 
 class BorrowerViewable: BorrowerEditable {
+    private let KEY_BANKS = "banks"
     private let KEY_COUNTRY = "country"
     private let KEY_EMAIL = "email"
     private let KEY_LOAN_CAP = "loan_cap"
@@ -16,6 +17,9 @@ class BorrowerViewable: BorrowerEditable {
     var country: String?
     var email: String?
     var loanCap: Float?
+
+    // Read only
+    var bankConnections: [BankConnectionSummary]?
 
     override var description: String {
         return "BorrowerViewable [ Address 1 : \(address1 ?? "nil") , Address 2 : \(address2 ?? "nil") , Address 3 : \(address3 ?? "nil") , City : \(city ?? "nil") , Country : \(country ?? "nil") , Email : \(email ?? "nil") , Employer : \(employer ?? "nil") , Job Title : \(jobTitle ?? "nil") , Loan Cap : \(loanCap ?? 0.0) , Name : \(name ?? "nil") , Phone : \(phone ?? "nil") , Post Code : \(postCode ?? "nil") , Province : \(province ?? "nil") ]"
@@ -44,6 +48,16 @@ class BorrowerViewable: BorrowerEditable {
 
                 // Optional
                 self.loanCap = (json.object(forKey: KEY_LOAN_CAP) as? NSNumber)?.floatValue
+
+                // Bank connections (optional)
+                if let bankConnections = json.object(forKey: KEY_BANKS) as? NSArray {
+                    self.bankConnections = []
+                    for bc in bankConnections {
+                        if let json = bc as? NSDictionary {
+                            self.bankConnections?.append(BankConnectionSummary.init(json))
+                        }
+                    }
+                }
 
                 return true
             }

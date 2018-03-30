@@ -26,20 +26,29 @@ class BankConnectionSummary: BaseModel, AbstractProtocol, CustomStringConvertibl
         parse(data)
     }
 
+    init(_ json: NSDictionary) {
+        super.init()
+        parse(json)
+    }
+
     func isValid() -> Bool {
         return (institution != nil && institution! > 0 && name != nil && name!.count > 0 && reference != nil && NSUUID(uuidString: reference!) != nil)
     }
 
     func parse(_ data: Data) {
         if let json = getJsonAsDictionary(with: data) {
-            if let institution = json.object(forKey: KEY_INSTITUTION) as? NSNumber,
-                let name = json.object(forKey: KEY_NAME) as? String,
-                let reference = json.object(forKey: KEY_REFERENCE) as? String {
+            parse(json)
+        }
+    }
 
-                self.institution = institution.intValue
-                self.name = name
-                self.reference = reference
-            }
+    func parse(_ json: NSDictionary) {
+        if let institution = json.object(forKey: KEY_INSTITUTION) as? NSNumber,
+            let name = json.object(forKey: KEY_NAME) as? String,
+            let reference = json.object(forKey: KEY_REFERENCE) as? String {
+
+            self.institution = institution.intValue
+            self.name = name
+            self.reference = reference
         }
     }
 

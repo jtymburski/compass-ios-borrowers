@@ -61,5 +61,9 @@ class CoreModelController {
         } else {
             userInfo = UserInfo.init(from: info)
         }
+
+        if(info.bankConnections != nil) {
+            bankConnections = info.bankConnections
+        }
     }
 }
