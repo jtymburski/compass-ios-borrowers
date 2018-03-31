@@ -7,12 +7,14 @@
 //
 
 import Foundation
+import UIKit
 
 class CoreModelController {
     // Borrower
     var account: Account!
     var bankConnections: [BankConnectionSummary]?
     var userInfo: UserInfo?
+    var verificationFiles: [VerificationFile] = []
 
     // Info
     var supportedCountries: [Country]?
@@ -40,6 +42,10 @@ class CoreModelController {
         userInfo = nil
     }
 
+    func getVerificationFile(index: Int) -> VerificationFile {
+        return verificationFiles[index]
+    }
+
     func hasBankConnections() -> Bool {
         return bankConnections != nil && bankConnections!.count > 0
     }
@@ -55,6 +61,13 @@ class CoreModelController {
         return account.isLoggedIn()
     }
 
+    func isVerificationFileValid(index: Int) -> Bool {
+        if index >= 0 && index < verificationFiles.count {
+            return verificationFiles[index].isValid()
+        }
+        return false
+    }
+
     func updateUserInfo(from info: BorrowerViewable) {
         if userInfo != nil {
             userInfo?.update(from: info)
@@ -65,5 +78,12 @@ class CoreModelController {
         if(info.bankConnections != nil) {
             bankConnections = info.bankConnections
         }
+    }
+
+    func setVerificationFile(index: Int, image: UIImage, name: String) {
+        while verificationFiles.count <= index {
+            verificationFiles.append(VerificationFile.init())
+        }
+        verificationFiles[index].set(image: image, name: name)
     }
 }

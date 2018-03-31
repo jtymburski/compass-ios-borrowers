@@ -31,7 +31,6 @@ class VerifyViewController: UITableViewController, UIImagePickerControllerDelega
 
     // Model
     var coreModel: CoreModelController!
-    var verificationFiles: [VerificationFile] = []
 
     // Control
     var displayRow: Int?
@@ -48,6 +47,10 @@ class VerifyViewController: UITableViewController, UIImagePickerControllerDelega
         // Dispose of any resources that can be recreated.
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        updateView()
+    }
+
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -55,7 +58,7 @@ class VerifyViewController: UITableViewController, UIImagePickerControllerDelega
         // Verify preview controller
         if let verifyPreviewController = segue.destination as? VerifyPreviewController {
             if displayRow != nil {
-                verifyPreviewController.verificationFile = verificationFiles[displayRow!]
+                verifyPreviewController.verificationFile = coreModel.getVerificationFile(index: displayRow!)
                 verifyPreviewController.verificationIndex = displayRow!
             }
         }
@@ -65,7 +68,7 @@ class VerifyViewController: UITableViewController, UIImagePickerControllerDelega
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Determine if a file has been found already
-        if isFileValid(index: indexPath.row) {
+        if coreModel.isVerificationFileValid(index: indexPath.row) {
             // Set up the selected properties
             displayRow = indexPath.row
 
@@ -97,7 +100,7 @@ class VerifyViewController: UITableViewController, UIImagePickerControllerDelega
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if selectedRow != nil && selectedFile != nil {
             if let imagePicked = info[UIImagePickerControllerOriginalImage] as? UIImage {
-                setFile(index: selectedRow!, image: imagePicked, name: selectedFile!)
+                coreModel.setVerificationFile(index: selectedRow!, image: imagePicked, name: selectedFile!)
                 updateView()
             }
 
@@ -117,20 +120,6 @@ class VerifyViewController: UITableViewController, UIImagePickerControllerDelega
         return nil
     }
 
-    func isFileValid(index: Int) -> Bool {
-        if index >= 0 && index < verificationFiles.count {
-            return verificationFiles[index].isValid()
-        }
-        return false
-    }
-
-    func setFile(index: Int, image: UIImage, name: String) {
-        while verificationFiles.count <= index {
-            verificationFiles.append(VerificationFile.init())
-        }
-        verificationFiles[index].set(image: image, name: name)
-    }
-
     func updateView() {
         let isFirstValid = updateView(index: 0, imageView: iconBankStatement)
         let isSecondValid = updateView(index: 1, imageView: iconPayStubLast)
@@ -142,7 +131,7 @@ class VerifyViewController: UITableViewController, UIImagePickerControllerDelega
     }
 
     func updateView(index: Int, imageView: UIImageView) -> Bool {
-        if isFileValid(index: index) {
+        if coreModel.isVerificationFileValid(index: index) {
             imageView.image = #imageLiteral(resourceName: "IconCircleCheck").withRenderingMode(.alwaysTemplate)
             imageView.tintColor = ICON_COLOR
             return true
