@@ -37,6 +37,10 @@ class VerifyViewController: UITableViewController, UIImagePickerControllerDelega
     var selectedFile: String?
     var selectedRow: Int?
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Extra loading here

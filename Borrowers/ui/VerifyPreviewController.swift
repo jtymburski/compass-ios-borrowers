@@ -17,6 +17,10 @@ class VerifyPreviewController: UIViewController, UIScrollViewDelegate, UIImagePi
     var verificationFile: VerificationFile!
     var verificationIndex: Int!
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
