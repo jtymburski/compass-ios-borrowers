@@ -39,9 +39,13 @@ class WelcomeViewController: UIViewController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Create bank viewview
+        // Create bank view
         if let bankCreateViewController = segue.destination as? BankCreateViewController {
             bankCreateViewController.coreModel = coreModel
+        }
+        // Verify view
+        else if let verifyViewController = segue.destination as? VerifyViewController {
+            verifyViewController.coreModel = coreModel
         }
     }
 
@@ -55,7 +59,11 @@ class WelcomeViewController: UIViewController {
     // MARK: - Actions
 
     @IBAction func attemptGetStarted(_ sender: UIButton) {
-        performSegue(withIdentifier: "showBankCreate", sender: self)
+        if !coreModel.hasBankConnections() {
+            performSegue(withIdentifier: "showBankCreate", sender: self)
+        } else {
+            performSegue(withIdentifier: "showVerification", sender: self)
+        }
     }
 
     // MARK: - Internals

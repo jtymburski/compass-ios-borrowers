@@ -11,19 +11,13 @@ import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    let BAR_COLOR = UIColor(red: 25.0/255.0, green: 167.0/255.0, blue: 130.0/255.0, alpha: 1.0)
 
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Set up the navigation bar
-        // Light light
-        //UINavigationBar.appearance().barTintColor = UIColor(red: 36.0/255.0, green: 197.0/255.0, blue: 148.0/255.0, alpha: 1.0)
-        // Light
-        UINavigationBar.appearance().barTintColor = UIColor(red: 25.0/255.0, green: 167.0/255.0, blue: 130.0/255.0, alpha: 1.0)
-        // Middle
-        //UINavigationBar.appearance().barTintColor = UIColor(red: 14.0/255.0, green: 139.0/255.0, blue: 113.0/255.0, alpha: 1.0)
-        // Dark
-        //UINavigationBar.appearance().barTintColor = UIColor(red: 5.0/255.0, green: 113.0/255.0, blue: 97.0/255.0, alpha: 1.0)
+        UINavigationBar.appearance().barTintColor = BAR_COLOR
         UINavigationBar.appearance().tintColor = UIColor.white
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.white]
 
