@@ -56,6 +56,22 @@ class VerifyViewController: UITableViewController, UIImagePickerControllerDelega
 
     override func viewDidAppear(_ animated: Bool) {
         updateView()
+
+        // If there is no active assessment, check if the user has any pending assessments and fetch
+        if coreModel.activeAssessment == nil {
+            if let pendingAssessment = coreModel.getPendingAssessment() {
+                attemptingCreate = true
+                startAnimating(CGSize.init(width: 90, height: 90), type: NVActivityIndicatorType.orbit)
+
+                // Start the fetch request
+                Session.assessmentInfo(account: coreModel.account, assessment: pendingAssessment, completionHandler: { (response, errorString, noNetwork, unauthorized) in
+
+                    DispatchQueue.main.async {
+                        self.updateFetchResult(result: response, error: errorString, noNetwork: noNetwork, unauthorized: unauthorized)
+                    }
+                })
+            }
+        }
     }
 
     // MARK: - Navigation
@@ -78,13 +94,18 @@ class VerifyViewController: UITableViewController, UIImagePickerControllerDelega
             return
         }
         attemptingCreate = true
-        self.view.endEditing(true)
         startAnimating(CGSize.init(width: 90, height: 90), type: NVActivityIndicatorType.orbit)
 
-        // Start the request
-        Session.assessmentCreate(account: coreModel.account) { (response, errorString, noNetwork, unauthorized) in
-            DispatchQueue.main.async {
-                self.updateCreateResult(result: response, error: errorString, noNetwork: noNetwork, unauthorized: unauthorized)
+        // Determine the current assessment state
+        if coreModel.activeAssessment != nil {
+            // Start the upload request
+            startUpload(uploadPath: coreModel.activeAssessment!.uploadPath!)
+        } else {
+            // Start the create request
+            Session.assessmentCreate(account: coreModel.account) { (response, errorString, noNetwork, unauthorized) in
+                DispatchQueue.main.async {
+                    self.updateCreateResult(result: response, error: errorString, noNetwork: noNetwork, unauthorized: unauthorized)
+                }
             }
         }
     }
@@ -180,6 +201,28 @@ class VerifyViewController: UITableViewController, UIImagePickerControllerDelega
                 performSegue(withIdentifier: UNWIND_SEGUE_LOGIN, sender: self)
             } else {
                 showErrorAlert(title: "Failed To Create", message: "A new assessment failed to be created. Try again later")
+            }
+        }
+    }
+
+    func updateFetchResult(result: AssessmentInfo?, error: String?, noNetwork: Bool, unauthorized: Bool) {
+        attemptingCreate = false
+        stopAnimating()
+
+        if result != nil && result!.isValid() {
+            coreModel.activeAssessment = result
+
+            // Check on the result for the state
+            if result!.hasUploadedFiles() {
+                performSegue(withIdentifier: UNWIND_SEGUE_WELCOME, sender: self)
+            }
+        } else {
+            if noNetwork {
+                showErrorAlert(title: "No Network", message: "A network connection is required to fetch the existing assessment")
+            } else if unauthorized {
+                performSegue(withIdentifier: UNWIND_SEGUE_LOGIN, sender: self)
+            } else {
+                showErrorAlert(title: "Failed To Fetch", message: "The existing assessment failed to be fetched. Try again later")
             }
         }
     }

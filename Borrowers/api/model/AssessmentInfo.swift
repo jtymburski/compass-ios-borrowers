@@ -27,12 +27,16 @@ class AssessmentInfo: BaseModel, AbstractProtocol, CustomStringConvertible {
     var updated: Int64?
     var uploadPath: String?
 
+    // Control
+    var referenceRequired = false
+
     var description: String {
         return "AssessmentInfo [ reference : \(reference ?? "nil") , registered : \(registered ?? 0) , updated : \(updated ?? 0) , status : \(status ?? 0) , rating : \(rating ?? 0) , upload path : \(uploadPath ?? "nil") ]"
     }
 
-    init(_ data: Data) {
+    init(_ data: Data, referenceRequired: Bool) {
         super.init()
+        self.referenceRequired = referenceRequired
         parse(data)
     }
 
@@ -41,34 +45,37 @@ class AssessmentInfo: BaseModel, AbstractProtocol, CustomStringConvertible {
     }
 
     func isValid() -> Bool {
-        return (reference != nil && NSUUID(uuidString: reference!) != nil && registered != nil && registered! > 0 && updated != nil && updated! > 0 && status != nil && status! > 0 && files != nil)
+        return ((!referenceRequired || (reference != nil && NSUUID(uuidString: reference!) != nil)) && registered != nil && registered! > 0 && updated != nil && updated! > 0 && status != nil && status! > 0 && files != nil)
     }
 
     func parse(_ data: Data) {
         if let json = getJsonAsDictionary(with: data) {
             if let files = json.object(forKey: KEY_FILES) as? NSArray,
-                let reference = json.object(forKey: KEY_REFERENCE) as? String,
                 let registered = json.object(forKey: KEY_REGISTERED) as? NSNumber,
                 let status = json.object(forKey: KEY_STATUS) as? NSNumber,
                 let updated = json.object(forKey: KEY_UPDATED) as? NSNumber {
 
-                // Required
-                self.reference = reference
-                self.registered = registered.int64Value
-                self.status = status.intValue
-                self.updated = updated.int64Value
+                // Reference test
+                let reference = json.object(forKey: KEY_REFERENCE) as? String
+                if !referenceRequired || reference != nil {
+                    // Required
+                    self.reference = reference
+                    self.registered = registered.int64Value
+                    self.status = status.intValue
+                    self.updated = updated.int64Value
 
-                // Files
-                self.files = []
-                for object in files {
-                    if let json = object as? NSDictionary {
-                        self.files!.append(AssessmentFile.init(json))
+                    // Files
+                    self.files = []
+                    for object in files {
+                        if let json = object as? NSDictionary {
+                            self.files!.append(AssessmentFile.init(json))
+                        }
                     }
-                }
 
-                // Optional
-                self.rating = (json.object(forKey: KEY_RATING) as? NSNumber)?.intValue
-                self.uploadPath = json.object(forKey: KEY_UPLOAD_PATH) as? String
+                    // Optional
+                    self.rating = (json.object(forKey: KEY_RATING) as? NSNumber)?.intValue
+                    self.uploadPath = json.object(forKey: KEY_UPLOAD_PATH) as? String
+                }
             }
         }
     }

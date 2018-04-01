@@ -34,6 +34,7 @@
 		0A9800F72054782600CC5166 /* StringHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9800F62054782600CC5166 /* StringHelper.swift */; };
 		0A9800FA2054A9BA00CC5166 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9800F92054A9BA00CC5166 /* Session.swift */; };
 		0A9800FC2054B69000CC5166 /* UiExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9800FB2054B69000CC5166 /* UiExtensions.swift */; };
+		0A9CBFFA207140300061323C /* AssessmentSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9CBFF9207140300061323C /* AssessmentSummary.swift */; };
 		0AB48E932054BD75008E11D3 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB48E922054BD75008E11D3 /* Account.swift */; };
 		0AB48E952054C161008E11D3 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB48E942054C161008E11D3 /* CoreDataStack.swift */; };
 		0AB48E9720550118008E11D3 /* CreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB48E9620550118008E11D3 /* CreateViewController.swift */; };
@@ -76,6 +77,7 @@
 		0A9800F62054782600CC5166 /* StringHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringHelper.swift; sourceTree = "<group>"; };
 		0A9800F92054A9BA00CC5166 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		0A9800FB2054B69000CC5166 /* UiExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UiExtensions.swift; sourceTree = "<group>"; };
+		0A9CBFF9207140300061323C /* AssessmentSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssessmentSummary.swift; sourceTree = "<group>"; };
 		0AB48E922054BD75008E11D3 /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		0AB48E942054C161008E11D3 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		0AB48E9620550118008E11D3 /* CreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateViewController.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 				0A0464692050604900BA5690 /* AbstractProtocol.swift */,
 				0A16983920704727001122BE /* AssessmentFile.swift */,
 				0A169837207046F3001122BE /* AssessmentInfo.swift */,
+				0A9CBFF9207140300061323C /* AssessmentSummary.swift */,
 				0A9800F3205475DA00CC5166 /* AuthRequest.swift */,
 				0A04646720505F2600BA5690 /* AuthResponse.swift */,
 				0AFF4D70206D6AA10002BB37 /* Bank.swift */,
@@ -356,6 +359,7 @@
 				0A022A78206AB5C700F05D76 /* BankCreateViewController.swift in Sources */,
 				0A9800F72054782600CC5166 /* StringHelper.swift in Sources */,
 				0AB48E932054BD75008E11D3 /* Account.swift in Sources */,
+				0A9CBFFA207140300061323C /* AssessmentSummary.swift in Sources */,
 				0AFDBD94205C43BB00737BF1 /* CoreModelController.swift in Sources */,
 				0A631B7B204DD2C700E8213F /* LoginViewController.swift in Sources */,
 				0A199B10205D6E7600F4582A /* BorrowerEditable.swift in Sources */,

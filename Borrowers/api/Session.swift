@@ -30,7 +30,7 @@ struct Session {
             if let response = response as? HTTPURLResponse, let data = data {
                 // Check the HTTP result
                 if response.statusCodeEnum == HTTPStatusCode.created {
-                    assessmentInfo = AssessmentInfo.init(data)
+                    assessmentInfo = AssessmentInfo.init(data, referenceRequired: true)
                     if !assessmentInfo!.isValid() {
                         errorString = "The server received invalid response for the assessment create request"
                     }
@@ -47,6 +47,44 @@ struct Session {
                 noNetwork = true
                 if error != nil {
                     print("General failure on assessment create attempt: \(error!)")
+                }
+            }
+
+            completionHandler(assessmentInfo, errorString, noNetwork, unauthorized)
+        }
+    }
+
+    static func assessmentInfo(account: Account, assessment: AssessmentSummary, completionHandler: @escaping (AssessmentInfo?, String?, Bool, Bool) -> Void) {
+        let function = "borrowers/" + account.userKey! + "/assessments/" + assessment.reference!
+        let method = "GET"
+
+        startRequest(function: function, method: method, accessKey: account.getAccessKey(), body: nil) { (data, response, error) in
+            var assessmentInfo: AssessmentInfo?
+            var errorString: String?
+            var noNetwork = false
+            var unauthorized = false
+
+            // Determine if the result is valid
+            if let response = response as? HTTPURLResponse, let data = data {
+                // Check the HTTP result
+                if response.statusCodeEnum == HTTPStatusCode.ok {
+                    assessmentInfo = AssessmentInfo.init(data, referenceRequired: false)
+                    if !assessmentInfo!.isValid() {
+                        errorString = "The server received invalid response for the assessment info fetch request"
+                    }
+                } else if response.statusCodeEnum == HTTPStatusCode.unauthorized {
+                    unauthorized = true
+                } else {
+                    let errorResult = ErrorResult.init(data)
+                    if errorResult.isValid() {
+                        print(errorResult)
+                    }
+                    errorString = "The server failed to process the assessment info fetch request"
+                }
+            } else {
+                noNetwork = true
+                if error != nil {
+                    print("General failure on assessment info fetch attempt: \(error!)")
                 }
             }
 

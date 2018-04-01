@@ -13,6 +13,7 @@ class CoreModelController {
     // Borrower
     var account: Account!
     var activeAssessment: AssessmentInfo?
+    var assessments: [AssessmentSummary]?
     var bankConnections: [BankConnectionSummary]?
     var userInfo: UserInfo?
     var verificationFiles: [VerificationFile] = []
@@ -41,6 +42,17 @@ class CoreModelController {
     func clear() {
         account.clear()
         userInfo = nil
+    }
+
+    func getPendingAssessment() -> AssessmentSummary? {
+        if assessments != nil {
+            for assessment in assessments! {
+                if assessment.isValid() && assessment.isStarted() {
+                    return assessment
+                }
+            }
+        }
+        return nil
     }
 
     func getVerificationFile(index: Int) -> VerificationFile {
@@ -82,6 +94,10 @@ class CoreModelController {
 
         if(info.bankConnections != nil) {
             bankConnections = info.bankConnections
+        }
+
+        if(info.assessments != nil) {
+            assessments = info.assessments
         }
     }
 
