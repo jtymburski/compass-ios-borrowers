@@ -30,7 +30,7 @@ struct Session {
             if let response = response as? HTTPURLResponse, let data = data {
                 // Check the HTTP result
                 if response.statusCodeEnum == HTTPStatusCode.created {
-                    assessmentInfo = AssessmentInfo.init(data, referenceRequired: true)
+                    assessmentInfo = AssessmentInfo.init(data, reference: nil)
                     if !assessmentInfo!.isValid() {
                         errorString = "The server received invalid response for the assessment create request"
                     }
@@ -68,7 +68,7 @@ struct Session {
             if let response = response as? HTTPURLResponse, let data = data {
                 // Check the HTTP result
                 if response.statusCodeEnum == HTTPStatusCode.ok {
-                    assessmentInfo = AssessmentInfo.init(data, referenceRequired: false)
+                    assessmentInfo = AssessmentInfo.init(data, reference: assessment.reference)
                     if !assessmentInfo!.isValid() {
                         errorString = "The server received invalid response for the assessment info fetch request"
                     }
@@ -89,6 +89,43 @@ struct Session {
             }
 
             completionHandler(assessmentInfo, errorString, noNetwork, unauthorized)
+        }
+    }
+
+    static func assessmentSubmit(account: Account, assessment: AssessmentInfo, completionHandler: @escaping (Bool, String?, Bool, Bool) -> Void) {
+        let function = "borrowers/" + account.userKey! + "/assessments/" + assessment.reference!
+        let method = "POST"
+
+        startRequest(function: function, method: method, accessKey: account.getAccessKey(), body: nil) { (data, response, error) in
+            var success = false
+            var errorString: String?
+            var noNetwork = false
+            var unauthorized = false
+
+            // Determine if the result is valid
+            if let response = response as? HTTPURLResponse {
+                // Check the HTTP result
+                if response.statusCodeEnum == HTTPStatusCode.ok {
+                    success = true
+                } else if response.statusCodeEnum == HTTPStatusCode.unauthorized {
+                    unauthorized = true
+                } else {
+                    if data != nil {
+                        let errorResult = ErrorResult.init(data!)
+                        if errorResult.isValid() {
+                            print(errorResult)
+                        }
+                    }
+                    errorString = "The server failed to submit the assessment request"
+                }
+            } else {
+                noNetwork = true
+                if error != nil {
+                    print("General failure on assessment submit request attempt: \(error!)")
+                }
+            }
+
+            completionHandler(success, errorString, noNetwork, unauthorized)
         }
     }
 

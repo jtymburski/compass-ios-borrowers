@@ -6,9 +6,12 @@
 //  Copyright © 2018 GN Compass. All rights reserved.
 //
 
+import NVActivityIndicatorView
 import UIKit
 
-class WelcomeViewController: UIViewController {
+class WelcomeViewController: UIViewController, NVActivityIndicatorViewable {
+    private let UNWIND_SEGUE_LOGIN = "unwindToLogin"
+
     // UI
     @IBOutlet weak var buttonNext: UIButton!
     @IBOutlet weak var iconAddBank: UIImageView!
@@ -16,6 +19,9 @@ class WelcomeViewController: UIViewController {
 
     // Model
     var coreModel: CoreModelController!
+
+    // Control
+    var attemptingSubmit = false
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -64,12 +70,46 @@ class WelcomeViewController: UIViewController {
         } else if !coreModel.hasReadyAssessment()  {
             performSegue(withIdentifier: "showVerification", sender: self)
         } else {
-            // TODO: Execute submit of assessment
-            print("TODO: Execute submit of assessment")
+            if attemptingSubmit {
+                return
+            }
+            attemptingSubmit = true
+            startAnimating(CGSize.init(width: 90, height: 90), type: NVActivityIndicatorType.orbit)
+
+            Session.assessmentSubmit(account: coreModel.account, assessment: coreModel.activeAssessment!, completionHandler: { (success, errorString, noNetwork, unauthorized) in
+
+                DispatchQueue.main.async {
+                    self.updateSubmitResult(success: success, error: errorString, noNetwork: noNetwork, unauthorized: unauthorized)
+                }
+            })
         }
     }
 
     // MARK: - Internals
+
+    func showErrorAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+
+    func updateSubmitResult(success: Bool, error: String?, noNetwork: Bool, unauthorized: Bool) {
+        attemptingSubmit = false
+        stopAnimating()
+
+        if success {
+            coreModel.activeAssessment = nil
+            performSegue(withIdentifier: "showMain", sender: self)
+        } else {
+            if noNetwork {
+                showErrorAlert(title: "No Network", message: "A network connection is required to submit for assessment")
+            } else if unauthorized {
+                performSegue(withIdentifier: UNWIND_SEGUE_LOGIN, sender: self)
+            } else {
+                showErrorAlert(title: "Failed To Submit", message: "The assessment failed to be submitted. Try again later")
+            }
+        }
+    }
 
     func updateView() {
         var hasBank = false

@@ -361,7 +361,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate, NVActivityIndi
         stopAnimating()
 
         if success {
-            if coreModel.hasValidDetails() {
+            if coreModel.hasValidDetails() && coreModel.hasBankConnections() && coreModel.hasSubmittedAssessment() {
+                performSegue(withIdentifier: "showMain", sender: self)
+            } else if coreModel.hasValidDetails() {
                 performSegue(withIdentifier: "showWelcome", sender: self)
             } else {
                 performSegue(withIdentifier: "showDetails", sender: self)

@@ -34,9 +34,9 @@ class AssessmentInfo: BaseModel, AbstractProtocol, CustomStringConvertible {
         return "AssessmentInfo [ reference : \(reference ?? "nil") , registered : \(registered ?? 0) , updated : \(updated ?? 0) , status : \(status ?? 0) , rating : \(rating ?? 0) , upload path : \(uploadPath ?? "nil") ]"
     }
 
-    init(_ data: Data, referenceRequired: Bool) {
+    init(_ data: Data, reference: String?) {
         super.init()
-        self.referenceRequired = referenceRequired
+        self.reference = reference
         parse(data)
     }
 
@@ -57,9 +57,11 @@ class AssessmentInfo: BaseModel, AbstractProtocol, CustomStringConvertible {
 
                 // Reference test
                 let reference = json.object(forKey: KEY_REFERENCE) as? String
-                if !referenceRequired || reference != nil {
+                if self.reference != nil || reference != nil {
                     // Required
-                    self.reference = reference
+                    if reference != nil {
+                        self.reference = reference
+                    }
                     self.registered = registered.int64Value
                     self.status = status.intValue
                     self.updated = updated.int64Value
