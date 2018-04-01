@@ -1924,10 +1924,10 @@
             </objects>
             <point key="canvasLocation" x="3705" y="-607"/>
         </scene>
-        <!--Item-->
+        <!--Main View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="Borrowers" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1953,8 +1953,7 @@ Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed 
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="b0p-IK-Bcn"/>
-                    <navigationItem key="navigationItem" id="uQI-1f-Xan"/>
+                    <tabBarItem key="tabBarItem" systemItem="favorites" id="b0p-IK-Bcn"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -1978,10 +1977,10 @@ Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed 
             </objects>
             <point key="canvasLocation" x="457.5" y="-1020.4225352112676"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Main Nav Controller-->
         <scene sceneID="zdQ-1K-1Ro">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="H8V-mm-reK" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="H8V-mm-reK" customClass="MainNavController" customModule="Borrowers" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="XwP-0V-V39">
                         <rect key="frame" x="0.0" y="20" width="320" height="44"/>
@@ -1996,12 +1995,12 @@ Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed 
             </objects>
             <point key="canvasLocation" x="1042.5" y="619.0140845070423"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Main-->
         <scene sceneID="iny-03-hGK">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="6zO-9L-dNo" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="6zO-9L-dNo" customClass="MainTabController" customModule="Borrowers" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" id="7QD-Fv-Gnj"/>
+                    <navigationItem key="navigationItem" title="Main" id="7QD-Fv-Gnj"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="z4J-Hh-rzY">
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>

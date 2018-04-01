@@ -49,6 +49,10 @@ class WelcomeViewController: UIViewController, NVActivityIndicatorViewable {
         if let bankCreateViewController = segue.destination as? BankCreateViewController {
             bankCreateViewController.coreModel = coreModel
         }
+        // Welcome navigation
+        else if let welcomeNavController = segue.destination as? WelcomeNavController {
+            welcomeNavController.coreModel = coreModel
+        }
         // Verify view
         else if let verifyViewController = segue.destination as? VerifyViewController {
             verifyViewController.coreModel = coreModel

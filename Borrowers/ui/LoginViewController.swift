@@ -98,6 +98,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate, NVActivityIndi
         else if let detailsViewController = segue.destination as? DetailsViewController {
             detailsViewController.coreModel = coreModel
         }
+        // Main navigation
+        else if let mainNavController = segue.destination as? MainNavController {
+            mainNavController.coreModel = coreModel
+        }
         // Welcome navigation
         else if let welcomeNavController = segue.destination as? WelcomeNavController {
             welcomeNavController.coreModel = coreModel
