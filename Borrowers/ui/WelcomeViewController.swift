@@ -61,8 +61,11 @@ class WelcomeViewController: UIViewController {
     @IBAction func attemptGetStarted(_ sender: UIButton) {
         if !coreModel.hasBankConnections() {
             performSegue(withIdentifier: "showBankCreate", sender: self)
-        } else {
+        } else if !coreModel.hasReadyAssessment()  {
             performSegue(withIdentifier: "showVerification", sender: self)
+        } else {
+            // TODO: Execute submit of assessment
+            print("TODO: Execute submit of assessment")
         }
     }
 
@@ -70,7 +73,7 @@ class WelcomeViewController: UIViewController {
 
     func updateView() {
         var hasBank = false
-        let hasVerified = false
+        var hasVerified = false
 
         // Bank connections icon
         if coreModel.hasBankConnections() {
@@ -81,7 +84,12 @@ class WelcomeViewController: UIViewController {
         }
 
         // Verify identity icon
-        // TODO
+        if coreModel.hasReadyAssessment() {
+            hasVerified = true
+            iconVerifyIdentity.image = #imageLiteral(resourceName: "IconCircleCheck")
+        } else {
+            iconVerifyIdentity.image = #imageLiteral(resourceName: "IconCircle2")
+        }
 
         // Button text
         if hasBank && hasVerified {

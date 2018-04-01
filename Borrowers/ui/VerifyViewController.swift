@@ -21,6 +21,7 @@ class VerifyViewController: UITableViewController, UIImagePickerControllerDelega
     ]
     private let ICON_COLOR = UIColor(red: 25.0/255.0, green: 167.0/255.0, blue: 130.0/255.0, alpha: 1.0)
     private let UNWIND_SEGUE_LOGIN = "unwindToLogin"
+    private let UNWIND_SEGUE_WELCOME = "unwindToWelcome"
 
     // UI
     @IBOutlet weak var buttonSave: UIBarButtonItem!
@@ -151,8 +152,18 @@ class VerifyViewController: UITableViewController, UIImagePickerControllerDelega
     }
 
     func startUpload(uploadPath: String) {
-        // TODO: Implement
-        print("start upload: " + uploadPath)
+        let uploadStartResult =
+            Session.assessmentUpload(urlString: uploadPath, files: coreModel.verificationFiles) { (success, error, noNetwork) in
+
+                DispatchQueue.main.async {
+                    self.updateUploadResult(success: success, error: error, noNetwork: noNetwork)
+                }
+        }
+
+        // Check if the upload failed to be started
+        if !uploadStartResult {
+            updateUploadResult(success: false, error: nil, noNetwork: false)
+        }
     }
 
     func updateCreateResult(result: AssessmentInfo?, error: String?, noNetwork: Bool, unauthorized: Bool) {
@@ -169,6 +180,24 @@ class VerifyViewController: UITableViewController, UIImagePickerControllerDelega
                 performSegue(withIdentifier: UNWIND_SEGUE_LOGIN, sender: self)
             } else {
                 showErrorAlert(title: "Failed To Create", message: "A new assessment failed to be created. Try again later")
+            }
+        }
+    }
+
+    func updateUploadResult(success: Bool, error: String?, noNetwork: Bool) {
+        attemptingCreate = false
+        stopAnimating()
+
+        if success {
+            coreModel.activeAssessment!.setFiles(files: coreModel.verificationFiles)
+            coreModel.verificationFiles.removeAll()
+
+            performSegue(withIdentifier: UNWIND_SEGUE_WELCOME, sender: self)
+        } else {
+            if noNetwork {
+                showErrorAlert(title: "No Network", message: "A network connection is required to upload the files")
+            } else {
+                showErrorAlert(title: "Failed to Upload", message: "The upload failed to be initialized. Try again later")
             }
         }
     }

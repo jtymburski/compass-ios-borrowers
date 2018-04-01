@@ -54,6 +54,63 @@ struct Session {
         }
     }
 
+    static func assessmentUpload(urlString: String, files: [VerificationFile], completionHandler: @escaping (Bool, String?, Bool) -> Void) -> Bool {
+        // Create the URL
+        if let url = URL(string: urlString) {
+            // Build the custom form upload request header
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            let boundary = "Boundary-\(UUID().uuidString)"
+            request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+
+            // Form upload body
+            let body = NSMutableData()
+            let boundaryPrefix = "--\(boundary)\r\n"
+            var fileIndex = 1
+            for file in files {
+                if file.isValid() {
+                    body.appendString(boundaryPrefix)
+                    body.appendString("Content-Disposition: form-data; name=\"\(fileIndex)\"; filename=\"\(file.name!)\"\r\n")
+                    body.appendString("Content-Type: \(file.getContentType())\r\n\r\n")
+                    body.append(file.getData()!)
+                    body.appendString("\r\n")
+
+                    fileIndex += 1
+                }
+            }
+            body.appendString(boundaryPrefix.appending("--"))
+            if fileIndex > 1 {
+                // Start the session request
+                URLSession.shared.uploadTask(with: request, from: body as Data, completionHandler: { (data, response, error) in
+                    var errorString: String?
+                    var noNetwork = false
+                    var success = false
+
+                    // Determine if the result is valid
+                    if let response = response as? HTTPURLResponse {
+                        // Check the HTTP result
+                        if response.statusCodeEnum == HTTPStatusCode.ok {
+                            success = true
+                        } else {
+                            errorString = "The server failed to process the assessment upload request with status: \(response.statusCode)"
+                        }
+                    } else {
+                        noNetwork = true
+                        if error != nil {
+                            print("General failure on assessment upload attempt: \(error!)")
+                        }
+                    }
+
+                    completionHandler(success, errorString, noNetwork)
+                }).resume()
+
+                return true
+            }
+        }
+
+        return false
+    }
+
     static func bankCreate(account: Account, input: BankConnectionNew, completionHandler: @escaping (BankConnectionSummary?, String?, Bool, Bool) -> Void) {
         let function = "borrowers/" + account.userKey! + "/banks"
         let method = "POST"
@@ -323,5 +380,11 @@ struct Session {
         }
 
         URLSession.shared.dataTask(with: request, completionHandler: completionHandler).resume()
+    }
+}
+
+extension NSMutableData {
+    func appendString(_ string: String) {
+        append(string.data(using: String.Encoding.utf8, allowLossyConversion: false)!)
     }
 }

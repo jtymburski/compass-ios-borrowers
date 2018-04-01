@@ -17,6 +17,8 @@ class AssessmentInfo: BaseModel, AbstractProtocol, CustomStringConvertible {
     private let KEY_UPDATED = "updated"
     private let KEY_UPLOAD_PATH = "upload_path"
 
+    private let MIN_FILE_COUNT = 4
+
     var files: [AssessmentFile]?
     var rating: Int?
     var reference: String?
@@ -32,6 +34,10 @@ class AssessmentInfo: BaseModel, AbstractProtocol, CustomStringConvertible {
     init(_ data: Data) {
         super.init()
         parse(data)
+    }
+
+    func hasUploadedFiles() -> Bool {
+        return files != nil && files!.count >= MIN_FILE_COUNT
     }
 
     func isValid() -> Bool {
@@ -64,6 +70,13 @@ class AssessmentInfo: BaseModel, AbstractProtocol, CustomStringConvertible {
                 self.rating = (json.object(forKey: KEY_RATING) as? NSNumber)?.intValue
                 self.uploadPath = json.object(forKey: KEY_UPLOAD_PATH) as? String
             }
+        }
+    }
+
+    func setFiles(files: [VerificationFile]) {
+        self.files = []
+        for file in files {
+            self.files!.append(file.getAssessmentFile())
         }
     }
 

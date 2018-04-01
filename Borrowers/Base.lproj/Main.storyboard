@@ -1862,6 +1862,7 @@
                         <outlet property="iconUtilityBill" destination="zRN-Vu-r1h" id="gGb-Sn-OyT"/>
                         <segue destination="8Ew-Fv-LdR" kind="show" identifier="showVerificationFile" id="h3S-vB-6zF"/>
                         <segue destination="FQl-1s-aXR" kind="unwind" identifier="unwindToLogin" unwindAction="unwindToLoginWithSegue:" id="ZcP-iu-FPd"/>
+                        <segue destination="FQl-1s-aXR" kind="unwind" identifier="unwindToWelcome" unwindAction="unwindToWelcomeWithSegue:" id="Il4-97-Tk7"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I1O-ba-dVR" userLabel="First Responder" sceneMemberID="firstResponder"/>

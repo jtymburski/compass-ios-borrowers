@@ -51,6 +51,10 @@ class CoreModelController {
         return bankConnections != nil && bankConnections!.count > 0
     }
 
+    func hasReadyAssessment() -> Bool {
+        return activeAssessment != nil && activeAssessment!.isValid() && activeAssessment!.hasUploadedFiles()
+    }
+
     func hasValidDetails() -> Bool {
         if userInfo != nil {
             return userInfo!.hasValidDetails()
