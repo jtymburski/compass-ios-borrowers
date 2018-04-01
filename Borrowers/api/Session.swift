@@ -16,6 +16,44 @@ struct Session {
 
     // MARK: - Functions
 
+    static func assessmentCreate(account: Account, completionHandler: @escaping (AssessmentInfo?, String?, Bool, Bool) -> Void) {
+        let function = "borrowers/" + account.userKey! + "/assessments"
+        let method = "POST"
+
+        startRequest(function: function, method: method, accessKey: account.getAccessKey(), body: nil) { (data, response, error) in
+            var assessmentInfo: AssessmentInfo?
+            var errorString: String?
+            var noNetwork = false
+            var unauthorized = false
+
+            // Determine if the result is valid
+            if let response = response as? HTTPURLResponse, let data = data {
+                // Check the HTTP result
+                if response.statusCodeEnum == HTTPStatusCode.created {
+                    assessmentInfo = AssessmentInfo.init(data)
+                    if !assessmentInfo!.isValid() {
+                        errorString = "The server received invalid response for the assessment create request"
+                    }
+                } else if response.statusCodeEnum == HTTPStatusCode.unauthorized {
+                    unauthorized = true
+                } else {
+                    let errorResult = ErrorResult.init(data)
+                    if errorResult.isValid() {
+                        print(errorResult)
+                    }
+                    errorString = "The server failed to process the assessment create request"
+                }
+            } else {
+                noNetwork = true
+                if error != nil {
+                    print("General failure on assessment create attempt: \(error!)")
+                }
+            }
+
+            completionHandler(assessmentInfo, errorString, noNetwork, unauthorized)
+        }
+    }
+
     static func bankCreate(account: Account, input: BankConnectionNew, completionHandler: @escaping (BankConnectionSummary?, String?, Bool, Bool) -> Void) {
         let function = "borrowers/" + account.userKey! + "/banks"
         let method = "POST"

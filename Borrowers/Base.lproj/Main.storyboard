@@ -1847,7 +1847,11 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Verify Your Identity" id="BvL-qw-CNI">
                         <barButtonItem key="backBarButtonItem" title="Back" id="eTz-Mx-TWi"/>
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Save" id="ZkY-jQ-1Xp"/>
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Save" id="ZkY-jQ-1Xp">
+                            <connections>
+                                <action selector="onAssessmentSave:" destination="Md4-Lo-qh9" id="Arh-fo-OVb"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="buttonSave" destination="ZkY-jQ-1Xp" id="S2N-cy-Q3z"/>
@@ -1857,9 +1861,11 @@
                         <outlet property="iconPayStubPrevious" destination="7hh-kz-fAI" id="K4y-ti-JIb"/>
                         <outlet property="iconUtilityBill" destination="zRN-Vu-r1h" id="gGb-Sn-OyT"/>
                         <segue destination="8Ew-Fv-LdR" kind="show" identifier="showVerificationFile" id="h3S-vB-6zF"/>
+                        <segue destination="FQl-1s-aXR" kind="unwind" identifier="unwindToLogin" unwindAction="unwindToLoginWithSegue:" id="ZcP-iu-FPd"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I1O-ba-dVR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="FQl-1s-aXR" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2655" y="-607.3943661971831"/>
         </scene>

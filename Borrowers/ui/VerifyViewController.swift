@@ -6,9 +6,10 @@
 //  Copyright © 2018 GN Compass. All rights reserved.
 //
 
+import NVActivityIndicatorView
 import UIKit
 
-class VerifyViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class VerifyViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, NVActivityIndicatorViewable {
     // Statics
     private let DEFAULT_FILE_NAME = "untitled.jpg"
     private let FILE_NAMES = [
@@ -18,8 +19,8 @@ class VerifyViewController: UITableViewController, UIImagePickerControllerDelega
         "government_id.jpg",
         "utility_bill.jpg"
     ]
-    //private let ICON_COLOR = UIColor(red: 29.0/255.0, green: 29.0/255.0, blue: 38.0/255.0, alpha: 0.3)
     private let ICON_COLOR = UIColor(red: 25.0/255.0, green: 167.0/255.0, blue: 130.0/255.0, alpha: 1.0)
+    private let UNWIND_SEGUE_LOGIN = "unwindToLogin"
 
     // UI
     @IBOutlet weak var buttonSave: UIBarButtonItem!
@@ -33,6 +34,7 @@ class VerifyViewController: UITableViewController, UIImagePickerControllerDelega
     var coreModel: CoreModelController!
 
     // Control
+    var attemptingCreate = false
     var displayRow: Int?
     var selectedFile: String?
     var selectedRow: Int?
@@ -64,6 +66,24 @@ class VerifyViewController: UITableViewController, UIImagePickerControllerDelega
             if displayRow != nil {
                 verifyPreviewController.verificationFile = coreModel.getVerificationFile(index: displayRow!)
                 verifyPreviewController.verificationIndex = displayRow!
+            }
+        }
+    }
+
+    // MARK: - Actions
+
+    @IBAction func onAssessmentSave(_ sender: UIBarButtonItem) {
+        if attemptingCreate {
+            return
+        }
+        attemptingCreate = true
+        self.view.endEditing(true)
+        startAnimating(CGSize.init(width: 90, height: 90), type: NVActivityIndicatorType.orbit)
+
+        // Start the request
+        Session.assessmentCreate(account: coreModel.account) { (response, errorString, noNetwork, unauthorized) in
+            DispatchQueue.main.async {
+                self.updateCreateResult(result: response, error: errorString, noNetwork: noNetwork, unauthorized: unauthorized)
             }
         }
     }
@@ -122,6 +142,35 @@ class VerifyViewController: UITableViewController, UIImagePickerControllerDelega
             return FILE_NAMES[index]
         }
         return nil
+    }
+
+    func showErrorAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+
+    func startUpload(uploadPath: String) {
+        // TODO: Implement
+        print("start upload: " + uploadPath)
+    }
+
+    func updateCreateResult(result: AssessmentInfo?, error: String?, noNetwork: Bool, unauthorized: Bool) {
+        if result != nil && result!.isValid() && result!.uploadPath != nil {
+            coreModel.activeAssessment = result
+            startUpload(uploadPath: result!.uploadPath!)
+        } else {
+            attemptingCreate = false
+            stopAnimating()
+
+            if noNetwork {
+                showErrorAlert(title: "No Network", message: "A network connection is required to create an assessment")
+            } else if unauthorized {
+                performSegue(withIdentifier: UNWIND_SEGUE_LOGIN, sender: self)
+            } else {
+                showErrorAlert(title: "Failed To Create", message: "A new assessment failed to be created. Try again later")
+            }
+        }
     }
 
     func updateView() {

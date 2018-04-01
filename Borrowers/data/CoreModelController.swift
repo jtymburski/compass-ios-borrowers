@@ -12,6 +12,7 @@ import UIKit
 class CoreModelController {
     // Borrower
     var account: Account!
+    var activeAssessment: AssessmentInfo?
     var bankConnections: [BankConnectionSummary]?
     var userInfo: UserInfo?
     var verificationFiles: [VerificationFile] = []

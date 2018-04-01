@@ -105,17 +105,21 @@ class LoginViewController: UIViewController, UITextFieldDelegate, NVActivityIndi
     }
 
     @IBAction func unwindToLogin(segue: UIStoryboardSegue) {
+        // Bank create view
+        if let bankCreateViewController = segue.source as? BankCreateViewController {
+            coreModel = bankCreateViewController.coreModel
+        }
         // Create view
-        if let createViewController = segue.source as? CreateViewController {
+        else if let createViewController = segue.source as? CreateViewController {
             coreModel = createViewController.coreModel
         }
         // Details view
         else if let detailsViewController = segue.source as? DetailsViewController {
             coreModel = detailsViewController.coreModel
         }
-        // Bank create view
-        else if let bankCreateViewController = segue.source as? BankCreateViewController {
-            coreModel = bankCreateViewController.coreModel
+        // Verify view
+        else if let verifyViewController = segue.source as? VerifyViewController {
+            coreModel = verifyViewController.coreModel
         }
     }
 

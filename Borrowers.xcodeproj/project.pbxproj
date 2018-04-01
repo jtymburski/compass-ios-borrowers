@@ -19,6 +19,8 @@
 		0A10ECBE204DB9D200226B92 /* Borrowers.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0A10ECBC204DB9D200226B92 /* Borrowers.xcdatamodeld */; };
 		0A10ECC0204DB9D200226B92 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A10ECBF204DB9D200226B92 /* Assets.xcassets */; };
 		0A10ECC3204DB9D200226B92 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A10ECC1204DB9D200226B92 /* LaunchScreen.storyboard */; };
+		0A169838207046F3001122BE /* AssessmentInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A169837207046F3001122BE /* AssessmentInfo.swift */; };
+		0A16983A20704727001122BE /* AssessmentFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A16983920704727001122BE /* AssessmentFile.swift */; };
 		0A199B10205D6E7600F4582A /* BorrowerEditable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A199B0F205D6E7600F4582A /* BorrowerEditable.swift */; };
 		0A199B12205D796700F4582A /* BorrowerViewable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A199B11205D796700F4582A /* BorrowerViewable.swift */; };
 		0A32001F2059A0E70021FE4A /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A32001E2059A0E70021FE4A /* DetailsViewController.swift */; };
@@ -59,6 +61,8 @@
 		0A10ECBF204DB9D200226B92 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0A10ECC2204DB9D200226B92 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0A10ECC4204DB9D200226B92 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0A169837207046F3001122BE /* AssessmentInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssessmentInfo.swift; sourceTree = "<group>"; };
+		0A16983920704727001122BE /* AssessmentFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssessmentFile.swift; sourceTree = "<group>"; };
 		0A199B0F205D6E7600F4582A /* BorrowerEditable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorrowerEditable.swift; sourceTree = "<group>"; };
 		0A199B11205D796700F4582A /* BorrowerViewable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorrowerViewable.swift; sourceTree = "<group>"; };
 		0A32001E2059A0E70021FE4A /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
@@ -111,6 +115,8 @@
 			isa = PBXGroup;
 			children = (
 				0A0464692050604900BA5690 /* AbstractProtocol.swift */,
+				0A16983920704727001122BE /* AssessmentFile.swift */,
+				0A169837207046F3001122BE /* AssessmentInfo.swift */,
 				0A9800F3205475DA00CC5166 /* AuthRequest.swift */,
 				0A04646720505F2600BA5690 /* AuthResponse.swift */,
 				0AFF4D70206D6AA10002BB37 /* Bank.swift */,
@@ -368,6 +374,7 @@
 				0A04646620505E6D00BA5690 /* BaseModel.swift in Sources */,
 				0A9800F4205475DA00CC5166 /* AuthRequest.swift in Sources */,
 				0AB48E952054C161008E11D3 /* CoreDataStack.swift in Sources */,
+				0A16983A20704727001122BE /* AssessmentFile.swift in Sources */,
 				0A04646A2050604900BA5690 /* AbstractProtocol.swift in Sources */,
 				0A10ECBE204DB9D200226B92 /* Borrowers.xcdatamodeld in Sources */,
 				0A6421A7207008FD0086FF8B /* VerificationFile.swift in Sources */,
@@ -377,6 +384,7 @@
 				0AC757E12050651F00D152F1 /* ErrorResult.swift in Sources */,
 				0A04646820505F2600BA5690 /* AuthResponse.swift in Sources */,
 				0A10ECB6204DB9D200226B92 /* AppDelegate.swift in Sources */,
+				0A169838207046F3001122BE /* AssessmentInfo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
