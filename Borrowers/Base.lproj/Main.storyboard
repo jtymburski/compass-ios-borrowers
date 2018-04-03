@@ -618,7 +618,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6nY-f3-JOT" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="UhL-PV-SLm" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-943.125" y="-114.08450704225352"/>
+            <point key="canvasLocation" x="-943" y="-2098"/>
         </scene>
         <!--Details View Controller-->
         <scene sceneID="TQs-zp-mlR">
@@ -1924,40 +1924,150 @@
             </objects>
             <point key="canvasLocation" x="3705" y="-607"/>
         </scene>
-        <!--Main View Controller-->
+        <!--Navigation Controller-->
+        <scene sceneID="TZE-MI-YcI">
+            <objects>
+                <navigationController id="gSz-2S-Fkb" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="IconHomeSolid" id="oYf-qh-Euc">
+                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
+                    </tabBarItem>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="wns-7u-zGW">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="6oF-1b-Zcc">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="rua-f1-IWU"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="a7Z-m0-MdM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2109" y="542"/>
+        </scene>
+        <!--Your Loans-->
         <scene sceneID="tne-QT-ifu">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="Borrowers" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="7Iw-L3-gwJ">
-                                <rect key="frame" x="40" y="220" width="240" height="128"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="240" id="TPQ-WU-8bd"/>
-                                    <constraint firstAttribute="height" constant="128" id="cIK-6o-aPo"/>
-                                </constraints>
-                                <string key="text">This is the main view template. Just here for testing purposes.
-
-Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dKC-gr-eHg">
+                                <rect key="frame" x="151" y="260.5" width="18.5" height="48"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="7Iw-L3-gwJ" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="MNw-rk-cbl"/>
-                            <constraint firstItem="7Iw-L3-gwJ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="dtQ-jZ-jtA"/>
+                            <constraint firstItem="dKC-gr-eHg" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="19s-Qt-s2J"/>
+                            <constraint firstItem="dKC-gr-eHg" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="YtH-cN-wv5"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <tabBarItem key="tabBarItem" systemItem="favorites" id="b0p-IK-Bcn"/>
+                    <navigationItem key="navigationItem" title="Your Loans" id="Ahq-NM-XBJ">
+                        <barButtonItem key="rightBarButtonItem" image="IconAccountBalance" id="b6E-p5-pyI"/>
+                    </navigationItem>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3270" y="618"/>
+            <point key="canvasLocation" x="3270" y="542"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="jeX-IF-vB8">
+            <objects>
+                <navigationController id="sxc-fo-AxL" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" image="IconFace" id="ZLX-0P-oLT">
+                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
+                    </tabBarItem>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ouu-bc-p6o">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="5Ee-gu-8Q5" kind="relationship" relationship="rootViewController" id="pcI-PR-9P2"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7Od-Tf-bku" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2108" y="2231"/>
+        </scene>
+        <!--Your Profile-->
+        <scene sceneID="QBQ-GN-MfX">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qjF-BH-ue3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="5Ee-gu-8Q5" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6c4-af-PgY">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n90-hM-Chx">
+                                <rect key="frame" x="148" y="260.5" width="24.5" height="48"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="n90-hM-Chx" firstAttribute="centerX" secondItem="6c4-af-PgY" secondAttribute="centerX" id="i8s-6m-9dH"/>
+                            <constraint firstItem="n90-hM-Chx" firstAttribute="centerY" secondItem="6c4-af-PgY" secondAttribute="centerY" id="wZI-Ni-FJZ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="AdX-3o-1mc"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Your Profile" id="UJk-Yd-eEV">
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="15b-xI-kWf"/>
+                    </navigationItem>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="3270" y="2231"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="sef-mt-XwD">
+            <objects>
+                <navigationController id="Utm-ju-Z4a" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="IconAddNavUnsel" selectedImage="IconAddNavSel" id="s6u-gw-xH8">
+                        <inset key="imageInsets" minX="0.0" minY="-24" maxX="0.0" maxY="0.0"/>
+                    </tabBarItem>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="d2S-iK-jrF">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Bcc-JB-R7c" kind="relationship" relationship="rootViewController" id="IyN-l6-jh2"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="blQ-zo-XN3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2108" y="1362"/>
+        </scene>
+        <!--New Loan-->
+        <scene sceneID="09q-9i-H1p">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3I8-EZ-8IY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="Bcc-JB-R7c" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="rJW-28-CHk">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y45-xL-Q4F">
+                                <rect key="frame" x="149" y="260.5" width="23.5" height="48"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="y45-xL-Q4F" firstAttribute="centerY" secondItem="rJW-28-CHk" secondAttribute="centerY" id="5GI-cJ-EWC"/>
+                            <constraint firstItem="y45-xL-Q4F" firstAttribute="centerX" secondItem="rJW-28-CHk" secondAttribute="centerX" id="ieX-wU-Hp3"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="9Jd-YF-XiX"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="New Loan" id="ibA-vU-rda"/>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="3270" y="1362"/>
         </scene>
         <!--Welcome Nav Controller-->
         <scene sceneID="ojR-Nh-kQ8">
@@ -1980,10 +2090,9 @@ Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed 
         <!--Main Nav Controller-->
         <scene sceneID="zdQ-1K-1Ro">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="H8V-mm-reK" customClass="MainNavController" customModule="Borrowers" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="H8V-mm-reK" customClass="MainNavController" customModule="Borrowers" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="XwP-0V-V39">
-                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -1993,37 +2102,46 @@ Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed 
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zhd-A3-I3S" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1042.5" y="619.0140845070423"/>
+            <point key="canvasLocation" x="458" y="368"/>
         </scene>
-        <!--Main-->
+        <!--Main Tab Controller-->
         <scene sceneID="iny-03-hGK">
             <objects>
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="6zO-9L-dNo" customClass="MainTabController" customModule="Borrowers" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Main" id="7QD-Fv-Gnj"/>
+                    <navigationItem key="navigationItem" id="7QD-Fv-Gnj"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="z4J-Hh-rzY">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="selectedImageTintColor" red="0.36862745098039218" green="0.69019607843137254" blue="0.58431372549019611" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="6Bn-mF-ciV"/>
+                        <segue destination="gSz-2S-Fkb" kind="relationship" relationship="viewControllers" id="kSn-tC-HMs"/>
+                        <segue destination="Utm-ju-Z4a" kind="relationship" relationship="viewControllers" id="JfZ-8y-okk"/>
+                        <segue destination="sxc-fo-AxL" kind="relationship" relationship="viewControllers" id="VPX-zc-NGb"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZV2-Bz-AFS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2169" y="618"/>
+            <point key="canvasLocation" x="458" y="1362"/>
         </scene>
     </scenes>
     <resources>
         <image name="BackgroundOnboard" width="750" height="1334"/>
         <image name="HeaderWelcome" width="351" height="273"/>
+        <image name="IconAccountBalance" width="24" height="24"/>
+        <image name="IconAddNavSel" width="72" height="72"/>
+        <image name="IconAddNavUnsel" width="72" height="72"/>
         <image name="IconBack" width="42" height="42"/>
         <image name="IconCircle" width="35" height="35"/>
         <image name="IconCircle1" width="35" height="35"/>
         <image name="IconCircle2" width="35" height="35"/>
         <image name="IconDown" width="22" height="12"/>
         <image name="IconEmail" width="41" height="35"/>
+        <image name="IconFace" width="24" height="24"/>
         <image name="IconHome" width="50" height="44"/>
+        <image name="IconHomeSolid" width="24" height="24"/>
         <image name="IconLocation" width="31" height="44"/>
         <image name="IconLock" width="37" height="44"/>
         <image name="IconNext" width="18" height="33"/>
@@ -2033,7 +2151,7 @@ Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed 
         <image name="Logo" width="322" height="322"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="94w-lY-3R1"/>
+        <segue reference="djK-Gp-YDv"/>
         <segue reference="hI4-Ix-g3k"/>
     </inferredMetricsTieBreakers>
 </document>
