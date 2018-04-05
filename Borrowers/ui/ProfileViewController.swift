@@ -1,14 +1,14 @@
 //
-//  MainViewController.swift
+//  ProfileViewController.swift
 //  Borrowers
 //
-//  Created by Kevin Smith on 2018-04-01.
+//  Created by Kevin Smith on 2018-04-04.
 //  Copyright © 2018 GN Compass. All rights reserved.
 //
 
 import UIKit
 
-class MainViewController: UIViewController {
+class ProfileViewController: UIViewController {
 
     // Model
     var coreModel: CoreModelController!
@@ -26,16 +26,15 @@ class MainViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
 
     /*
-    // MARK: - Navigation
+     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
 }

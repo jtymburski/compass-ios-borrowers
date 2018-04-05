@@ -24,6 +24,8 @@
 		0A199B10205D6E7600F4582A /* BorrowerEditable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A199B0F205D6E7600F4582A /* BorrowerEditable.swift */; };
 		0A199B12205D796700F4582A /* BorrowerViewable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A199B11205D796700F4582A /* BorrowerViewable.swift */; };
 		0A32001F2059A0E70021FE4A /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A32001E2059A0E70021FE4A /* DetailsViewController.swift */; };
+		0A53B7B720759C4600B73AFF /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A53B7B620759C4600B73AFF /* HomeViewController.swift */; };
+		0A53B7B920759C6100B73AFF /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A53B7B820759C6100B73AFF /* ProfileViewController.swift */; };
 		0A631B7B204DD2C700E8213F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A631B7A204DD2C700E8213F /* LoginViewController.swift */; };
 		0A6421A1206DF5870086FF8B /* BankConnectionSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6421A0206DF5870086FF8B /* BankConnectionSummary.swift */; };
 		0A6421A3206DF8210086FF8B /* BankConnectionNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6421A2206DF8210086FF8B /* BankConnectionNew.swift */; };
@@ -37,7 +39,6 @@
 		0A9CBFFA207140300061323C /* AssessmentSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9CBFF9207140300061323C /* AssessmentSummary.swift */; };
 		0A9CBFFC207155520061323C /* MainNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9CBFFB207155520061323C /* MainNavController.swift */; };
 		0A9CBFFE207156C50061323C /* MainTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9CBFFD207156C50061323C /* MainTabController.swift */; };
-		0A9CC001207158600061323C /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9CC000207158600061323C /* MainViewController.swift */; };
 		0AB48E932054BD75008E11D3 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB48E922054BD75008E11D3 /* Account.swift */; };
 		0AB48E952054C161008E11D3 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB48E942054C161008E11D3 /* CoreDataStack.swift */; };
 		0AB48E9720550118008E11D3 /* CreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB48E9620550118008E11D3 /* CreateViewController.swift */; };
@@ -70,6 +71,8 @@
 		0A199B0F205D6E7600F4582A /* BorrowerEditable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorrowerEditable.swift; sourceTree = "<group>"; };
 		0A199B11205D796700F4582A /* BorrowerViewable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorrowerViewable.swift; sourceTree = "<group>"; };
 		0A32001E2059A0E70021FE4A /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
+		0A53B7B620759C4600B73AFF /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		0A53B7B820759C6100B73AFF /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		0A631B7A204DD2C700E8213F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		0A6421A0206DF5870086FF8B /* BankConnectionSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankConnectionSummary.swift; sourceTree = "<group>"; };
 		0A6421A2206DF8210086FF8B /* BankConnectionNew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankConnectionNew.swift; sourceTree = "<group>"; };
@@ -83,7 +86,6 @@
 		0A9CBFF9207140300061323C /* AssessmentSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssessmentSummary.swift; sourceTree = "<group>"; };
 		0A9CBFFB207155520061323C /* MainNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavController.swift; sourceTree = "<group>"; };
 		0A9CBFFD207156C50061323C /* MainTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabController.swift; sourceTree = "<group>"; };
-		0A9CC000207158600061323C /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		0AB48E922054BD75008E11D3 /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		0AB48E942054C161008E11D3 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		0AB48E9620550118008E11D3 /* CreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateViewController.swift; sourceTree = "<group>"; };
@@ -190,9 +192,10 @@
 			isa = PBXGroup;
 			children = (
 				0ABD795A2073F39600E79BA1 /* onboard */,
+				0A53B7B620759C4600B73AFF /* HomeViewController.swift */,
 				0A9CBFFB207155520061323C /* MainNavController.swift */,
 				0A9CBFFD207156C50061323C /* MainTabController.swift */,
-				0A9CC000207158600061323C /* MainViewController.swift */,
+				0A53B7B820759C6100B73AFF /* ProfileViewController.swift */,
 			);
 			path = ui;
 			sourceTree = "<group>";
@@ -376,6 +379,7 @@
 				0A022A78206AB5C700F05D76 /* BankCreateViewController.swift in Sources */,
 				0A9800F72054782600CC5166 /* StringHelper.swift in Sources */,
 				0A9CBFFE207156C50061323C /* MainTabController.swift in Sources */,
+				0A53B7B720759C4600B73AFF /* HomeViewController.swift in Sources */,
 				0AB48E932054BD75008E11D3 /* Account.swift in Sources */,
 				0A9CBFFA207140300061323C /* AssessmentSummary.swift in Sources */,
 				0AFDBD94205C43BB00737BF1 /* CoreModelController.swift in Sources */,
@@ -388,7 +392,6 @@
 				0A022A76206AAB0100F05D76 /* WelcomeNavController.swift in Sources */,
 				0A9800FC2054B69000CC5166 /* UiExtensions.swift in Sources */,
 				0A32001F2059A0E70021FE4A /* DetailsViewController.swift in Sources */,
-				0A9CC001207158600061323C /* MainViewController.swift in Sources */,
 				0A6421A3206DF8210086FF8B /* BankConnectionNew.swift in Sources */,
 				0A6421A9207015920086FF8B /* VerifyPreviewController.swift in Sources */,
 				0A6421A5206FE3BD0086FF8B /* VerifyViewController.swift in Sources */,
@@ -400,6 +403,7 @@
 				0AB48E952054C161008E11D3 /* CoreDataStack.swift in Sources */,
 				0A16983A20704727001122BE /* AssessmentFile.swift in Sources */,
 				0A04646A2050604900BA5690 /* AbstractProtocol.swift in Sources */,
+				0A53B7B920759C6100B73AFF /* ProfileViewController.swift in Sources */,
 				0A10ECBE204DB9D200226B92 /* Borrowers.xcdatamodeld in Sources */,
 				0A6421A7207008FD0086FF8B /* VerificationFile.swift in Sources */,
 				0A9800FA2054A9BA00CC5166 /* Session.swift in Sources */,
