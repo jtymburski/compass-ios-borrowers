@@ -30,48 +30,37 @@ class LoanListViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // TODO: Properly return based on total loans
         return 1
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LoanCell", for: indexPath) as! LoanListViewCell
-
-        // Configure the cell...
-//        switch indexPath.row {
-//        case 0:
-//            cell.fieldLabel.text = NSLocalizedString("Name", comment: "Name Field")
-//            cell.valueLabel.text = restaurant?.name
-//        case 1:
-//            cell.fieldLabel.text = NSLocalizedString("Type", comment: "Type Field")
-//            cell.valueLabel.text = restaurant?.type
-//        case 2:
-//            cell.fieldLabel.text = NSLocalizedString("Location", comment: "Location/Address Field")
-//            cell.valueLabel.text = restaurant?.location
-//        case 3:
-//            cell.fieldLabel.text = NSLocalizedString("Phone", comment: "Phone Field")
-//            cell.valueLabel.text = restaurant?.phoneNumber
-//        case 4:
-//            cell.fieldLabel.text = NSLocalizedString("Been here", comment: "Have you been here Field")
-//            if let restaurantVisited = restaurant?.isVisited {
-//                cell.valueLabel.text = restaurantVisited ? NSLocalizedString("Yes, I've been here before", comment: "Yes, I've been here before") : NSLocalizedString("No", comment: "No, I haven't been here")
-//            }
-//        default:
-//            cell.fieldLabel.text = ""
-//            cell.valueLabel.text = ""
-//        }
-
+        // TODO: Properly tie to cell data
         return cell
     }
 
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        print("1: willDisplay")
         (cell as! LoanListViewCell).willDisplay()
     }
 
-//    override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        print("2: didEndDisplaying")
-//        (cell as! LoanListViewCell).willDisplay()
-//    }
+    override func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) as? LoanListViewCell {
+            cell.setHighlighted(true)
+        }
+    }
+
+    override func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) as? LoanListViewCell {
+            cell.setHighlighted(false)
+        }
+    }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // TODO: Process the select
+
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 
     /*
      // MARK: - Navigation

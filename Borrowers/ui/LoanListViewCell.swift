@@ -9,6 +9,11 @@
 import UIKit
 
 class LoanListViewCell: UITableViewCell {
+    // Statics
+    private let BORDER_COLOR = UIColor(red: 231.0/255.0, green: 234.0/255.0, blue: 238.0/255.0, alpha: 1.0)
+    private let HIGHLIGHT_COLOR = UIColor(red: 247.0/255.0, green: 255.0/255.0, blue: 254.0/255.0, alpha: 1.0)
+
+    // UI
     @IBOutlet weak var balanceRemaining: UILabel!
     @IBOutlet weak var cellCard: UIView!
     @IBOutlet weak var nextPaymentAmount: UILabel!
@@ -17,28 +22,37 @@ class LoanListViewCell: UITableViewCell {
     @IBOutlet weak var rate: UILabel!
     @IBOutlet weak var viewCompleted: UIView!
     @IBOutlet weak var viewSectionDate: UIView!
-    @IBOutlet weak var viewSectionMain: UIView!
+    @IBOutlet weak var viewSectionRate: UIView!
     @IBOutlet weak var viewStatus: UIView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
-
         // Custom initialization code
-        //_ = viewSectionMain.layer.addBorder(edge: .bottom, color: UIColor.red, thickness: 1.0)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
         // Configure the view for the selected state
     }
 
-    func willDisplay() {
-        // Borders (the views have been sized so they can be added now)
-        _ = viewSectionMain.layer.addBorder(edge: .bottom, color: UIColor.red, thickness: 1.0)
-        _ = viewSectionMain.layer.addBorder(edge: .right, color: UIColor.orange, thickness: 1.0)
+    func setHighlighted(_ highlighted: Bool) {
+        if highlighted {
+            UIView.animate(withDuration: 0.25, animations: {
+                self.cellCard.backgroundColor = self.HIGHLIGHT_COLOR
+            })
+        } else {
+            UIView.animate(withDuration: 0.25, animations: {
+                self.cellCard.backgroundColor = UIColor.white
+            })
+        }
+    }
 
-        _ = viewSectionDate.layer.addBorder(edge: .top, color: UIColor.blue, thickness: 1.0)
-        _ = viewSectionDate.layer.addBorder(edge: .right, color: UIColor.green, thickness: 1.0)
+    func willDisplay() {
+        layoutIfNeeded()
+
+        // Borders (the views have been sized so they can be added now)
+        _ = viewSectionRate.layer.addBorder(edge: .top, color: BORDER_COLOR, thickness: 1.0)
+        _ = viewSectionDate.layer.addBorder(edge: .top, color: BORDER_COLOR, thickness: 1.0)
+        _ = viewSectionDate.layer.addBorder(edge: .right, color: BORDER_COLOR, thickness: 1.0)
     }
 }
