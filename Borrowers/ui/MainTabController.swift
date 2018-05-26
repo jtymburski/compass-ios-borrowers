@@ -13,7 +13,8 @@ class MainTabController: UITabBarController, UITabBarControllerDelegate {
     let ICON_MARGIN: CGFloat = 8.0
     let ICON_SIZE: CGFloat = 72.0
     let SEGUE_CREATE = "showCreate"
-    let TITLE_HOME = "Home"
+    let TITLE_HOME = "Loans"
+    let TITLE_PROFILE = "Profile"
 
     // UI
     let createButton = UIButton.init(type: .custom)
@@ -56,16 +57,16 @@ class MainTabController: UITabBarController, UITabBarControllerDelegate {
     }
 
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-        if viewController is HomeViewController {
+        if viewController is LoanListViewController {
             self.navigationItem.title = TITLE_HOME
         } else if viewController is ProfileViewController {
-            self.navigationItem.title = "Profile"
+            self.navigationItem.title = TITLE_PROFILE
         }
     }
 
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         // Make sure the controller is passed along
-        if let homeViewController = viewController as? HomeViewController {
+        if let homeViewController = viewController as? LoanListViewController {
             if homeViewController.coreModel == nil {
                 homeViewController.coreModel = coreModel
             }
