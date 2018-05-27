@@ -2276,6 +2276,7 @@
         <scene sceneID="iny-03-hGK">
             <objects>
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="6zO-9L-dNo" customClass="MainTabController" customModule="Borrowers" customModuleProvider="target" sceneMemberID="viewController">
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Main" id="7QD-Fv-Gnj">
                         <barButtonItem key="backBarButtonItem" title="Back" id="W09-Br-bmC"/>
