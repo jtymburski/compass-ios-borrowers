@@ -60,9 +60,22 @@ class MainTabController: UITabBarController, UITabBarControllerDelegate {
         // Dispose of any resources that can be recreated.
     }
 
+    // MARK: - Navigation
+
     @objc func onCreateClicked() {
         performSegue(withIdentifier: SEGUE_CREATE, sender: self)
     }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // New loan nav controller
+        if let newLoanNavController = segue.destination as? NewLoanNavController {
+            if newLoanNavController.coreModel == nil {
+                newLoanNavController.coreModel = coreModel
+            }
+        }
+    }
+
+    // MARK: - Tab bar control
 
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         if viewController is LoanListViewController {
