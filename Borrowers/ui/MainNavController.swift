@@ -13,10 +13,6 @@ class MainNavController: UINavigationController, UINavigationControllerDelegate 
     // Model
     var coreModel: CoreModelController!
 
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         delegate = self

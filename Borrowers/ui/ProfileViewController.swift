@@ -9,6 +9,8 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
+    // UI
+    @IBOutlet weak var navBar: UINavigationBar!
 
     // Model
     var coreModel: CoreModelController!
@@ -19,7 +21,10 @@ class ProfileViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+
+        navBar.isTranslucent = true
+        navBar.setBackgroundImage(UIImage(), for: .default)
+        navBar.shadowImage = UIImage()
     }
 
     override func didReceiveMemoryWarning() {

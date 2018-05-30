@@ -2,13 +2,15 @@
 //  LoanListNavController.swift
 //  Borrowers
 //
-//  Created by Kevin Smith on 2018-05-28.
+//  Created by Jordan Tymburski on 2018-05-29.
 //  Copyright © 2018 GN Compass. All rights reserved.
 //
 
 import UIKit
 
-class NewLoanNavController: UINavigationController {
+class LoanListNavController: UINavigationController, UINavigationControllerDelegate {
+    // Model
+    var coreModel: CoreModelController!
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -16,24 +18,23 @@ class NewLoanNavController: UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        delegate = self
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 
-    /*
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        // Pass along the model
+        // Loan list view controller
+        if let loanListViewController = viewController as? LoanListViewController {
+            if loanListViewController.coreModel == nil {
+                loanListViewController.coreModel = coreModel
+            }
+        }
     }
-    */
-
 }

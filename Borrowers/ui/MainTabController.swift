@@ -23,10 +23,6 @@ class MainTabController: UITabBarController, UITabBarControllerDelegate {
     // Model
     var coreModel: CoreModelController!
 
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         delegate = self
@@ -87,9 +83,9 @@ class MainTabController: UITabBarController, UITabBarControllerDelegate {
 
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         // Make sure the controller is passed along
-        if let homeViewController = viewController as? LoanListViewController {
-            if homeViewController.coreModel == nil {
-                homeViewController.coreModel = coreModel
+        if let loanListNavController = viewController as? LoanListNavController {
+            if loanListNavController.coreModel == nil {
+                loanListNavController.coreModel = coreModel
             }
         } else if let profileViewController = viewController as? ProfileViewController {
             if profileViewController.coreModel == nil {
