@@ -9,6 +9,18 @@
 import Foundation
 
 struct StringHelper {
+    static func append(appendTo: String, string: String, divider: String) -> String {
+        if appendTo.isEmpty {
+            return string
+        } else {
+            return appendTo + divider + string
+        }
+    }
+
+    static func hasContent(_ testStr: String?) -> Bool {
+        return testStr != nil && !testStr!.isEmpty
+    }
+
     static func isValidEmail(_ testStr: String?) -> Bool {
         let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
         return testStr != nil && NSPredicate(format: "SELF MATCHES %@", emailRegex).evaluate(with: testStr)

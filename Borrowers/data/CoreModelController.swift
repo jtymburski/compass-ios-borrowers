@@ -44,6 +44,17 @@ class CoreModelController {
         userInfo = nil
     }
 
+    func getApprovedAssessment() -> AssessmentSummary? {
+        if assessments != nil {
+            for assessment in assessments!.reversed() {
+                if assessment.isValid() && assessment.isApproved() {
+                    return assessment
+                }
+            }
+        }
+        return nil
+    }
+
     func getPendingAssessment() -> AssessmentSummary? {
         if assessments != nil {
             for assessment in assessments! {

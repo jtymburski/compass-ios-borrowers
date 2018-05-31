@@ -14,7 +14,14 @@ class AssessmentSummary: BaseModel, AbstractProtocol, CustomStringConvertible {
     private let KEY_REFERENCE = "reference"
     private let KEY_STATUS = "status"
 
+    private let RATING_VERY_STRONG = 1 // A+
+    private let RATING_STRONG = 2 // A
+    private let RATING_GREAT = 3 // A-
+    private let RATING_GOOD = 4 // B+
+    private let RATING_AVERAGE = 5 // B
+
     private let STATUS_STARTED = 1
+    private let STATUS_APPROVED = 3
 
     var date: Int64?
     var rating: Int?
@@ -33,6 +40,36 @@ class AssessmentSummary: BaseModel, AbstractProtocol, CustomStringConvertible {
     init(_ json: NSDictionary) {
         super.init()
         parse(json)
+    }
+
+    func getRatingLetter() -> String {
+        switch rating {
+        case .some(RATING_VERY_STRONG),
+             .some(RATING_STRONG),
+             .some(RATING_GREAT):
+            return "A"
+        case .some(RATING_GOOD),
+             .some(RATING_AVERAGE):
+            return "B"
+        default:
+            return "--"
+        }
+    }
+
+    func getRatingMod() -> String {
+        switch rating {
+        case .some(RATING_VERY_STRONG),
+             .some(RATING_GOOD):
+            return "+"
+        case .some(RATING_GREAT):
+            return "-"
+        default:
+            return ""
+        }
+    }
+
+    func isApproved() -> Bool {
+        return status != nil && status == STATUS_APPROVED
     }
 
     func isStarted() -> Bool {
