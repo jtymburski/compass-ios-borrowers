@@ -32,6 +32,9 @@
 		0A6421A5206FE3BD0086FF8B /* VerifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6421A4206FE3BD0086FF8B /* VerifyViewController.swift */; };
 		0A6421A7207008FD0086FF8B /* VerificationFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6421A6207008FD0086FF8B /* VerificationFile.swift */; };
 		0A6421A9207015920086FF8B /* VerifyPreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6421A8207015920086FF8B /* VerifyPreviewController.swift */; };
+		0A713C0520C07B9F0079E796 /* LoanAvailable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A713C0420C07B9F0079E796 /* LoanAvailable.swift */; };
+		0A713C0720C07C5D0079E796 /* LoanAmortization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A713C0620C07C5D0079E796 /* LoanAmortization.swift */; };
+		0A713C0920C0816B0079E796 /* LoanFrequency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A713C0820C0816B0079E796 /* LoanFrequency.swift */; };
 		0A91DAF520BF20D100935463 /* Pair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A91DAF420BF20D100935463 /* Pair.swift */; };
 		0A91DAF720BF29C800935463 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A91DAF620BF29C800935463 /* ProfileTableViewCell.swift */; };
 		0A9800F4205475DA00CC5166 /* AuthRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9800F3205475DA00CC5166 /* AuthRequest.swift */; };
@@ -46,6 +49,8 @@
 		0AB48E932054BD75008E11D3 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB48E922054BD75008E11D3 /* Account.swift */; };
 		0AB48E952054C161008E11D3 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB48E942054C161008E11D3 /* CoreDataStack.swift */; };
 		0AB48E9720550118008E11D3 /* CreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB48E9620550118008E11D3 /* CreateViewController.swift */; };
+		0AC524FB20C0577E008C85B1 /* EditProfileNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC524FA20C0577E008C85B1 /* EditProfileNavController.swift */; };
+		0AC524FD20C0583D008C85B1 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC524FC20C0583D008C85B1 /* EditProfileViewController.swift */; };
 		0AC757E12050651F00D152F1 /* ErrorResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC757E02050651F00D152F1 /* ErrorResult.swift */; };
 		0AD7462A20B8707300BA15CE /* LoanListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD7462920B8707300BA15CE /* LoanListViewCell.swift */; };
 		0ADABA9020BE688F00B603CE /* LoanListNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADABA8F20BE688F00B603CE /* LoanListNavController.swift */; };
@@ -85,6 +90,9 @@
 		0A6421A4206FE3BD0086FF8B /* VerifyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyViewController.swift; sourceTree = "<group>"; };
 		0A6421A6207008FD0086FF8B /* VerificationFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationFile.swift; sourceTree = "<group>"; };
 		0A6421A8207015920086FF8B /* VerifyPreviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyPreviewController.swift; sourceTree = "<group>"; };
+		0A713C0420C07B9F0079E796 /* LoanAvailable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanAvailable.swift; sourceTree = "<group>"; };
+		0A713C0620C07C5D0079E796 /* LoanAmortization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanAmortization.swift; sourceTree = "<group>"; };
+		0A713C0820C0816B0079E796 /* LoanFrequency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanFrequency.swift; sourceTree = "<group>"; };
 		0A91DAF420BF20D100935463 /* Pair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pair.swift; sourceTree = "<group>"; };
 		0A91DAF620BF29C800935463 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		0A9800F3205475DA00CC5166 /* AuthRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRequest.swift; sourceTree = "<group>"; };
@@ -99,6 +107,8 @@
 		0AB48E922054BD75008E11D3 /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		0AB48E942054C161008E11D3 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		0AB48E9620550118008E11D3 /* CreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateViewController.swift; sourceTree = "<group>"; };
+		0AC524FA20C0577E008C85B1 /* EditProfileNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileNavController.swift; sourceTree = "<group>"; };
+		0AC524FC20C0583D008C85B1 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		0AC757E02050651F00D152F1 /* ErrorResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResult.swift; sourceTree = "<group>"; };
 		0AD7462920B8707300BA15CE /* LoanListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanListViewCell.swift; sourceTree = "<group>"; };
 		0ADABA8F20BE688F00B603CE /* LoanListNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanListNavController.swift; sourceTree = "<group>"; };
@@ -150,6 +160,9 @@
 				0A199B11205D796700F4582A /* BorrowerViewable.swift */,
 				0AED28DB2057053A0031B26F /* Country.swift */,
 				0AC757E02050651F00D152F1 /* ErrorResult.swift */,
+				0A713C0620C07C5D0079E796 /* LoanAmortization.swift */,
+				0A713C0820C0816B0079E796 /* LoanFrequency.swift */,
+				0A713C0420C07B9F0079E796 /* LoanAvailable.swift */,
 				0AFDBD97205C70AE00737BF1 /* RegisterRequest.swift */,
 			);
 			path = model;
@@ -204,6 +217,8 @@
 			isa = PBXGroup;
 			children = (
 				0ABD795A2073F39600E79BA1 /* onboard */,
+				0AC524FA20C0577E008C85B1 /* EditProfileNavController.swift */,
+				0AC524FC20C0583D008C85B1 /* EditProfileViewController.swift */,
 				0ADABA8F20BE688F00B603CE /* LoanListNavController.swift */,
 				0AD7462920B8707300BA15CE /* LoanListViewCell.swift */,
 				0A53B7B620759C4600B73AFF /* LoanListViewController.swift */,
@@ -402,10 +417,13 @@
 				0A9CBFFA207140300061323C /* AssessmentSummary.swift in Sources */,
 				0AFDBD94205C43BB00737BF1 /* CoreModelController.swift in Sources */,
 				0A631B7B204DD2C700E8213F /* LoginViewController.swift in Sources */,
+				0AC524FD20C0583D008C85B1 /* EditProfileViewController.swift in Sources */,
 				0A199B10205D6E7600F4582A /* BorrowerEditable.swift in Sources */,
+				0A713C0920C0816B0079E796 /* LoanFrequency.swift in Sources */,
 				0A022A74206AA20D00F05D76 /* WelcomeViewController.swift in Sources */,
 				0A91DAF720BF29C800935463 /* ProfileTableViewCell.swift in Sources */,
 				0A9B5D9820BC6CD7004EA333 /* NewLoanNavController.swift in Sources */,
+				0A713C0520C07B9F0079E796 /* LoanAvailable.swift in Sources */,
 				0AFF4D71206D6AA10002BB37 /* Bank.swift in Sources */,
 				0AFDBD98205C70AE00737BF1 /* RegisterRequest.swift in Sources */,
 				0A9CBFFC207155520061323C /* MainNavController.swift in Sources */,
@@ -431,8 +449,10 @@
 				0A9800FA2054A9BA00CC5166 /* Session.swift in Sources */,
 				0A9B5D9A20BC6D93004EA333 /* NewLoanViewController.swift in Sources */,
 				0AED28DC2057053A0031B26F /* Country.swift in Sources */,
+				0AC524FB20C0577E008C85B1 /* EditProfileNavController.swift in Sources */,
 				0A6421A1206DF5870086FF8B /* BankConnectionSummary.swift in Sources */,
 				0AC757E12050651F00D152F1 /* ErrorResult.swift in Sources */,
+				0A713C0720C07C5D0079E796 /* LoanAmortization.swift in Sources */,
 				0ADABA9020BE688F00B603CE /* LoanListNavController.swift in Sources */,
 				0A04646820505F2600BA5690 /* AuthResponse.swift in Sources */,
 				0A10ECB6204DB9D200226B92 /* AppDelegate.swift in Sources */,

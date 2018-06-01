@@ -440,6 +440,44 @@ struct Session {
         }
     }
 
+    static func loanAvailable(account: Account, completionHandler: @escaping (LoanAvailable?, String?, Bool, Bool) -> Void) {
+        let function = "borrowers/" + account.userKey! + "/loans/available"
+        let method = "GET"
+
+        startRequest(function: function, method: method, accessKey: account.getAccessKey(), body: nil) { (data, response, error) in
+            var loanAvailableInfo: LoanAvailable?
+            var errorString: String?
+            var noNetwork = false
+            var unauthorized = false
+
+            // Determine if the result is valid
+            if let response = response as? HTTPURLResponse, let data = data {
+                // Check the HTTP result
+                if response.statusCodeEnum == HTTPStatusCode.ok {
+                    loanAvailableInfo = LoanAvailable.init(data)
+                    if !loanAvailableInfo!.isValid() {
+                        errorString = "The server received invalid response for the loan available info fetch request"
+                    }
+                } else if response.statusCodeEnum == HTTPStatusCode.unauthorized {
+                    unauthorized = true
+                } else {
+                    let errorResult = ErrorResult.init(data)
+                    if errorResult.isValid() {
+                        print(errorResult)
+                    }
+                    errorString = "The server failed to process the loan available info fetch request"
+                }
+            } else {
+                noNetwork = true
+                if error != nil {
+                    print("General failure on loan available info fetch attempt: \(error!)")
+                }
+            }
+
+            completionHandler(loanAvailableInfo, errorString, noNetwork, unauthorized)
+        }
+    }
+
     // MARK: - Internals
 
     static func startRequest(function: String, method: String, accessKey: String?, body: Data?, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) {
