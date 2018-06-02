@@ -76,6 +76,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate, NVActivityIndi
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        // Clean up the view (remove all old text)
+        textEmail.text = nil
+        textPassword.text = nil
+
         // Hide the view control until it can be determined if a login is required
         if coreModel.isLoggedIn() {
             viewControl.isHidden = true
@@ -109,22 +113,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate, NVActivityIndi
     }
 
     @IBAction func unwindToLogin(segue: UIStoryboardSegue) {
-        // Bank create view
-        if let bankCreateViewController = segue.source as? BankCreateViewController {
-            coreModel = bankCreateViewController.coreModel
-        }
-        // Create view
-        else if let createViewController = segue.source as? CreateViewController {
-            coreModel = createViewController.coreModel
-        }
-        // Details view
-        else if let detailsViewController = segue.source as? DetailsViewController {
-            coreModel = detailsViewController.coreModel
-        }
-        // Verify view
-        else if let verifyViewController = segue.source as? VerifyViewController {
-            coreModel = verifyViewController.coreModel
-        }
+        // Make sure the context is saved and then re-fetch the core model
+        CoreDataStack.saveContext()
+        coreModel = CoreModelController()
     }
 
     // MARK: - Button Actions

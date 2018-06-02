@@ -2306,9 +2306,10 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="OKv-kt-FuT">
                                 <rect key="frame" x="0.0" y="261" width="320" height="258"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <view key="tableFooterView" contentMode="scaleToFill" id="J8i-cF-9EQ">
-                                    <rect key="frame" x="0.0" y="96" width="320" height="0.0"/>
+                                <view key="tableFooterView" contentMode="scaleToFill" id="f5j-0M-DJn">
+                                    <rect key="frame" x="0.0" y="96" width="320" height="1"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="InfoCell" rowHeight="68" id="exT-TZ-S4A" customClass="ProfileTableViewCell" customModule="Borrowers" customModuleProvider="target">
@@ -2387,9 +2388,11 @@
                         <outlet property="viewRating" destination="9Wq-aD-F3i" id="SgQ-St-XCq"/>
                         <outlet property="viewStatus" destination="vQp-ak-eRp" id="r4z-Go-gJ8"/>
                         <segue destination="wVh-fT-rD9" kind="presentation" identifier="showEditProfile" id="Oz1-o2-CaS"/>
+                        <segue destination="rng-OY-ZmZ" kind="unwind" identifier="unwindToLogin" unwindAction="unwindToLoginWithSegue:" id="Ole-Rr-wfy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qjF-BH-ue3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="rng-OY-ZmZ" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2107.5" y="2261.6197183098593"/>
         </scene>

@@ -478,6 +478,45 @@ struct Session {
         }
     }
 
+    static func logout(account: Account, completionHandler: ((_ success: Bool, _ error: String?, _ noNetwork: Bool, _ unauthorized: Bool) -> Void)?) {
+        let function = "borrowers/" + account.userKey! + "/logout"
+        let method = "POST"
+
+        startRequest(function: function, method: method, accessKey: account.getAccessKey(), body: nil) { (data, response, error) in
+            var success = false
+            var errorString: String?
+            var noNetwork = false
+            var unauthorized = false
+
+            // Determine if the result is valid
+            if let response = response as? HTTPURLResponse {
+                // Check the HTTP result
+                if response.statusCodeEnum == HTTPStatusCode.ok {
+                    success = true
+                } else if response.statusCodeEnum == HTTPStatusCode.unauthorized {
+                    unauthorized = true
+                } else {
+                    if data != nil {
+                        let errorResult = ErrorResult.init(data!)
+                        if errorResult.isValid() {
+                            print(errorResult)
+                        }
+                    }
+                    errorString = "The server failed to process the borrower logout request"
+                }
+            } else {
+                noNetwork = true
+                if error != nil {
+                    print("General failure on borrower logout attempt: \(error!)")
+                }
+            }
+
+            if completionHandler != nil {
+                completionHandler!(success, errorString, noNetwork, unauthorized)
+            }
+        }
+    }
+
     // MARK: - Internals
 
     static func startRequest(function: String, method: String, accessKey: String?, body: Data?, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) {

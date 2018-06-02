@@ -12,6 +12,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource {
     // Statics
     private let BORDER_HEADER = UIColorCompat(red: 63.0/255.0, green: 205.0/255.0, blue: 168.0/255.0, alpha: 1.0)
     private let SEGUE_EDIT_PROFILE = "showEditProfile"
+    private let SEGUE_LOGIN = "unwindToLogin"
 
     // UI
     @IBOutlet weak var labelName: UILabel!
@@ -93,7 +94,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource {
 
         // Logout action
         let logoutAction = UIAlertAction(title: "Log Out", style: .destructive) { _ in
-            print("Log Out")
+            self.requestLogout()
         }
         optionMenu.addAction(logoutAction)
 
@@ -120,6 +121,33 @@ class ProfileViewController: UIViewController, UITableViewDataSource {
      */
 
     // MARK: - Internals
+
+    private func executeLogout() {
+        // Execute the logout
+        Session.logout(account: coreModel.account, completionHandler: nil)
+
+        // Clean up and leave before the session execution is complete
+        coreModel.account.clear()
+        CoreDataStack.saveContext()
+        performSegue(withIdentifier: self.SEGUE_LOGIN, sender: self)
+    }
+
+    private func requestLogout() {
+        let logoutMenu = UIAlertController(title: nil, message: "Are you sure you want to log out?", preferredStyle: .actionSheet)
+
+        // Logout action
+        let logoutAction = UIAlertAction(title: "Log Out", style: .destructive) { _ in
+            self.executeLogout()
+        }
+        logoutMenu.addAction(logoutAction)
+
+        // Cancel action
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        logoutMenu.addAction(cancelAction)
+
+        // Show the view
+        present(logoutMenu, animated: true, completion: nil)
+    }
 
     private func updateDisplayInfo() {
         tableView.beginUpdates()
