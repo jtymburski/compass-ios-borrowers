@@ -10,7 +10,8 @@ import UIKit
 
 class ProfileViewController: UIViewController, UITableViewDataSource {
     // Statics
-    let BORDER_HEADER = UIColor.init(red: 63.0/255.0, green: 205.0/255.0, blue: 168.0/255.0, alpha: 1.0)
+    private let BORDER_HEADER = UIColorCompat(red: 63.0/255.0, green: 205.0/255.0, blue: 168.0/255.0, alpha: 1.0)
+    private let SEGUE_EDIT_PROFILE = "showEditProfile"
 
     // UI
     @IBOutlet weak var labelName: UILabel!
@@ -42,12 +43,12 @@ class ProfileViewController: UIViewController, UITableViewDataSource {
 
         // Borders inside large custom nav bar view
         viewRating.layoutIfNeeded()
-        _ = viewRating.layer.addBorder(edge: .top, color: BORDER_HEADER, thickness: 1.0)
-        _ = viewRating.layer.addBorder(edge: .left, color: BORDER_HEADER, thickness: 1.0)
-        _ = viewRating.layer.addBorder(edge: .right, color: BORDER_HEADER, thickness: 1.0)
-        _ = viewRating.layer.addBorder(edge: .bottom, color: BORDER_HEADER, thickness: 1.0)
+        _ = viewRating.layer.addBorder(edge: .top, color: BORDER_HEADER.get(), thickness: 1.0)
+        _ = viewRating.layer.addBorder(edge: .left, color: BORDER_HEADER.get(), thickness: 1.0)
+        _ = viewRating.layer.addBorder(edge: .right, color: BORDER_HEADER.get(), thickness: 1.0)
+        _ = viewRating.layer.addBorder(edge: .bottom, color: BORDER_HEADER.get(), thickness: 1.0)
         viewStatus.layoutIfNeeded()
-        _ = viewStatus.layer.addBorder(edge: .top, color: .white, thickness: 1.0)
+        _ = viewStatus.layer.addBorder(edge: .top, color: BORDER_HEADER.get(), thickness: 1.0)
 
         // Table view
         tableView.estimatedRowHeight = 44.0
@@ -85,9 +86,32 @@ class ProfileViewController: UIViewController, UITableViewDataSource {
         return cell
     }
 
-    /*
-     // MARK: - Navigation
+    // MARK: - Navigation
 
+    @IBAction func moreClicked(_ sender: UIBarButtonItem) {
+        let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+
+        // Logout action
+        let logoutAction = UIAlertAction(title: "Log Out", style: .destructive) { _ in
+            print("Log Out")
+        }
+        optionMenu.addAction(logoutAction)
+
+        // Edit profile action
+        let editProfileAction = UIAlertAction(title: "Edit Profile", style: .default) { _ in
+            self.performSegue(withIdentifier: self.SEGUE_EDIT_PROFILE, sender: self)
+        }
+        optionMenu.addAction(editProfileAction)
+
+        // Cancel action
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        optionMenu.addAction(cancelAction)
+
+        // Show the view
+        present(optionMenu, animated: true, completion: nil)
+    }
+
+    /*
      // In a storyboard-based application, you will often want to do a little preparation before navigation
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
      // Get the new view controller using segue.destinationViewController.

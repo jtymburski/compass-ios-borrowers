@@ -11,18 +11,18 @@ import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    let BAR_COLOR = UIColor(red: 25.0/255.0, green: 167.0/255.0, blue: 130.0/255.0, alpha: 1.0)
+    private let BAR_COLOR = UIColorCompat(red: 25.0/255.0, green: 167.0/255.0, blue: 130.0/255.0, alpha: 1.0)
 
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Set up the navigation bar
-        UINavigationBar.appearance().barTintColor = BAR_COLOR
+        UINavigationBar.appearance().barTintColor = BAR_COLOR.get()
         UINavigationBar.appearance().tintColor = UIColor.white
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.white]
 
         // Set up the tab bar
-        UITabBar.appearance().tintColor = BAR_COLOR
+        UITabBar.appearance().tintColor = BAR_COLOR.get()
 
         return true
     }

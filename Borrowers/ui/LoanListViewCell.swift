@@ -10,8 +10,8 @@ import UIKit
 
 class LoanListViewCell: UITableViewCell {
     // Statics
-    private let BORDER_COLOR = UIColor(red: 231.0/255.0, green: 234.0/255.0, blue: 238.0/255.0, alpha: 1.0)
-    private let HIGHLIGHT_COLOR = UIColor(red: 247.0/255.0, green: 255.0/255.0, blue: 254.0/255.0, alpha: 1.0)
+    private let BORDER_COLOR = UIColorCompat(red: 231.0/255.0, green: 234.0/255.0, blue: 238.0/255.0, alpha: 1.0)
+    private let HIGHLIGHT_COLOR = UIColorCompat(red: 247.0/255.0, green: 255.0/255.0, blue: 254.0/255.0, alpha: 1.0)
 
     // UI
     @IBOutlet weak var balanceRemaining: UILabel!
@@ -38,7 +38,7 @@ class LoanListViewCell: UITableViewCell {
     func setHighlighted(_ highlighted: Bool) {
         if highlighted {
             UIView.animate(withDuration: 0.25, animations: {
-                self.cellCard.backgroundColor = self.HIGHLIGHT_COLOR
+                self.cellCard.backgroundColor = self.HIGHLIGHT_COLOR.get()
             })
         } else {
             UIView.animate(withDuration: 0.25, animations: {
@@ -51,8 +51,8 @@ class LoanListViewCell: UITableViewCell {
         layoutIfNeeded()
 
         // Borders (the views have been sized so they can be added now)
-        _ = viewSectionRate.layer.addBorder(edge: .top, color: BORDER_COLOR, thickness: 1.0)
-        _ = viewSectionDate.layer.addBorder(edge: .top, color: BORDER_COLOR, thickness: 1.0)
-        _ = viewSectionDate.layer.addBorder(edge: .right, color: BORDER_COLOR, thickness: 1.0)
+        _ = viewSectionRate.layer.addBorder(edge: .top, color: BORDER_COLOR.get(), thickness: 1.0)
+        _ = viewSectionDate.layer.addBorder(edge: .top, color: BORDER_COLOR.get(), thickness: 1.0)
+        _ = viewSectionDate.layer.addBorder(edge: .right, color: BORDER_COLOR.get(), thickness: 1.0)
     }
 }

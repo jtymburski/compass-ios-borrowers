@@ -11,10 +11,10 @@ import UIKit
 
 class DetailsViewController: UIViewController, UITextFieldDelegate, NVActivityIndicatorViewable {
     // Constants
-    let BACKGROUND_COLOR = UIColor.init(red: 74.0/255.0, green: 162.0/255.0, blue: 119.0/255.0, alpha: 1.0)
-    let BORDER_COLOR_ACTIVE = UIColor.init(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-    let BORDER_COLOR_DEFAULT = UIColor.init(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.5)
-    let BORDER_COLOR_ERROR = UIColor.init(red: 1.0, green: 105.0/255.0, blue: 105.0/255.0, alpha: 1.0)
+    let BACKGROUND_COLOR = UIColorCompat(red: 74.0/255.0, green: 162.0/255.0, blue: 119.0/255.0, alpha: 1.0)
+    let BORDER_COLOR_ACTIVE = UIColorCompat(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+    let BORDER_COLOR_DEFAULT = UIColorCompat(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.5)
+    let BORDER_COLOR_ERROR = UIColorCompat(red: 1.0, green: 105.0/255.0, blue: 105.0/255.0, alpha: 1.0)
 
     // UI
     @IBOutlet weak var labelErrorAddress1: UILabel!
@@ -78,23 +78,23 @@ class DetailsViewController: UIViewController, UITextFieldDelegate, NVActivityIn
 
         // Add borders to the view
         viewAddress1.layoutIfNeeded()
-        borderAddress1 = viewAddress1.layer.addBorder(edge: .bottom, color: BORDER_COLOR_DEFAULT, thickness: 1.0)
+        borderAddress1 = viewAddress1.layer.addBorder(edge: .bottom, color: BORDER_COLOR_DEFAULT.get(), thickness: 1.0)
         viewAddress2.layoutIfNeeded()
-        borderAddress2 = viewAddress2.layer.addBorder(edge: .bottom, color: BORDER_COLOR_DEFAULT, thickness: 1.0)
+        borderAddress2 = viewAddress2.layer.addBorder(edge: .bottom, color: BORDER_COLOR_DEFAULT.get(), thickness: 1.0)
         viewAddress3.layoutIfNeeded()
-        borderAddress3 = viewAddress3.layer.addBorder(edge: .bottom, color: BORDER_COLOR_DEFAULT, thickness: 1.0)
+        borderAddress3 = viewAddress3.layer.addBorder(edge: .bottom, color: BORDER_COLOR_DEFAULT.get(), thickness: 1.0)
         viewCity.layoutIfNeeded()
-        borderCity = viewCity.layer.addBorder(edge: .bottom, color: BORDER_COLOR_DEFAULT, thickness: 1.0)
+        borderCity = viewCity.layer.addBorder(edge: .bottom, color: BORDER_COLOR_DEFAULT.get(), thickness: 1.0)
         viewCompany.layoutIfNeeded()
-        borderCompany = viewCompany.layer.addBorder(edge: .bottom, color: BORDER_COLOR_DEFAULT, thickness: 1.0)
+        borderCompany = viewCompany.layer.addBorder(edge: .bottom, color: BORDER_COLOR_DEFAULT.get(), thickness: 1.0)
         viewJobTitle.layoutIfNeeded()
-        borderJobTitle = viewJobTitle.layer.addBorder(edge: .bottom, color: BORDER_COLOR_DEFAULT, thickness: 1.0)
+        borderJobTitle = viewJobTitle.layer.addBorder(edge: .bottom, color: BORDER_COLOR_DEFAULT.get(), thickness: 1.0)
         viewPhone.layoutIfNeeded()
-        borderPhone = viewPhone.layer.addBorder(edge: .bottom, color: BORDER_COLOR_DEFAULT, thickness: 1.0)
+        borderPhone = viewPhone.layer.addBorder(edge: .bottom, color: BORDER_COLOR_DEFAULT.get(), thickness: 1.0)
         viewPostCode.layoutIfNeeded()
-        borderPostCode = viewPostCode.layer.addBorder(edge: .bottom, color: BORDER_COLOR_DEFAULT, thickness: 1.0)
+        borderPostCode = viewPostCode.layer.addBorder(edge: .bottom, color: BORDER_COLOR_DEFAULT.get(), thickness: 1.0)
         viewProvince.layoutIfNeeded()
-        borderProvince = viewProvince.layer.addBorder(edge: .bottom, color: BORDER_COLOR_DEFAULT, thickness: 1.0)
+        borderProvince = viewProvince.layer.addBorder(edge: .bottom, color: BORDER_COLOR_DEFAULT.get(), thickness: 1.0)
 
         // Update the data to the user info state
         if let userInfo = coreModel.userInfo {
@@ -199,71 +199,71 @@ class DetailsViewController: UIViewController, UITextFieldDelegate, NVActivityIn
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == textAddress1 {
-            borderAddress1.backgroundColor = BORDER_COLOR_ACTIVE.cgColor
+            borderAddress1.backgroundColor = BORDER_COLOR_ACTIVE.getCG()
         }
         else if textField == textAddress2 {
-            borderAddress2.backgroundColor = BORDER_COLOR_ACTIVE.cgColor
+            borderAddress2.backgroundColor = BORDER_COLOR_ACTIVE.getCG()
         }
         else if textField == textAddress3 {
-            borderAddress3.backgroundColor = BORDER_COLOR_ACTIVE.cgColor
+            borderAddress3.backgroundColor = BORDER_COLOR_ACTIVE.getCG()
         }
         else if textField == textCity {
-            borderCity.backgroundColor = BORDER_COLOR_ACTIVE.cgColor
+            borderCity.backgroundColor = BORDER_COLOR_ACTIVE.getCG()
         }
         else if textField == textCompany {
-            borderCompany.backgroundColor = BORDER_COLOR_ACTIVE.cgColor
+            borderCompany.backgroundColor = BORDER_COLOR_ACTIVE.getCG()
         }
         else if textField == textJobTitle {
-            borderJobTitle.backgroundColor = BORDER_COLOR_ACTIVE.cgColor
+            borderJobTitle.backgroundColor = BORDER_COLOR_ACTIVE.getCG()
         }
         else if textField == textPhone {
-            borderPhone.backgroundColor = BORDER_COLOR_ACTIVE.cgColor
+            borderPhone.backgroundColor = BORDER_COLOR_ACTIVE.getCG()
         }
         else if textField == textPostCode {
-            borderPostCode.backgroundColor = BORDER_COLOR_ACTIVE.cgColor
+            borderPostCode.backgroundColor = BORDER_COLOR_ACTIVE.getCG()
         }
         else if textField == textProvince {
-            borderProvince.backgroundColor = BORDER_COLOR_ACTIVE.cgColor
+            borderProvince.backgroundColor = BORDER_COLOR_ACTIVE.getCG()
         }
     }
 
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == textAddress1 {
             if !checkForError(textField, mustBeVisible: false) {
-                borderAddress1.backgroundColor = BORDER_COLOR_DEFAULT.cgColor
+                borderAddress1.backgroundColor = BORDER_COLOR_DEFAULT.getCG()
             }
         }
         else if textField == textAddress2 {
-            borderAddress2.backgroundColor = BORDER_COLOR_DEFAULT.cgColor
+            borderAddress2.backgroundColor = BORDER_COLOR_DEFAULT.getCG()
         }
         else if textField == textAddress3 {
-            borderAddress3.backgroundColor = BORDER_COLOR_DEFAULT.cgColor
+            borderAddress3.backgroundColor = BORDER_COLOR_DEFAULT.getCG()
         }
         else if textField == textCity {
             if !checkForError(textField, mustBeVisible: false) {
-                borderCity.backgroundColor = BORDER_COLOR_DEFAULT.cgColor
+                borderCity.backgroundColor = BORDER_COLOR_DEFAULT.getCG()
             }
         }
         else if textField == textCompany {
             if !checkForError(textField, mustBeVisible: false) {
-                borderCompany.backgroundColor = BORDER_COLOR_DEFAULT.cgColor
+                borderCompany.backgroundColor = BORDER_COLOR_DEFAULT.getCG()
             }
         }
         else if textField == textJobTitle {
             if !checkForError(textField, mustBeVisible: false) {
-                borderJobTitle.backgroundColor = BORDER_COLOR_DEFAULT.cgColor
+                borderJobTitle.backgroundColor = BORDER_COLOR_DEFAULT.getCG()
             }
         }
         else if textField == textPhone {
             if !checkForError(textField, mustBeVisible: false) {
-                borderPhone.backgroundColor = BORDER_COLOR_DEFAULT.cgColor
+                borderPhone.backgroundColor = BORDER_COLOR_DEFAULT.getCG()
             }
         }
         else if textField == textPostCode {
-            borderPostCode.backgroundColor = BORDER_COLOR_DEFAULT.cgColor
+            borderPostCode.backgroundColor = BORDER_COLOR_DEFAULT.getCG()
         }
         else if textField == textProvince {
-            borderProvince.backgroundColor = BORDER_COLOR_DEFAULT.cgColor
+            borderProvince.backgroundColor = BORDER_COLOR_DEFAULT.getCG()
         }
     }
 
@@ -354,9 +354,9 @@ class DetailsViewController: UIViewController, UITextFieldDelegate, NVActivityIn
                 labelErrorAddress1.isHidden = true
                 labelErrorAddress1.text = " "
             } else {
-                borderAddress1.backgroundColor = BORDER_COLOR_ERROR.cgColor
+                borderAddress1.backgroundColor = BORDER_COLOR_ERROR.getCG()
                 labelErrorAddress1.text = "A valid address is required"
-                labelErrorAddress1.textColor = BORDER_COLOR_ERROR
+                labelErrorAddress1.textColor = BORDER_COLOR_ERROR.get()
                 labelErrorAddress1.isHidden = false
                 if(mustBeVisible) {
                     scrollToView(viewSectionAddress1)
@@ -369,9 +369,9 @@ class DetailsViewController: UIViewController, UITextFieldDelegate, NVActivityIn
                 labelErrorCity.isHidden = true
                 labelErrorCity.text = " "
             } else {
-                borderCity.backgroundColor = BORDER_COLOR_ERROR.cgColor
+                borderCity.backgroundColor = BORDER_COLOR_ERROR.getCG()
                 labelErrorCity.text = "A valid city name is required"
-                labelErrorCity.textColor = BORDER_COLOR_ERROR
+                labelErrorCity.textColor = BORDER_COLOR_ERROR.get()
                 labelErrorCity.isHidden = false
                 if(mustBeVisible) {
                     scrollToView(viewSectionCity)
@@ -384,9 +384,9 @@ class DetailsViewController: UIViewController, UITextFieldDelegate, NVActivityIn
                 labelErrorCompany.isHidden = true
                 labelErrorCompany.text = " "
             } else {
-                borderCompany.backgroundColor = BORDER_COLOR_ERROR.cgColor
+                borderCompany.backgroundColor = BORDER_COLOR_ERROR.getCG()
                 labelErrorCompany.text = "A valid company name is required"
-                labelErrorCompany.textColor = BORDER_COLOR_ERROR
+                labelErrorCompany.textColor = BORDER_COLOR_ERROR.get()
                 labelErrorCompany.isHidden = false
                 if(mustBeVisible) {
                     scrollToView(viewSectionCompany)
@@ -399,9 +399,9 @@ class DetailsViewController: UIViewController, UITextFieldDelegate, NVActivityIn
                 labelErrorJobTitle.isHidden = true
                 labelErrorJobTitle.text = " "
             } else {
-                borderJobTitle.backgroundColor = BORDER_COLOR_ERROR.cgColor
+                borderJobTitle.backgroundColor = BORDER_COLOR_ERROR.getCG()
                 labelErrorJobTitle.text = "A valid job title is required"
-                labelErrorJobTitle.textColor = BORDER_COLOR_ERROR
+                labelErrorJobTitle.textColor = BORDER_COLOR_ERROR.get()
                 labelErrorJobTitle.isHidden = false
                 if(mustBeVisible) {
                     scrollToView(viewSectionJobTitle)
@@ -414,9 +414,9 @@ class DetailsViewController: UIViewController, UITextFieldDelegate, NVActivityIn
                 labelErrorPhone.isHidden = true
                 labelErrorPhone.text = " "
             } else {
-                borderPhone.backgroundColor = BORDER_COLOR_ERROR.cgColor
+                borderPhone.backgroundColor = BORDER_COLOR_ERROR.getCG()
                 labelErrorPhone.text = "A valid phone number is required"
-                labelErrorPhone.textColor = BORDER_COLOR_ERROR
+                labelErrorPhone.textColor = BORDER_COLOR_ERROR.get()
                 labelErrorPhone.isHidden = false
                 if(mustBeVisible) {
                     scrollToView(viewSectionPhone)
@@ -439,7 +439,7 @@ class DetailsViewController: UIViewController, UITextFieldDelegate, NVActivityIn
     }
 
     func textFieldReset(border: CALayer?, label: UILabel) {
-        border?.backgroundColor = BORDER_COLOR_DEFAULT.cgColor
+        border?.backgroundColor = BORDER_COLOR_DEFAULT.getCG()
         label.text = "Error text"
         label.isHidden = true
     }

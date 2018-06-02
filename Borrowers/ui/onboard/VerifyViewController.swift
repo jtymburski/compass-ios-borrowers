@@ -19,7 +19,7 @@ class VerifyViewController: UITableViewController, UIImagePickerControllerDelega
         "government_id.jpg",
         "utility_bill.jpg"
     ]
-    private let ICON_COLOR = UIColor(red: 25.0/255.0, green: 167.0/255.0, blue: 130.0/255.0, alpha: 1.0)
+    private let ICON_COLOR = UIColorCompat(red: 25.0/255.0, green: 167.0/255.0, blue: 130.0/255.0, alpha: 1.0)
     private let UNWIND_SEGUE_LOGIN = "unwindToLogin"
     private let UNWIND_SEGUE_WELCOME = "unwindToWelcome"
 
@@ -122,7 +122,7 @@ class VerifyViewController: UITableViewController, UIImagePickerControllerDelega
             performSegue(withIdentifier: "showVerificationFile", sender: self)
         } else {
             // Fetch a picture
-            let sourceType = UIImagePickerControllerSourceType.photoLibrary
+            let sourceType = UIImagePickerControllerSourceType.camera
             if UIImagePickerController.isSourceTypeAvailable(sourceType) {
                 // Set up the image properties
                 selectedRow = indexPath.row
@@ -258,7 +258,7 @@ class VerifyViewController: UITableViewController, UIImagePickerControllerDelega
     func updateView(index: Int, imageView: UIImageView) -> Bool {
         if coreModel.isVerificationFileValid(index: index) {
             imageView.image = #imageLiteral(resourceName: "IconCircleCheck").withRenderingMode(.alwaysTemplate)
-            imageView.tintColor = ICON_COLOR
+            imageView.tintColor = ICON_COLOR.get()
             return true
         } else {
             imageView.image = #imageLiteral(resourceName: "IconCircle")

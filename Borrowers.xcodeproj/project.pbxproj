@@ -23,6 +23,7 @@
 		0A16983A20704727001122BE /* AssessmentFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A16983920704727001122BE /* AssessmentFile.swift */; };
 		0A199B10205D6E7600F4582A /* BorrowerEditable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A199B0F205D6E7600F4582A /* BorrowerEditable.swift */; };
 		0A199B12205D796700F4582A /* BorrowerViewable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A199B11205D796700F4582A /* BorrowerViewable.swift */; };
+		0A1C251F20C33B89003459DC /* UIColorCompat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1C251E20C33B89003459DC /* UIColorCompat.swift */; };
 		0A32001F2059A0E70021FE4A /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A32001E2059A0E70021FE4A /* DetailsViewController.swift */; };
 		0A53B7B720759C4600B73AFF /* LoanListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A53B7B620759C4600B73AFF /* LoanListViewController.swift */; };
 		0A53B7B920759C6100B73AFF /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A53B7B820759C6100B73AFF /* ProfileViewController.swift */; };
@@ -40,7 +41,7 @@
 		0A9800F4205475DA00CC5166 /* AuthRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9800F3205475DA00CC5166 /* AuthRequest.swift */; };
 		0A9800F72054782600CC5166 /* StringHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9800F62054782600CC5166 /* StringHelper.swift */; };
 		0A9800FA2054A9BA00CC5166 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9800F92054A9BA00CC5166 /* Session.swift */; };
-		0A9800FC2054B69000CC5166 /* UiExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9800FB2054B69000CC5166 /* UiExtensions.swift */; };
+		0A9800FC2054B69000CC5166 /* UIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9800FB2054B69000CC5166 /* UIExtensions.swift */; };
 		0A9B5D9820BC6CD7004EA333 /* NewLoanNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9B5D9720BC6CD7004EA333 /* NewLoanNavController.swift */; };
 		0A9B5D9A20BC6D93004EA333 /* NewLoanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9B5D9920BC6D93004EA333 /* NewLoanViewController.swift */; };
 		0A9CBFFA207140300061323C /* AssessmentSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9CBFF9207140300061323C /* AssessmentSummary.swift */; };
@@ -81,6 +82,7 @@
 		0A16983920704727001122BE /* AssessmentFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssessmentFile.swift; sourceTree = "<group>"; };
 		0A199B0F205D6E7600F4582A /* BorrowerEditable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorrowerEditable.swift; sourceTree = "<group>"; };
 		0A199B11205D796700F4582A /* BorrowerViewable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorrowerViewable.swift; sourceTree = "<group>"; };
+		0A1C251E20C33B89003459DC /* UIColorCompat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorCompat.swift; sourceTree = "<group>"; };
 		0A32001E2059A0E70021FE4A /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		0A53B7B620759C4600B73AFF /* LoanListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanListViewController.swift; sourceTree = "<group>"; };
 		0A53B7B820759C6100B73AFF /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -98,7 +100,7 @@
 		0A9800F3205475DA00CC5166 /* AuthRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRequest.swift; sourceTree = "<group>"; };
 		0A9800F62054782600CC5166 /* StringHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringHelper.swift; sourceTree = "<group>"; };
 		0A9800F92054A9BA00CC5166 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
-		0A9800FB2054B69000CC5166 /* UiExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UiExtensions.swift; sourceTree = "<group>"; };
+		0A9800FB2054B69000CC5166 /* UIExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIExtensions.swift; sourceTree = "<group>"; };
 		0A9B5D9720BC6CD7004EA333 /* NewLoanNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewLoanNavController.swift; sourceTree = "<group>"; };
 		0A9B5D9920BC6D93004EA333 /* NewLoanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewLoanViewController.swift; sourceTree = "<group>"; };
 		0A9CBFF9207140300061323C /* AssessmentSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssessmentSummary.swift; sourceTree = "<group>"; };
@@ -208,7 +210,8 @@
 			isa = PBXGroup;
 			children = (
 				0A9800F62054782600CC5166 /* StringHelper.swift */,
-				0A9800FB2054B69000CC5166 /* UiExtensions.swift */,
+				0A1C251E20C33B89003459DC /* UIColorCompat.swift */,
+				0A9800FB2054B69000CC5166 /* UIExtensions.swift */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -428,12 +431,13 @@
 				0AFDBD98205C70AE00737BF1 /* RegisterRequest.swift in Sources */,
 				0A9CBFFC207155520061323C /* MainNavController.swift in Sources */,
 				0A022A76206AAB0100F05D76 /* WelcomeNavController.swift in Sources */,
-				0A9800FC2054B69000CC5166 /* UiExtensions.swift in Sources */,
+				0A9800FC2054B69000CC5166 /* UIExtensions.swift in Sources */,
 				0A32001F2059A0E70021FE4A /* DetailsViewController.swift in Sources */,
 				0A6421A3206DF8210086FF8B /* BankConnectionNew.swift in Sources */,
 				0A91DAF520BF20D100935463 /* Pair.swift in Sources */,
 				0A6421A9207015920086FF8B /* VerifyPreviewController.swift in Sources */,
 				0A6421A5206FE3BD0086FF8B /* VerifyViewController.swift in Sources */,
+				0A1C251F20C33B89003459DC /* UIColorCompat.swift in Sources */,
 				0A199B12205D796700F4582A /* BorrowerViewable.swift in Sources */,
 				0AB48E9720550118008E11D3 /* CreateViewController.swift in Sources */,
 				0AFDBD9A205C97A300737BF1 /* UserInfo.swift in Sources */,

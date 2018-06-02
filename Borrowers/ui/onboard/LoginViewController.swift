@@ -11,7 +11,10 @@ import UIKit
 
 class LoginViewController: UIViewController, UITextFieldDelegate, NVActivityIndicatorViewable {
     // Statics
-    let SMALL_PHONE_HEIGHT: CGFloat = 500.0
+    private let BORDER_COLOR_DEFAULT = UIColorCompat(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.5)
+    private let BORDER_COLOR_ERROR = UIColorCompat(red: 1.0, green: 105.0/255.0, blue: 105.0/255.0, alpha: 1.0)
+    private let BORDER_COLOR_SELECTED = UIColorCompat(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+    private let SMALL_PHONE_HEIGHT: CGFloat = 500.0
 
     // UI
     @IBOutlet weak var imageLogo: UIImageView!
@@ -26,9 +29,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate, NVActivityIndi
 
     // Control
     var attemptingLogin = false
-    var borderColorDefault = UIColor.init(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.5)
-    var borderColorError = UIColor.init(red: 1.0, green: 105.0/255.0, blue: 105.0/255.0, alpha: 1.0)
-    var borderColorSelected = UIColor.init(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
     var borderEmail: CALayer?
     var borderPassword: CALayer?
     var checkIgnored = false
@@ -52,9 +52,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate, NVActivityIndi
 
         // Add borders to the view
         viewEmail.layoutIfNeeded()
-        borderEmail = viewEmail.layer.addBorder(edge: .bottom, color: borderColorDefault, thickness: 1.0)
+        borderEmail = viewEmail.layer.addBorder(edge: .bottom, color: BORDER_COLOR_DEFAULT.get(), thickness: 1.0)
         viewPassword.layoutIfNeeded()
-        borderPassword = viewPassword.layer.addBorder(edge: .bottom, color: borderColorDefault, thickness: 1.0)
+        borderPassword = viewPassword.layer.addBorder(edge: .bottom, color: BORDER_COLOR_DEFAULT.get(), thickness: 1.0)
         
         // Connects the text fields to this class as delegates
         textEmail.delegate = self
@@ -190,21 +190,21 @@ class LoginViewController: UIViewController, UITextFieldDelegate, NVActivityIndi
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == textEmail {
-            borderEmail?.backgroundColor = borderColorSelected.cgColor
+            borderEmail?.backgroundColor = BORDER_COLOR_SELECTED.getCG()
         }
         else if textField == textPassword {
-            borderPassword?.backgroundColor = borderColorSelected.cgColor
+            borderPassword?.backgroundColor = BORDER_COLOR_SELECTED.getCG()
         }
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == textEmail {
-            borderEmail?.backgroundColor = borderColorDefault.cgColor
+            borderEmail?.backgroundColor = BORDER_COLOR_DEFAULT.getCG()
             labelEmailError.text = "Error text"
             labelEmailError.isHidden = true
         }
         else if textField == textPassword {
-            borderPassword?.backgroundColor = borderColorDefault.cgColor
+            borderPassword?.backgroundColor = BORDER_COLOR_DEFAULT.getCG()
             labelPasswordError.text = "Error text"
             labelPasswordError.isHidden = true
         }
@@ -323,15 +323,15 @@ class LoginViewController: UIViewController, UITextFieldDelegate, NVActivityIndi
     }
 
     func setEmailError() {
-        borderEmail?.backgroundColor = borderColorError.cgColor
-        labelEmailError.textColor = borderColorError
+        borderEmail?.backgroundColor = BORDER_COLOR_ERROR.getCG()
+        labelEmailError.textColor = BORDER_COLOR_ERROR.get()
         labelEmailError.text = "A valid email is required"
         labelEmailError.isHidden = false
     }
 
     func setPasswordError(preValidation: Bool, error: String? = nil) {
-        borderPassword?.backgroundColor = borderColorError.cgColor
-        labelPasswordError.textColor = borderColorError
+        borderPassword?.backgroundColor = BORDER_COLOR_ERROR.getCG()
+        labelPasswordError.textColor = BORDER_COLOR_ERROR.get()
         if preValidation {
             labelPasswordError.text = "A valid password is required"
         } else {

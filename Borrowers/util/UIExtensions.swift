@@ -1,5 +1,5 @@
 //
-//  UiExtensions.swift
+//  UIExtensions.swift
 //  Borrowers
 //
 //  Created by Jordan Tymburski on 2018-03-10.

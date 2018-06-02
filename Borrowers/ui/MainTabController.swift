@@ -10,7 +10,7 @@ import UIKit
 
 class MainTabController: UITabBarController, UITabBarControllerDelegate {
     // Statics
-    let COLOR_TAB_BORDER = UIColor(red: 199.0/255.0, green: 204.0/255.0, blue: 210.0/255.0, alpha: 0.3)
+    let COLOR_TAB_BORDER = UIColorCompat(red: 199.0/255.0, green: 204.0/255.0, blue: 210.0/255.0, alpha: 0.3)
     let ICON_MARGIN: CGFloat = 8.0
     let ICON_SIZE: CGFloat = 72.0
     let SEGUE_CREATE = "showCreate"
@@ -40,7 +40,7 @@ class MainTabController: UITabBarController, UITabBarControllerDelegate {
         tabBar.layer.borderWidth = 0.5
         tabBar.layer.borderColor = UIColor.clear.cgColor
         tabBar.clipsToBounds = true
-        _ = tabBar.layer.addBorder(edge: .top, color: COLOR_TAB_BORDER, thickness: 1.0)
+        _ = tabBar.layer.addBorder(edge: .top, color: COLOR_TAB_BORDER.get(), thickness: 1.0)
     }
 
     override func viewDidLayoutSubviews() {

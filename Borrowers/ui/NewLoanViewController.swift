@@ -12,8 +12,8 @@ import UIKit
 class NewLoanViewController: UIViewController, NVActivityIndicatorViewable {
     // Statics
     private let ANIMATION_SIZE = 90
-    private let BORDER_FORM = UIColor.init(red: 231.0/255.0, green: 234.0/255.0, blue: 238.0/255.0, alpha: 1.0)
-    private let BORDER_HEADER = UIColor.init(red: 63.0/255.0, green: 205.0/255.0, blue: 168.0/255.0, alpha: 1.0)
+    private let BORDER_FORM = UIColorCompat(red: 231.0/255.0, green: 234.0/255.0, blue: 238.0/255.0, alpha: 1.0)
+    private let BORDER_HEADER = UIColorCompat(red: 63.0/255.0, green: 205.0/255.0, blue: 168.0/255.0, alpha: 1.0)
 
     // UI
     @IBOutlet weak var buttonSubmit: UIButton!
@@ -43,11 +43,11 @@ class NewLoanViewController: UIViewController, NVActivityIndicatorViewable {
 
         // Add borders to the view
         viewAmountAvailable.layoutIfNeeded()
-        _ = viewAmountAvailable.layer.addBorder(edge: .right, color: BORDER_HEADER, thickness: 1.0)
+        _ = viewAmountAvailable.layer.addBorder(edge: .right, color: BORDER_HEADER.get(), thickness: 1.0)
         viewAmount.layoutIfNeeded()
-        _ = viewAmount.layer.addBorder(edge: .bottom, color: BORDER_FORM, thickness: 1.0)
+        _ = viewAmount.layer.addBorder(edge: .bottom, color: BORDER_FORM.get(), thickness: 1.0)
         viewFrequency.layoutIfNeeded()
-        _ = viewFrequency.layer.addBorder(edge: .bottom, color: BORDER_FORM, thickness: 1.0)
+        _ = viewFrequency.layer.addBorder(edge: .bottom, color: BORDER_FORM.get(), thickness: 1.0)
 
         // Start animating to block the UI. In viewDidAppear(), it will be executing an async data fetch
         startAnimating(CGSize.init(width: ANIMATION_SIZE, height: ANIMATION_SIZE), type: NVActivityIndicatorType.orbit)

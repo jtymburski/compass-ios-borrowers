@@ -10,7 +10,12 @@ import NVActivityIndicatorView
 import UIKit
 
 class CreateViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, NVActivityIndicatorViewable {
+    // Statics
     private let ANIMATION_SIZE = 90
+    private let BACKGROUND_COLOR = UIColorCompat(red: 74.0/255.0, green: 162.0/255.0, blue: 119.0/255.0, alpha: 1.0)
+    private let BORDER_COLOR_DEFAULT = UIColorCompat(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.5)
+    private let BORDER_COLOR_ERROR = UIColorCompat(red: 1.0, green: 105.0/255.0, blue: 105.0/255.0, alpha: 1.0)
+    private let BORDER_COLOR_SELECTED = UIColorCompat(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
     private let UNWIND_SEGUE = "unwindToLogin"
 
     // UI
@@ -35,10 +40,6 @@ class CreateViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
     // Control
     var account: Account?
     var attemptingCreate = false
-    let backgroundColor = UIColor.init(red: 74.0/255.0, green: 162.0/255.0, blue: 119.0/255.0, alpha: 1.0)
-    let borderColorDefault = UIColor.init(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.5)
-    let borderColorError = UIColor.init(red: 1.0, green: 105.0/255.0, blue: 105.0/255.0, alpha: 1.0)
-    let borderColorSelected = UIColor.init(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
     var borderCountry: CALayer?
     var borderEmail: CALayer?
     var borderName: CALayer?
@@ -67,13 +68,13 @@ class CreateViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
 
         // Add borders to the view
         viewCountry.layoutIfNeeded()
-        borderCountry = viewCountry.layer.addBorder(edge: .bottom, color: borderColorDefault, thickness: 1.0)
+        borderCountry = viewCountry.layer.addBorder(edge: .bottom, color: BORDER_COLOR_DEFAULT.get(), thickness: 1.0)
         viewEmail.layoutIfNeeded()
-        borderEmail = viewEmail.layer.addBorder(edge: .bottom, color: borderColorDefault, thickness: 1.0)
+        borderEmail = viewEmail.layer.addBorder(edge: .bottom, color: BORDER_COLOR_DEFAULT.get(), thickness: 1.0)
         viewName.layoutIfNeeded()
-        borderName = viewName.layer.addBorder(edge: .bottom, color: borderColorDefault, thickness: 1.0)
+        borderName = viewName.layer.addBorder(edge: .bottom, color: BORDER_COLOR_DEFAULT.get(), thickness: 1.0)
         viewPassword.layoutIfNeeded()
-        borderPassword = viewPassword.layer.addBorder(edge: .bottom, color: borderColorDefault, thickness: 1.0)
+        borderPassword = viewPassword.layer.addBorder(edge: .bottom, color: BORDER_COLOR_DEFAULT.get(), thickness: 1.0)
 
         // Connect the country text field to a picker
         let pickerCountry = UIPickerView()
@@ -224,20 +225,20 @@ class CreateViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
         textActive = textField
 
         if textField == textCountry {
-            borderCountry?.backgroundColor = borderColorSelected.cgColor
+            borderCountry?.backgroundColor = BORDER_COLOR_SELECTED.getCG()
             if countrySelected < 0 && countryList != nil && countryList!.count > 0 {
                 textField.text = countryList![0].name
                 countrySelected = 0
             }
         }
         else if textField == textEmail {
-            borderEmail?.backgroundColor = borderColorSelected.cgColor
+            borderEmail?.backgroundColor = BORDER_COLOR_SELECTED.getCG()
         }
         else if textField == textName {
-            borderName?.backgroundColor = borderColorSelected.cgColor
+            borderName?.backgroundColor = BORDER_COLOR_SELECTED.getCG()
         }
         else if textField == textPassword {
-            borderPassword?.backgroundColor = borderColorSelected.cgColor
+            borderPassword?.backgroundColor = BORDER_COLOR_SELECTED.getCG()
         }
     }
 
@@ -331,8 +332,8 @@ class CreateViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
     }
 
     func setCountryError(_ error: String?) {
-        borderCountry?.backgroundColor = borderColorError.cgColor
-        labelCountryError.textColor = borderColorError
+        borderCountry?.backgroundColor = BORDER_COLOR_ERROR.getCG()
+        labelCountryError.textColor = BORDER_COLOR_ERROR.get()
         if error != nil {
             labelCountryError.text = error
         } else {
@@ -342,8 +343,8 @@ class CreateViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
     }
 
     func setEmailError(preValidation: Bool) {
-        borderEmail?.backgroundColor = borderColorError.cgColor
-        labelEmailError.textColor = borderColorError
+        borderEmail?.backgroundColor = BORDER_COLOR_ERROR.getCG()
+        labelEmailError.textColor = BORDER_COLOR_ERROR.get()
         if preValidation {
             labelEmailError.text = "A valid email is required"
         } else {
@@ -353,15 +354,15 @@ class CreateViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
     }
 
     func setNameError() {
-        borderName?.backgroundColor = borderColorError.cgColor
-        labelNameError.textColor = borderColorError
+        borderName?.backgroundColor = BORDER_COLOR_ERROR.getCG()
+        labelNameError.textColor = BORDER_COLOR_ERROR.get()
         labelNameError.text = "Your name is required"
         labelNameError.isHidden = false
     }
 
     func setPasswordError() {
-        borderPassword?.backgroundColor = borderColorError.cgColor
-        labelPasswordError.textColor = borderColorError
+        borderPassword?.backgroundColor = BORDER_COLOR_ERROR.getCG()
+        labelPasswordError.textColor = BORDER_COLOR_ERROR.get()
         labelPasswordError.text = "The password must be at least 8 characters"
         labelPasswordError.isHidden = false
     }
@@ -432,7 +433,7 @@ class CreateViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
     }
 
     func textFieldReset(border: CALayer?, label: UILabel) {
-        border?.backgroundColor = borderColorDefault.cgColor
+        border?.backgroundColor = BORDER_COLOR_DEFAULT.getCG()
         label.text = "Error text"
         label.isHidden = true
     }

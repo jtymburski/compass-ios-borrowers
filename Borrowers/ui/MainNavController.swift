@@ -2,7 +2,7 @@
 //  MainNavController.swift
 //  Borrowers
 //
-//  Created by Kevin Smith on 2018-04-01.
+//  Created by Jordan Tymburski on 2018-04-01.
 //  Copyright © 2018 GN Compass. All rights reserved.
 //
 
