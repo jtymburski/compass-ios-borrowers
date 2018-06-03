@@ -47,6 +47,7 @@ class NewLoanViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     var pickerFrequency: UIPickerView?
     var pickerTerm: UIPickerView?
     var termSelected = -1
+    var textActive: UITextField?
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -77,6 +78,10 @@ class NewLoanViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         textAmount.addTarget(self, action: #selector(self.textFieldDidChange), for: .editingChanged)
         textFrequency.delegate = self
         textTerm.delegate = self
+
+        // Scroll view click
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(self.mainViewTap))
+        scrollView.addGestureRecognizer(gesture)
 
         // Add observers for the keyboard showing and hiding
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
@@ -111,8 +116,18 @@ class NewLoanViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     }
     */
 
+    // MARK: - Actions
+
     @IBAction func cancelClicked(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
+    }
+
+    @IBAction func mainViewTap(_ gestureRecognizer : UITapGestureRecognizer) {
+        if gestureRecognizer.state == .ended {
+            if textActive != nil {
+                textActive!.resignFirstResponder()
+            }
+        }
     }
 
     // MARK: - Picker Delegates
@@ -164,6 +179,8 @@ class NewLoanViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     // MARK: - Text Field Delegates
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        textActive = textField
+
         if textField == textAmount {
             processAmountField()
         } else if textField == textFrequency {
@@ -185,6 +202,10 @@ class NewLoanViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         if textField == textAmount {
             processAmountField()
         }
+    }
+
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        textActive = nil
     }
 
     // MARK: - Keyboard Control
