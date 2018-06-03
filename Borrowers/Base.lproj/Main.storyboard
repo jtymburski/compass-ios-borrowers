@@ -2752,6 +2752,7 @@
                         <outlet property="labelPaymentAmount" destination="Zgb-MV-07Z" id="3Eb-SA-hik"/>
                         <outlet property="labelPaymentFrequency" destination="UOk-MG-6tg" id="DnW-zd-ovF"/>
                         <outlet property="labelRate" destination="eeb-23-HTP" id="KOV-07-8kh"/>
+                        <outlet property="scrollView" destination="aCK-Bv-gMk" id="D8d-PD-7Nn"/>
                         <outlet property="textAmount" destination="l4P-hp-G7C" id="0NP-Sf-fKU"/>
                         <outlet property="textFrequency" destination="v8k-fz-RQf" id="qsa-yR-bnQ"/>
                         <outlet property="textTerm" destination="oPK-lp-x1g" id="Gah-vx-KEO"/>
@@ -2760,9 +2761,11 @@
                         <outlet property="viewFrequency" destination="LBu-7N-uLM" id="eaQ-MC-5tq"/>
                         <outlet property="viewNoPayment" destination="iA7-uY-yWx" id="dfK-Bd-csy"/>
                         <outlet property="viewPayment" destination="zYv-he-Ljg" id="RrD-wx-hqR"/>
+                        <segue destination="Nvj-Kk-uk6" kind="unwind" identifier="unwindToLogin" unwindAction="unwindToLoginWithSegue:" id="czx-aU-KXp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3I8-EZ-8IY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="Nvj-Kk-uk6" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="4170" y="1330.9859154929577"/>
         </scene>

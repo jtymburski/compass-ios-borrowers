@@ -285,6 +285,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, NVActivityIndi
             var success = false
             if response != nil && response!.isValid() {
                 self.coreModel.authenticate(response!)
+                CoreDataStack.saveContext()
                 success = true
             }
 

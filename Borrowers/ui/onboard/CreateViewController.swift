@@ -444,6 +444,7 @@ class CreateViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
         if result != nil && result!.isValid() {
             coreModel.account.sessionKey = result!.sessionKey
             coreModel.account.userKey = result!.userKey
+            CoreDataStack.saveContext()
 
             performSegue(withIdentifier: UNWIND_SEGUE, sender: self)
         } else {

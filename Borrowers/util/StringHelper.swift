@@ -35,4 +35,11 @@ struct StringHelper {
     static func isValidPassword(_ testStr: String?, strong: Bool = false) -> Bool {
         return testStr != nil && testStr!.count > 0 && (strong ? testStr!.count >= 8 : true)
     }
+
+    static func removeAllButNumeric(_ original: String?) -> String {
+        if original != nil {
+            return original!.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
+        }
+        return ""
+    }
 }

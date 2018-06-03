@@ -31,6 +31,13 @@ class LoanAmortization: BaseModel, AbstractProtocol, CustomStringConvertible {
         parse(json)
     }
 
+    func getTotalYears(monthsPerYear: Float) -> Float {
+        if months != nil && months! > 0 {
+            return Float(months!) / monthsPerYear
+        }
+        return 0.0
+    }
+
     func isValid() -> Bool {
         return id != nil && id! > 0 && months != nil && months! > 0 && name != nil && name!.count > 0
     }

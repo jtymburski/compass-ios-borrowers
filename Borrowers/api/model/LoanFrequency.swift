@@ -33,6 +33,15 @@ class LoanFrequency: BaseModel, AbstractProtocol, CustomStringConvertible {
         parse(json)
     }
 
+    func getPeriodsPerYear(daysPerYear: Float, monthsPerYear: Float) -> Float {
+        if days != nil && days! > 0 {
+            return daysPerYear / Float(days!)
+        } else if perMonth != nil && perMonth! > 0 {
+            return monthsPerYear * Float(perMonth!)
+        }
+        return 0.0
+    }
+
     func isValid() -> Bool {
         return id != nil && id! > 0 && name != nil && name!.count > 0 && ((days != nil && days! > 0) || (perMonth != nil && perMonth! > 0))
     }

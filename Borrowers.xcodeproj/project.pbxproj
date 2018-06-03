@@ -24,6 +24,7 @@
 		0A199B10205D6E7600F4582A /* BorrowerEditable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A199B0F205D6E7600F4582A /* BorrowerEditable.swift */; };
 		0A199B12205D796700F4582A /* BorrowerViewable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A199B11205D796700F4582A /* BorrowerViewable.swift */; };
 		0A1C251F20C33B89003459DC /* UIColorCompat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1C251E20C33B89003459DC /* UIColorCompat.swift */; };
+		0A1C252120C3A06A003459DC /* PaymentHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1C252020C3A06A003459DC /* PaymentHelper.swift */; };
 		0A32001F2059A0E70021FE4A /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A32001E2059A0E70021FE4A /* DetailsViewController.swift */; };
 		0A53B7B720759C4600B73AFF /* LoanListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A53B7B620759C4600B73AFF /* LoanListViewController.swift */; };
 		0A53B7B920759C6100B73AFF /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A53B7B820759C6100B73AFF /* ProfileViewController.swift */; };
@@ -83,6 +84,7 @@
 		0A199B0F205D6E7600F4582A /* BorrowerEditable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorrowerEditable.swift; sourceTree = "<group>"; };
 		0A199B11205D796700F4582A /* BorrowerViewable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorrowerViewable.swift; sourceTree = "<group>"; };
 		0A1C251E20C33B89003459DC /* UIColorCompat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorCompat.swift; sourceTree = "<group>"; };
+		0A1C252020C3A06A003459DC /* PaymentHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentHelper.swift; sourceTree = "<group>"; };
 		0A32001E2059A0E70021FE4A /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		0A53B7B620759C4600B73AFF /* LoanListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanListViewController.swift; sourceTree = "<group>"; };
 		0A53B7B820759C6100B73AFF /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -209,6 +211,7 @@
 		0A9800F52054781700CC5166 /* util */ = {
 			isa = PBXGroup;
 			children = (
+				0A1C252020C3A06A003459DC /* PaymentHelper.swift */,
 				0A9800F62054782600CC5166 /* StringHelper.swift */,
 				0A1C251E20C33B89003459DC /* UIColorCompat.swift */,
 				0A9800FB2054B69000CC5166 /* UIExtensions.swift */,
@@ -438,6 +441,7 @@
 				0A6421A9207015920086FF8B /* VerifyPreviewController.swift in Sources */,
 				0A6421A5206FE3BD0086FF8B /* VerifyViewController.swift in Sources */,
 				0A1C251F20C33B89003459DC /* UIColorCompat.swift in Sources */,
+				0A1C252120C3A06A003459DC /* PaymentHelper.swift in Sources */,
 				0A199B12205D796700F4582A /* BorrowerViewable.swift in Sources */,
 				0AB48E9720550118008E11D3 /* CreateViewController.swift in Sources */,
 				0AFDBD9A205C97A300737BF1 /* UserInfo.swift in Sources */,
