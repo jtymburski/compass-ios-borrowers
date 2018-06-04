@@ -56,6 +56,9 @@
 		0AC757E12050651F00D152F1 /* ErrorResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC757E02050651F00D152F1 /* ErrorResult.swift */; };
 		0AD7462A20B8707300BA15CE /* LoanListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD7462920B8707300BA15CE /* LoanListViewCell.swift */; };
 		0ADABA9020BE688F00B603CE /* LoanListNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADABA8F20BE688F00B603CE /* LoanListNavController.swift */; };
+		0AE6D9D520C43FB60060966C /* LoanNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE6D9D420C43FB60060966C /* LoanNew.swift */; };
+		0AE6D9D720C441EB0060966C /* LoanInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE6D9D620C441EB0060966C /* LoanInfo.swift */; };
+		0AE6D9D920C442230060966C /* LoanPayment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE6D9D820C442230060966C /* LoanPayment.swift */; };
 		0AED28DC2057053A0031B26F /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AED28DB2057053A0031B26F /* Country.swift */; };
 		0AFDBD94205C43BB00737BF1 /* CoreModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFDBD93205C43BB00737BF1 /* CoreModelController.swift */; };
 		0AFDBD98205C70AE00737BF1 /* RegisterRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFDBD97205C70AE00737BF1 /* RegisterRequest.swift */; };
@@ -116,6 +119,9 @@
 		0AC757E02050651F00D152F1 /* ErrorResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResult.swift; sourceTree = "<group>"; };
 		0AD7462920B8707300BA15CE /* LoanListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanListViewCell.swift; sourceTree = "<group>"; };
 		0ADABA8F20BE688F00B603CE /* LoanListNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanListNavController.swift; sourceTree = "<group>"; };
+		0AE6D9D420C43FB60060966C /* LoanNew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanNew.swift; sourceTree = "<group>"; };
+		0AE6D9D620C441EB0060966C /* LoanInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanInfo.swift; sourceTree = "<group>"; };
+		0AE6D9D820C442230060966C /* LoanPayment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanPayment.swift; sourceTree = "<group>"; };
 		0AED28DB2057053A0031B26F /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		0AFDBD93205C43BB00737BF1 /* CoreModelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreModelController.swift; sourceTree = "<group>"; };
 		0AFDBD97205C70AE00737BF1 /* RegisterRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterRequest.swift; sourceTree = "<group>"; };
@@ -165,8 +171,11 @@
 				0AED28DB2057053A0031B26F /* Country.swift */,
 				0AC757E02050651F00D152F1 /* ErrorResult.swift */,
 				0A713C0620C07C5D0079E796 /* LoanAmortization.swift */,
-				0A713C0820C0816B0079E796 /* LoanFrequency.swift */,
 				0A713C0420C07B9F0079E796 /* LoanAvailable.swift */,
+				0A713C0820C0816B0079E796 /* LoanFrequency.swift */,
+				0AE6D9D620C441EB0060966C /* LoanInfo.swift */,
+				0AE6D9D420C43FB60060966C /* LoanNew.swift */,
+				0AE6D9D820C442230060966C /* LoanPayment.swift */,
 				0AFDBD97205C70AE00737BF1 /* RegisterRequest.swift */,
 			);
 			path = model;
@@ -438,11 +447,14 @@
 				0A32001F2059A0E70021FE4A /* DetailsViewController.swift in Sources */,
 				0A6421A3206DF8210086FF8B /* BankConnectionNew.swift in Sources */,
 				0A91DAF520BF20D100935463 /* Pair.swift in Sources */,
+				0AE6D9D720C441EB0060966C /* LoanInfo.swift in Sources */,
 				0A6421A9207015920086FF8B /* VerifyPreviewController.swift in Sources */,
 				0A6421A5206FE3BD0086FF8B /* VerifyViewController.swift in Sources */,
+				0AE6D9D920C442230060966C /* LoanPayment.swift in Sources */,
 				0A1C251F20C33B89003459DC /* UIColorCompat.swift in Sources */,
 				0A1C252120C3A06A003459DC /* PaymentHelper.swift in Sources */,
 				0A199B12205D796700F4582A /* BorrowerViewable.swift in Sources */,
+				0AE6D9D520C43FB60060966C /* LoanNew.swift in Sources */,
 				0AB48E9720550118008E11D3 /* CreateViewController.swift in Sources */,
 				0AFDBD9A205C97A300737BF1 /* UserInfo.swift in Sources */,
 				0A04646620505E6D00BA5690 /* BaseModel.swift in Sources */,

@@ -478,6 +478,45 @@ struct Session {
         }
     }
 
+    static func loanCreate(account: Account, input: LoanNew, completionHandler: @escaping (_ info: LoanInfo?, _ error: String?, _ noNetwork: Bool, _ unauthorized: Bool) -> Void) {
+
+        let function = "borrowers/" + account.userKey! + "/loans"
+        let method = "POST"
+
+        startRequest(function: function, method: method, accessKey: account.getAccessKey(), body: input.toJsonData()) { (data, response, error) in
+            var loanInfo: LoanInfo?
+            var errorString: String?
+            var noNetwork = false
+            var unauthorized = false
+
+            // Determine if the result is valid
+            if let response = response as? HTTPURLResponse, let data = data {
+                // Check the HTTP result
+                if response.statusCodeEnum == HTTPStatusCode.created {
+                    loanInfo = LoanInfo(data)
+                    if !loanInfo!.isValid() {
+                        errorString = "The server received invalid response for the loan create new request"
+                    }
+                } else if response.statusCodeEnum == HTTPStatusCode.unauthorized {
+                    unauthorized = true
+                } else {
+                    let errorResult = ErrorResult.init(data)
+                    if errorResult.isValid() {
+                        print(errorResult)
+                    }
+                    errorString = "The server failed to process the loan create new request"
+                }
+            } else {
+                noNetwork = true
+                if error != nil {
+                    print("General failure on loan create new attempt: \(error!)")
+                }
+            }
+
+            completionHandler(loanInfo, errorString, noNetwork, unauthorized)
+        }
+    }
+
     static func logout(account: Account, completionHandler: ((_ success: Bool, _ error: String?, _ noNetwork: Bool, _ unauthorized: Bool) -> Void)?) {
         let function = "borrowers/" + account.userKey! + "/logout"
         let method = "POST"

@@ -41,6 +41,7 @@ class NewLoanViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
 
     // Control
     var amountValue = 0
+    var attemptingCreate = false
     var currencyFormatLarge: NumberFormatter!
     var currencyFormatSmall: NumberFormatter!
     var frequencySelected = -1
@@ -126,6 +127,30 @@ class NewLoanViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         if gestureRecognizer.state == .ended {
             if textActive != nil {
                 textActive!.resignFirstResponder()
+            }
+        }
+    }
+
+    @IBAction func submitClicked(_ sender: UIButton) {
+        if !attemptingCreate && isValidInput() {
+            // Resign responders
+            if textActive != nil {
+                textActive!.resignFirstResponder()
+            }
+
+            // Generate the new packet
+            let newPacket = LoanNew(bank: coreModel.bankConnections?[0].reference, principal: amountValue, amortization: loanAvailableInfo?.amortizations?[termSelected].id, frequency: loanAvailableInfo?.frequencies?[frequencySelected].id)
+            if newPacket.isValid() {
+                // Start the create
+                attemptingCreate = true
+                startAnimating(CGSize.init(width: ANIMATION_SIZE, height: ANIMATION_SIZE), type: NVActivityIndicatorType.orbit)
+
+                Session.loanCreate(account: coreModel.account, input: newPacket, completionHandler: { (infoPacket, errorString, noNetwork, unauthorized) in
+
+                    DispatchQueue.main.async {
+                        self.updateCreateResult(result: infoPacket, error: errorString, noNetwork: noNetwork, unauthorized: unauthorized)
+                    }
+                })
             }
         }
     }
@@ -240,6 +265,10 @@ class NewLoanViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         }
     }
 
+    private func isValidInput() -> Bool {
+        return (amountValue >= MIN_LOAN_AMOUNT && frequencySelected >= 0 && termSelected >= 0)
+    }
+
     private func processAmountField() {
         // Determine the amount first and store it
         amountValue = Int(StringHelper.removeAllButNumeric(textAmount.text)) ?? 0
@@ -260,11 +289,13 @@ class NewLoanViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         updatePaymentInfo()
     }
 
-    private func showErrorAlert(title: String, message: String) {
+    private func showErrorAlert(title: String, message: String, dismissOnOk: Bool = true) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
-            DispatchQueue.main.async {
-                self.dismiss(animated: true, completion: nil)
+            if dismissOnOk {
+                DispatchQueue.main.async {
+                    self.dismiss(animated: true, completion: nil)
+                }
             }
         }))
         self.present(alert, animated: true, completion: nil)
@@ -317,8 +348,30 @@ class NewLoanViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         }
     }
 
+    private func updateCreateResult(result: LoanInfo?, error: String?, noNetwork: Bool, unauthorized: Bool) {
+        attemptingCreate = false
+        stopAnimating()
+
+        if result != nil {
+            // TODO: Need to return the result to the main tab controller for viewing
+            print("Success: \(result!.description)")
+            dismiss(animated: true, completion: nil)
+        } else {
+            if noNetwork {
+                showErrorAlert(title: "No Network", message: "A network connection is required to submit a new loan application", dismissOnOk: false)
+            } else if unauthorized {
+                performSegue(withIdentifier: SEGUE_LOGIN, sender: self)
+            } else {
+                showErrorAlert(title: "Failed To Submit", message: "A new loan application failed to be submitted. Try again later", dismissOnOk: false)
+                if error != nil {
+                    print("Error on loan result: \(error!)")
+                }
+            }
+        }
+    }
+
     private func updatePaymentInfo() {
-        if amountValue >= MIN_LOAN_AMOUNT && frequencySelected >= 0 && termSelected >= 0 {
+        if isValidInput() {
             labelPaymentAmount.text = currencyFormatSmall.string(from: calculatePayment())
             labelPaymentFrequency.text = getFrequencyText()
 
