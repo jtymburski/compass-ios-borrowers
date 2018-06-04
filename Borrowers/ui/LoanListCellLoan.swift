@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoanListViewCell: UITableViewCell {
+class LoanListCellLoan: UITableViewCell {
     // Statics
     private let BORDER_COLOR = UIColorCompat(red: 231.0/255.0, green: 234.0/255.0, blue: 238.0/255.0, alpha: 1.0)
     private let HIGHLIGHT_COLOR = UIColorCompat(red: 247.0/255.0, green: 255.0/255.0, blue: 254.0/255.0, alpha: 1.0)

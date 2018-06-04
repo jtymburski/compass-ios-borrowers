@@ -1933,15 +1933,11 @@
             <objects>
                 <tableViewController id="zEg-rJ-Eju" customClass="LoanListViewController" customModule="Borrowers" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="XYz-xb-fY9">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="612"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.94901960780000005" green="0.96470588239999999" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
-                        <view key="tableFooterView" contentMode="scaleToFill" id="nHS-Nv-7tM">
-                            <rect key="frame" x="0.0" y="263" width="320" height="0.0"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="LoanCell" rowHeight="235" id="Big-EU-IKF" customClass="LoanListViewCell" customModule="Borrowers" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="LoanCell" rowHeight="235" id="Big-EU-IKF" customClass="LoanListCellLoan" customModule="Borrowers" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="320" height="235"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Big-EU-IKF" id="Gcq-5c-OM7">
@@ -2163,6 +2159,103 @@
                                     <outlet property="viewStatus" destination="44o-hW-BOf" id="KGX-zl-2Da"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="LoadingCell" rowHeight="235" id="GKR-Rd-YC8" customClass="LoanListCellLoading" customModule="Borrowers" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="263" width="320" height="235"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GKR-Rd-YC8" id="YcD-ay-fgE">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="235"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bOB-VH-gbX">
+                                            <rect key="frame" x="16" y="16" width="288" height="218"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3BB-hI-iC6" customClass="NVActivityIndicatorView" customModule="NVActivityIndicatorView">
+                                                    <rect key="frame" x="120" y="85" width="48" height="48"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="48" id="FA0-Rn-WtN"/>
+                                                        <constraint firstAttribute="width" constant="48" id="sYc-JD-Lcf"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="218" id="8er-gR-yiB"/>
+                                                <constraint firstItem="3BB-hI-iC6" firstAttribute="centerY" secondItem="bOB-VH-gbX" secondAttribute="centerY" id="p6e-D8-f2d"/>
+                                                <constraint firstItem="3BB-hI-iC6" firstAttribute="centerX" secondItem="bOB-VH-gbX" secondAttribute="centerX" id="zMu-TD-G9X"/>
+                                            </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                    <integer key="value" value="10"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="bOB-VH-gbX" firstAttribute="top" secondItem="YcD-ay-fgE" secondAttribute="top" constant="16" id="EfZ-or-KQi"/>
+                                        <constraint firstItem="bOB-VH-gbX" firstAttribute="leading" secondItem="YcD-ay-fgE" secondAttribute="leading" constant="16" id="ekg-2z-t51"/>
+                                        <constraint firstAttribute="trailing" secondItem="bOB-VH-gbX" secondAttribute="trailing" constant="16" id="xuB-gd-pxt"/>
+                                        <constraint firstItem="bOB-VH-gbX" firstAttribute="bottom" secondItem="YcD-ay-fgE" secondAttribute="baseline" priority="750" id="ygA-9i-QDx"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" red="0.94901960780000005" green="0.96470588239999999" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <outlet property="viewAnimation" destination="3BB-hI-iC6" id="o1f-ml-6EF"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="AddCell" rowHeight="89" id="XN4-kt-LnZ" customClass="LoanListCellAdd" customModule="Borrowers" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="498" width="320" height="89"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="XN4-kt-LnZ" id="kEL-st-ccI">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="89"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lXY-S9-tjU">
+                                            <rect key="frame" x="16" y="16" width="288" height="72"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IconAdd" translatesAutoresizingMaskIntoConstraints="NO" id="SjY-Gh-hK3">
+                                                    <rect key="frame" x="31" y="26" width="20" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="2EY-nH-Vlf"/>
+                                                        <constraint firstAttribute="width" constant="20" id="IZT-bx-XZJ"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add another loan" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q6G-5Y-LLb">
+                                                    <rect key="frame" x="75" y="23" width="201" height="25"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="18"/>
+                                                    <color key="textColor" red="0.098039215686274508" green="0.65490196078431373" blue="0.50980392156862742" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstItem="SjY-Gh-hK3" firstAttribute="leading" secondItem="lXY-S9-tjU" secondAttribute="leading" constant="31" id="1UW-LL-Anm"/>
+                                                <constraint firstItem="q6G-5Y-LLb" firstAttribute="centerY" secondItem="lXY-S9-tjU" secondAttribute="centerY" id="4o1-hn-rhv"/>
+                                                <constraint firstItem="q6G-5Y-LLb" firstAttribute="leading" secondItem="SjY-Gh-hK3" secondAttribute="trailing" constant="24" id="Lgb-iC-WK5"/>
+                                                <constraint firstAttribute="height" constant="72" id="S3d-pc-SR3"/>
+                                                <constraint firstAttribute="trailing" secondItem="q6G-5Y-LLb" secondAttribute="trailing" constant="12" id="S83-Wr-ZgI"/>
+                                                <constraint firstItem="SjY-Gh-hK3" firstAttribute="centerY" secondItem="lXY-S9-tjU" secondAttribute="centerY" id="lnM-ts-XmQ"/>
+                                            </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                    <integer key="value" value="10"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="lXY-S9-tjU" firstAttribute="bottom" secondItem="kEL-st-ccI" secondAttribute="baseline" priority="750" id="4Hz-bb-Xrd"/>
+                                        <constraint firstAttribute="trailing" secondItem="lXY-S9-tjU" secondAttribute="trailing" constant="16" id="Klj-d9-doY"/>
+                                        <constraint firstItem="lXY-S9-tjU" firstAttribute="leading" secondItem="kEL-st-ccI" secondAttribute="leading" constant="16" id="iQb-U9-bp6"/>
+                                        <constraint firstItem="lXY-S9-tjU" firstAttribute="top" secondItem="kEL-st-ccI" secondAttribute="top" constant="16" id="ydw-XP-diD"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" red="0.94901960780000005" green="0.96470588239999999" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <outlet property="cellCard" destination="lXY-S9-tjU" id="1uU-eD-fQv"/>
+                                </connections>
+                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="zEg-rJ-Eju" id="SmS-H0-al2"/>
@@ -2170,10 +2263,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Loans" id="6AL-Xo-fdn"/>
+                    <size key="freeformSize" width="320" height="725"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="osg-Za-F0F" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2969" y="509"/>
+            <point key="canvasLocation" x="2971.875" y="339.08450704225351"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="QBQ-GN-MfX">
@@ -2891,7 +2985,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YfP-Wb-Tk9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2105.5999999999999" y="509.14542728635683"/>
+            <point key="canvasLocation" x="2108" y="340"/>
         </scene>
         <!--Edit Profile Nav Controller-->
         <scene sceneID="9t4-Br-duL">
@@ -2915,6 +3009,7 @@
     <resources>
         <image name="BackgroundOnboard" width="750" height="1334"/>
         <image name="HeaderWelcome" width="351" height="273"/>
+        <image name="IconAdd" width="20" height="20"/>
         <image name="IconBack" width="42" height="42"/>
         <image name="IconCircle" width="35" height="35"/>
         <image name="IconCircle1" width="35" height="35"/>
@@ -2934,7 +3029,7 @@
         <image name="Logo" width="322" height="322"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="djK-Gp-YDv"/>
+        <segue reference="94w-lY-3R1"/>
         <segue reference="hI4-Ix-g3k"/>
     </inferredMetricsTieBreakers>
 </document>

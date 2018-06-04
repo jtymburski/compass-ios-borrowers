@@ -9,9 +9,17 @@
 import UIKit
 
 class LoanListViewController: UITableViewController {
+    // Statics
+    private let CELL_ADD = "AddCell"
+    private let CELL_LOADING = "LoadingCell"
+    private let CELL_LOAN = "LoanCell"
+    private let LOADING_COUNT = 3
 
     // Model
     var coreModel: CoreModelController!
+
+    // Control
+    var isLoading = true
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -19,7 +27,10 @@ class LoanListViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+
+        // Put a blank footer on the table view to allow some margin for scrolling
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.bounds.width, height: 16))
+        tableView.tableFooterView = footerView
     }
 
     override func didReceiveMemoryWarning() {
@@ -30,34 +41,56 @@ class LoanListViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // TODO: Properly return based on total loans
-        return 1
+        if isLoading {
+            return LOADING_COUNT
+        } else {
+            // TODO: Tie to data stack count
+            return 0
+        }
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "LoanCell", for: indexPath) as! LoanListViewCell
-        // TODO: Properly tie to cell data
-        return cell
+        if isLoading {
+            return tableView.dequeueReusableCell(withIdentifier: CELL_LOADING, for: indexPath)
+        } else {
+            // TODO: Properly tie to data stack for this index
+            return tableView.dequeueReusableCell(withIdentifier: CELL_LOAN, for: indexPath)
+        }
     }
 
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        (cell as! LoanListViewCell).willDisplay()
+        if let cellLoan = cell as? LoanListCellLoan {
+            cellLoan.willDisplay()
+        }
     }
 
     override func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
-        if let cell = tableView.cellForRow(at: indexPath) as? LoanListViewCell {
-            cell.setHighlighted(true)
+        if let cell = tableView.cellForRow(at: indexPath) {
+            if let cellAdd = cell as? LoanListCellAdd {
+                cellAdd.setHighlighted(true)
+            } else if let cellLoan = cell as? LoanListCellLoan {
+                cellLoan.setHighlighted(true)
+            }
         }
     }
 
     override func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
-        if let cell = tableView.cellForRow(at: indexPath) as? LoanListViewCell {
-            cell.setHighlighted(false)
+        if let cell = tableView.cellForRow(at: indexPath) {
+            if let cellAdd = cell as? LoanListCellAdd {
+                cellAdd.setHighlighted(false)
+            } else if let cellLoan = cell as? LoanListCellLoan {
+                cellLoan.setHighlighted(false)
+            }
         }
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // TODO: Process the select
+        // Process the select
+        if let cell = tableView.cellForRow(at: indexPath) {
+            if let cellLoan = cell as? LoanListCellLoan {
+                // TODO: Process the loan cell
+            }
+        }
 
         tableView.deselectRow(at: indexPath, animated: true)
     }
