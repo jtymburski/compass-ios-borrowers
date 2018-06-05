@@ -44,11 +44,9 @@ class LoanInfo: BaseModel, AbstractProtocol, CustomStringConvertible {
         parse(data)
     }
 
-
     func isValid() -> Bool {
         return (reference != nil && NSUUID(uuidString: reference!) != nil && created != nil && created! > 0 && bank != nil && bank!.isValid() && principal != nil && principal! > 0 && rating != nil && rating! > 0 && rate != nil && rate! > 0.0 && amortization != nil && amortization!.isValid() && frequency != nil && frequency!.isValid())
     }
-
 
     func parse(_ data: Data) {
         if let json = getJsonAsDictionary(with: data) {
@@ -83,8 +81,6 @@ class LoanInfo: BaseModel, AbstractProtocol, CustomStringConvertible {
             }
         }
     }
-
-    // TODO: BELOW
 
     func toJson() -> Any? {
         if isValid() {

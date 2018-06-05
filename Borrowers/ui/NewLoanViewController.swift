@@ -328,7 +328,7 @@ class NewLoanViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         // Rate in header
         let rateFormatter = NumberFormatter()
         rateFormatter.numberStyle = .decimal
-        rateFormatter.maximumFractionDigits = 2
+        rateFormatter.maximumFractionDigits = 1
         labelRate.text = rateFormatter.string(from: loanAvailableInfo!.assessment!.getRatePercent())
 
         // Frequency text field custom picker
@@ -363,9 +363,6 @@ class NewLoanViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                 performSegue(withIdentifier: SEGUE_LOGIN, sender: self)
             } else {
                 showErrorAlert(title: "Failed To Submit", message: "A new loan application failed to be submitted. Try again later", dismissOnOk: false)
-                if error != nil {
-                    print("Error on loan result: \(error!)")
-                }
             }
         }
     }

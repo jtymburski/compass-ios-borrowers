@@ -1975,7 +1975,7 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </view>
                                                             </subviews>
-                                                            <color key="backgroundColor" red="0.90588235294117647" green="0.91764705882352937" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <color key="backgroundColor" red="0.90588235294117647" green="0.91764705882352937" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="60" id="76S-Bh-TPM"/>
                                                                 <constraint firstAttribute="trailing" secondItem="wEt-Kd-4O6" secondAttribute="trailing" id="Gu8-6z-Ag0"/>
@@ -1993,30 +1993,30 @@
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j8L-P8-NZB">
                                                             <rect key="frame" x="122" y="29" width="12" height="27.5"/>
                                                             <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="20"/>
-                                                            <color key="textColor" red="0.43529411764705883" green="0.45490196078431372" blue="0.4823529411764706" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <color key="textColor" red="0.43529411759999997" green="0.4549019608" blue="0.4823529412" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="19,586" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Oz6-6n-SZE">
                                                             <rect key="frame" x="138" y="24" width="142" height="55"/>
                                                             <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="40"/>
-                                                            <color key="textColor" red="0.43529411759999997" green="0.4549019608" blue="0.4823529412" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <color key="textColor" red="0.43529411764705883" green="0.45490196078431372" blue="0.4823529411764706" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$414.32" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="Poo-ZX-rQM">
                                                             <rect key="frame" x="138" y="87" width="54" height="19.5"/>
                                                             <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="14"/>
-                                                            <color key="textColor" red="0.74117647058823533" green="0.77254901960784317" blue="0.81176470588235294" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <color key="textColor" red="0.74117647060000003" green="0.7725490196" blue="0.81176470590000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text=" due in 3 days" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="9Eg-nD-G5j">
                                                             <rect key="frame" x="192" y="87" width="88" height="19.5"/>
                                                             <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
-                                                            <color key="textColor" red="0.74117647060000003" green="0.7725490196" blue="0.81176470590000005" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <color key="textColor" red="0.74117647058823533" green="0.77254901960784317" blue="0.81176470588235294" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="44o-hW-BOf">
                                                             <rect key="frame" x="122" y="93" width="8" height="8"/>
-                                                            <color key="backgroundColor" red="0.74117647058823533" green="0.77254901960784317" blue="0.81176470588235294" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <color key="backgroundColor" red="0.74117647060000003" green="0.7725490196" blue="0.81176470590000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="8" id="Mis-uZ-Bex"/>
                                                                 <constraint firstAttribute="width" constant="8" id="e8u-Bo-Mgj"/>
@@ -2054,13 +2054,13 @@
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="December 30, 2018" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="VuU-q1-Enh">
                                                                     <rect key="frame" x="24" y="42" width="158" height="25"/>
                                                                     <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="18"/>
-                                                                    <color key="textColor" red="0.43529411764705883" green="0.45490196078431372" blue="0.4823529411764706" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    <color key="textColor" red="0.43529411759999997" green="0.4549019608" blue="0.4823529412" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Next payment due" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xV2-Fj-SCE">
                                                                     <rect key="frame" x="24" y="16" width="158" height="18"/>
                                                                     <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="13"/>
-                                                                    <color key="textColor" red="0.74117647058823533" green="0.77254901960784317" blue="0.81176470588235294" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    <color key="textColor" red="0.74117647060000003" green="0.7725490196" blue="0.81176470590000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>
@@ -2079,19 +2079,19 @@
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rate" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HG6-Uc-1Qm">
                                                                     <rect key="frame" x="28" y="16" width="27" height="18"/>
                                                                     <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="13"/>
-                                                                    <color key="textColor" red="0.74117647058823533" green="0.77254901960784317" blue="0.81176470588235294" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    <color key="textColor" red="0.74117647060000003" green="0.7725490196" blue="0.81176470590000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5.9" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LPU-AX-xOA">
                                                                     <rect key="frame" x="29" y="42" width="25.5" height="25"/>
                                                                     <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="18"/>
-                                                                    <color key="textColor" red="0.43529411764705883" green="0.45490196078431372" blue="0.4823529411764706" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    <color key="textColor" red="0.43529411759999997" green="0.4549019608" blue="0.4823529412" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tbO-jh-Way">
                                                                     <rect key="frame" x="56.5" y="44" width="17.5" height="11"/>
                                                                     <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="8"/>
-                                                                    <color key="textColor" red="0.43529411764705883" green="0.45490196078431372" blue="0.4823529411764706" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    <color key="textColor" red="0.43529411759999997" green="0.4549019608" blue="0.4823529412" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>
@@ -2151,6 +2151,7 @@
                                     <outlet property="cellCard" destination="NKe-hJ-WgL" id="SF4-EO-9xZ"/>
                                     <outlet property="nextPaymentAmount" destination="Poo-ZX-rQM" id="bzH-Ch-KuV"/>
                                     <outlet property="nextPaymentDate" destination="VuU-q1-Enh" id="VDI-Ft-U4y"/>
+                                    <outlet property="nextPaymentHeader" destination="xV2-Fj-SCE" id="w3e-z3-WgU"/>
                                     <outlet property="nextPaymentString" destination="9Eg-nD-G5j" id="47m-fS-pUw"/>
                                     <outlet property="rate" destination="LPU-AX-xOA" id="8AA-LJ-cZO"/>
                                     <outlet property="viewCompleted" destination="s9S-oW-h8u" id="l0E-VH-Ttc"/>
@@ -2223,7 +2224,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add another loan" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q6G-5Y-LLb">
                                                     <rect key="frame" x="75" y="23" width="201" height="25"/>
                                                     <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="18"/>
-                                                    <color key="textColor" red="0.098039215686274508" green="0.65490196078431373" blue="0.50980392156862742" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" red="0.098039215686274508" green="0.65490196078431373" blue="0.50980392156862742" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -2254,6 +2255,7 @@
                                 <color key="backgroundColor" red="0.94901960780000005" green="0.96470588239999999" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <outlet property="cellCard" destination="lXY-S9-tjU" id="1uU-eD-fQv"/>
+                                    <outlet property="labelText" destination="q6G-5Y-LLb" id="NOT-3B-YTH"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -2264,8 +2266,12 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Loans" id="6AL-Xo-fdn"/>
                     <size key="freeformSize" width="320" height="725"/>
+                    <connections>
+                        <segue destination="53V-5c-L2A" kind="unwind" identifier="unwindToLogin" unwindAction="unwindToLoginWithSegue:" id="SC2-Iw-Bdy"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="osg-Za-F0F" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="53V-5c-L2A" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2971.875" y="339.08450704225351"/>
         </scene>

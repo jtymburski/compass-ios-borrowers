@@ -29,6 +29,7 @@
 		0A3B89F120C50CE2004ACDA5 /* LoanListCellAdd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3B89F020C50CE2004ACDA5 /* LoanListCellAdd.swift */; };
 		0A53B7B720759C4600B73AFF /* LoanListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A53B7B620759C4600B73AFF /* LoanListViewController.swift */; };
 		0A53B7B920759C6100B73AFF /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A53B7B820759C6100B73AFF /* ProfileViewController.swift */; };
+		0A5EC58620C5A7BB00177E1B /* LoanSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5EC58520C5A7BB00177E1B /* LoanSummary.swift */; };
 		0A631B7B204DD2C700E8213F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A631B7A204DD2C700E8213F /* LoginViewController.swift */; };
 		0A6421A1206DF5870086FF8B /* BankConnectionSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6421A0206DF5870086FF8B /* BankConnectionSummary.swift */; };
 		0A6421A3206DF8210086FF8B /* BankConnectionNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6421A2206DF8210086FF8B /* BankConnectionNew.swift */; };
@@ -94,6 +95,7 @@
 		0A3B89F020C50CE2004ACDA5 /* LoanListCellAdd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanListCellAdd.swift; sourceTree = "<group>"; };
 		0A53B7B620759C4600B73AFF /* LoanListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanListViewController.swift; sourceTree = "<group>"; };
 		0A53B7B820759C6100B73AFF /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		0A5EC58520C5A7BB00177E1B /* LoanSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanSummary.swift; sourceTree = "<group>"; };
 		0A631B7A204DD2C700E8213F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		0A6421A0206DF5870086FF8B /* BankConnectionSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankConnectionSummary.swift; sourceTree = "<group>"; };
 		0A6421A2206DF8210086FF8B /* BankConnectionNew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankConnectionNew.swift; sourceTree = "<group>"; };
@@ -180,6 +182,7 @@
 				0AE6D9D620C441EB0060966C /* LoanInfo.swift */,
 				0AE6D9D420C43FB60060966C /* LoanNew.swift */,
 				0AE6D9D820C442230060966C /* LoanPayment.swift */,
+				0A5EC58520C5A7BB00177E1B /* LoanSummary.swift */,
 				0AFDBD97205C70AE00737BF1 /* RegisterRequest.swift */,
 			);
 			path = model;
@@ -450,6 +453,7 @@
 				0A9CBFFC207155520061323C /* MainNavController.swift in Sources */,
 				0A022A76206AAB0100F05D76 /* WelcomeNavController.swift in Sources */,
 				0A9800FC2054B69000CC5166 /* UIExtensions.swift in Sources */,
+				0A5EC58620C5A7BB00177E1B /* LoanSummary.swift in Sources */,
 				0A32001F2059A0E70021FE4A /* DetailsViewController.swift in Sources */,
 				0A6421A3206DF8210086FF8B /* BankConnectionNew.swift in Sources */,
 				0A91DAF520BF20D100935463 /* Pair.swift in Sources */,

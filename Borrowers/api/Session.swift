@@ -517,6 +517,41 @@ struct Session {
         }
     }
 
+    static func loanList(account: Account, completionHandler: @escaping (_ list: [LoanSummary]?, _ error: String?, _ noNetwork: Bool, _ unauthorized: Bool) -> Void) {
+        let function = "borrowers/" + account.userKey! + "/loans"
+        let method = "GET"
+
+        startRequest(function: function, method: method, accessKey: account.getAccessKey(), body: nil) { (data, response, error) in
+            var errorString: String?
+            var loanList: [LoanSummary]?
+            var noNetwork = false
+            var unauthorized = false
+
+            // Determine if the result is valid
+            if let response = response as? HTTPURLResponse, let data = data {
+                // Check the HTTP result
+                if response.statusCodeEnum == HTTPStatusCode.ok {
+                    loanList = LoanSummary.parseArray(data)
+                } else if response.statusCodeEnum == HTTPStatusCode.unauthorized {
+                    unauthorized = true
+                } else {
+                    let errorResult = ErrorResult.init(data)
+                    if errorResult.isValid() {
+                        print(errorResult)
+                    }
+                    errorString = "The server failed to process the loan list fetch request"
+                }
+            } else {
+                noNetwork = true
+                if error != nil {
+                    print("General failure on loan list fetch: \(error!)")
+                }
+            }
+
+            completionHandler(loanList, errorString, noNetwork, unauthorized)
+        }
+    }
+
     static func logout(account: Account, completionHandler: ((_ success: Bool, _ error: String?, _ noNetwork: Bool, _ unauthorized: Bool) -> Void)?) {
         let function = "borrowers/" + account.userKey! + "/logout"
         let method = "POST"

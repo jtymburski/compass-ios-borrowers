@@ -18,6 +18,7 @@ class LoanListCellLoan: UITableViewCell {
     @IBOutlet weak var cellCard: UIView!
     @IBOutlet weak var nextPaymentAmount: UILabel!
     @IBOutlet weak var nextPaymentDate: UILabel!
+    @IBOutlet weak var nextPaymentHeader: UILabel!
     @IBOutlet weak var nextPaymentString: UILabel!
     @IBOutlet weak var rate: UILabel!
     @IBOutlet weak var viewCompleted: UIView!
@@ -25,14 +26,54 @@ class LoanListCellLoan: UITableViewCell {
     @IBOutlet weak var viewSectionRate: UIView!
     @IBOutlet weak var viewStatus: UIView!
 
+    // Data
+    var data: LoanSummary!
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Custom initialization code
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        // Configure the view for the selected state
+    func setData(_ cellData: LoanSummary, principalFormatter: NumberFormatter, currencyFormatter: NumberFormatter, rateFormatter: NumberFormatter) {
+        data = cellData
+
+        // Update the interface
+        // TODO: Once status is introduced, it will be used to gauge the loan information shown
+        if data.isInProgress() {
+            // TODO: Make circle the amount that has been paid off
+
+            balanceRemaining.text = principalFormatter.string(from: data.balance! as NSNumber)
+
+            // TODO: This should also handle over drawn states with yellow or red text for the status
+            viewStatus.isHidden = false
+            nextPaymentAmount.isHidden = false
+            nextPaymentAmount.text = currencyFormatter.string(from: data.nextPayment!.amount! as NSNumber)
+            nextPaymentString.isHidden = false
+            nextPaymentString.text = " due in 7 days" // TODO: Calculate the day gap
+
+            nextPaymentHeader.text = "Next payment due"
+            nextPaymentDate.text = "December 30, 2018" // TODO: Display the date as a string
+        } else  {
+            // TODO: Make circle full green with a little check (if complete) OR X (if cancelled) OR ... (if pending) in the middle
+
+            balanceRemaining.text = principalFormatter.string(from: data.principal! as NSNumber)
+            viewStatus.isHidden = true
+            nextPaymentAmount.isHidden = true
+            nextPaymentString.isHidden = true
+
+            nextPaymentHeader.text = "Status"
+            if data.isCompleted() {
+                nextPaymentDate.text = "Completed"
+            } else {
+                // TODO: This should have two states - one for cancelled and one for pending
+                nextPaymentDate.text = "Pending"
+            }
+
+            // TODO: Make the whole cell card slightly washed, if cancelled or completed
+        }
+
+        // General settings that will always be set regardless of the state/status
+        rate.text = rateFormatter.string(from: data.rate! as NSNumber)
     }
 
     func setHighlighted(_ highlighted: Bool) {
@@ -45,6 +86,11 @@ class LoanListCellLoan: UITableViewCell {
                 self.cellCard.backgroundColor = UIColor.white
             })
         }
+    }
+
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        // Configure the view for the selected state
     }
 
     func willDisplay() {

@@ -14,10 +14,19 @@ class LoanListCellAdd: UITableViewCell {
 
     // UI
     @IBOutlet weak var cellCard: UIView!
+    @IBOutlet weak var labelText: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+    }
+
+    func isOnlyCell(_ noLoans: Bool) {
+        if noLoans {
+            labelText.text = "Add your first loan"
+        } else {
+            labelText.text = "Add another loan"
+        }
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

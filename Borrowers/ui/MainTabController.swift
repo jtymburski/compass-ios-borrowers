@@ -22,6 +22,7 @@ class MainTabController: UITabBarController, UITabBarControllerDelegate {
 
     // Model
     var coreModel: CoreModelController!
+    var coreModelSent = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,6 +50,13 @@ class MainTabController: UITabBarController, UITabBarControllerDelegate {
         // safe place to set the frame of button manually
         let iconHalf = (ICON_SIZE / 2)
         createButton.frame = CGRect.init(x: self.tabBar.center.x - iconHalf, y: self.view.bounds.height - ICON_SIZE - ICON_MARGIN, width: ICON_SIZE, height: ICON_SIZE)
+
+        if !coreModelSent && coreModel != nil && viewControllers != nil {
+            for viewController in viewControllers! {
+                loadInCoreModel(viewController: viewController)
+            }
+            coreModelSent = true
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -82,7 +90,13 @@ class MainTabController: UITabBarController, UITabBarControllerDelegate {
     }
 
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
-        // Make sure the controller is passed along
+        loadInCoreModel(viewController: viewController)
+        return true
+    }
+
+    // MARK: - Internals
+
+    private func loadInCoreModel(viewController: UIViewController) {
         if let loanListNavController = viewController as? LoanListNavController {
             if loanListNavController.coreModel == nil {
                 loanListNavController.coreModel = coreModel
@@ -92,7 +106,5 @@ class MainTabController: UITabBarController, UITabBarControllerDelegate {
                 profileViewController.coreModel = coreModel
             }
         }
-
-        return true
     }
 }
