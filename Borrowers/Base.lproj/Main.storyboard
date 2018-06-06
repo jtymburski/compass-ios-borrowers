@@ -2268,6 +2268,7 @@
                     <size key="freeformSize" width="320" height="725"/>
                     <connections>
                         <segue destination="53V-5c-L2A" kind="unwind" identifier="unwindToLogin" unwindAction="unwindToLoginWithSegue:" id="SC2-Iw-Bdy"/>
+                        <segue destination="qEc-K8-eTv" kind="show" identifier="showCreate" id="BFY-Tx-1od"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="osg-Za-F0F" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2865,6 +2866,7 @@
                         <outlet property="viewNoPayment" destination="iA7-uY-yWx" id="dfK-Bd-csy"/>
                         <outlet property="viewPayment" destination="zYv-he-Ljg" id="RrD-wx-hqR"/>
                         <segue destination="Nvj-Kk-uk6" kind="unwind" identifier="unwindToLogin" unwindAction="unwindToLoginWithSegue:" id="czx-aU-KXp"/>
+                        <segue destination="Nvj-Kk-uk6" kind="unwind" identifier="unwindToTabView" unwindAction="unwindToTabViewWithSegue:" id="o1z-Aq-nqB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3I8-EZ-8IY" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3014,7 +3016,7 @@
     </scenes>
     <resources>
         <image name="BackgroundOnboard" width="750" height="1334"/>
-        <image name="HeaderWelcome" width="351" height="273"/>
+        <image name="HeaderWelcome" width="111" height="85"/>
         <image name="IconAdd" width="20" height="20"/>
         <image name="IconBack" width="42" height="42"/>
         <image name="IconCircle" width="35" height="35"/>
@@ -3035,6 +3037,7 @@
         <image name="Logo" width="322" height="322"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="3LC-Op-apN"/>
         <segue reference="94w-lY-3R1"/>
         <segue reference="hI4-Ix-g3k"/>
     </inferredMetricsTieBreakers>

@@ -17,6 +17,17 @@ struct StringHelper {
         }
     }
 
+    static func getDateString(_ date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .none
+        return dateFormatter.string(from: date)
+    }
+
+    static func getDateString(_ timeSince1970: Int64) -> String {
+        return getDateString(Date(timeIntervalSince1970: Double(timeSince1970 / 1000)))
+    }
+
     static func hasContent(_ testStr: String?) -> Bool {
         return testStr != nil && !testStr!.isEmpty
     }

@@ -44,15 +44,21 @@ class LoanListCellLoan: UITableViewCell {
 
             balanceRemaining.text = principalFormatter.string(from: data.balance! as NSNumber)
 
-            // TODO: This should also handle over drawn states with yellow or red text for the status
+            // TODO: This should also handle over due states with yellow or red text for the status
             viewStatus.isHidden = false
             nextPaymentAmount.isHidden = false
             nextPaymentAmount.text = currencyFormatter.string(from: data.nextPayment!.amount! as NSNumber)
             nextPaymentString.isHidden = false
-            nextPaymentString.text = " due in 7 days" // TODO: Calculate the day gap
-
             nextPaymentHeader.text = "Next payment due"
-            nextPaymentDate.text = "December 30, 2018" // TODO: Display the date as a string
+
+            // Date analysis
+            let calendar = Calendar.current
+            let currentDate = calendar.startOfDay(for: Date())
+            let dueDate = calendar.startOfDay(for: Date(timeIntervalSince1970: Double(data.nextPayment!.dueDate! / 1000)))
+            let components = calendar.dateComponents([.day], from: currentDate, to: dueDate)
+
+            nextPaymentString.text = " due in \(components.day ?? 0) days"
+            nextPaymentDate.text = StringHelper.getDateString(dueDate)
         } else  {
             // TODO: Make circle full green with a little check (if complete) OR X (if cancelled) OR ... (if pending) in the middle
 

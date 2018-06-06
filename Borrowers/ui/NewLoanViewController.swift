@@ -18,6 +18,7 @@ class NewLoanViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     private let COLOR_BUTTON_ENABLED = UIColorCompat(red: 25.0/255.0, green: 167.0/255.0, blue: 130.0/255.0, alpha: 1.0)
     private let MIN_LOAN_AMOUNT = 100
     private let SEGUE_LOGIN = "unwindToLogin"
+    private let SEGUE_TAB_VIEW = "unwindToTabView"
 
     // UI
     @IBOutlet weak var buttonSubmit: UIButton!
@@ -38,6 +39,7 @@ class NewLoanViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     // Model
     var coreModel: CoreModelController!
     var loanAvailableInfo: LoanAvailable?
+    var loanResult: LoanInfo?
 
     // Control
     var amountValue = 0
@@ -353,9 +355,8 @@ class NewLoanViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         stopAnimating()
 
         if result != nil {
-            // TODO: Need to return the result to the main tab controller for viewing
-            print("Success: \(result!.description)")
-            dismiss(animated: true, completion: nil)
+            loanResult = result
+            performSegue(withIdentifier: SEGUE_TAB_VIEW, sender: self)
         } else {
             if noNetwork {
                 showErrorAlert(title: "No Network", message: "A network connection is required to submit a new loan application", dismissOnOk: false)

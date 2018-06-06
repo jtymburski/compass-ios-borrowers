@@ -14,8 +14,6 @@ class MainTabController: UITabBarController, UITabBarControllerDelegate {
     let ICON_MARGIN: CGFloat = 8.0
     let ICON_SIZE: CGFloat = 72.0
     let SEGUE_CREATE = "showCreate"
-    let TITLE_HOME = "Loans"
-    let TITLE_PROFILE = "Profile"
 
     // UI
     let createButton = UIButton.init(type: .custom)
@@ -27,9 +25,6 @@ class MainTabController: UITabBarController, UITabBarControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         delegate = self
-
-        // Starting title
-        self.navigationItem.title = TITLE_HOME
 
         // Load the center button
         createButton.setImage(#imageLiteral(resourceName: "IconNavAdd"), for: .normal)
@@ -79,15 +74,21 @@ class MainTabController: UITabBarController, UITabBarControllerDelegate {
         }
     }
 
-    // MARK: - Tab bar control
-
-    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-        if viewController is LoanListViewController {
-            self.navigationItem.title = TITLE_HOME
-        } else if viewController is ProfileViewController {
-            self.navigationItem.title = TITLE_PROFILE
+    @IBAction func unwindToTabView(segue: UIStoryboardSegue) {
+        // Check that the segue was from the expected source
+        if let newLoanViewController = segue.source as? NewLoanViewController {
+            // Try to find the loan list view controller
+            if newLoanViewController.loanResult != nil && viewControllers != nil {
+                for viewController in viewControllers! {
+                    if let loanListNavController = viewController as? LoanListNavController {
+                        loanListNavController.addLoan(newLoanViewController.loanResult!)
+                    }
+                }
+            }
         }
     }
+
+    // MARK: - Tab bar control
 
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         loadInCoreModel(viewController: viewController)

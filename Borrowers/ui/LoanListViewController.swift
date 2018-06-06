@@ -14,6 +14,7 @@ class LoanListViewController: UITableViewController {
     private let CELL_LOADING = "LoadingCell"
     private let CELL_LOAN = "LoanCell"
     private let LOADING_COUNT = 3
+    private let SEGUE_CREATE = "showCreate"
     private let SEGUE_LOGIN = "unwindToLogin"
 
     // Model
@@ -48,6 +49,7 @@ class LoanListViewController: UITableViewController {
         principalFormat.numberStyle = .currency
         principalFormat.generatesDecimalNumbers = false
         principalFormat.maximumFractionDigits = 0
+        principalFormat.currencySymbol = ""
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -129,8 +131,8 @@ class LoanListViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Process the select
         if let cell = tableView.cellForRow(at: indexPath) {
-            if let cellAdd = cell as? LoanListCellAdd {
-                // TODO: Process the add cell click
+            if cell is LoanListCellAdd {
+                performSegue(withIdentifier: SEGUE_CREATE, sender: self)
             } else if let cellLoan = cell as? LoanListCellLoan {
                 // TODO: Process the loan cell click
             }
@@ -139,15 +141,16 @@ class LoanListViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
-    /*
-     // MARK: - Navigation
+    // MARK: - Navigation
 
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // New loan nav controller
+        if let newLoanNavController = segue.destination as? NewLoanNavController {
+            if newLoanNavController.coreModel == nil {
+                newLoanNavController.coreModel = coreModel
+            }
+        }
+    }
 
     // MARK: - Internals
 
@@ -157,12 +160,35 @@ class LoanListViewController: UITableViewController {
         self.present(alert, animated: true, completion: nil)
     }
 
+    private func sortLoanList() {
+        if loanList != nil {
+            loanList!.sort(by: { (first, second) -> Bool in
+                let firstInProgress = first.isInProgress()
+                let secondInProgress = second.isInProgress()
+                if firstInProgress && secondInProgress {
+                    // Both valid and in progress
+                    return first.nextPayment!.dueDate! < second.nextPayment!.dueDate!
+                } else if firstInProgress {
+                    // Only first is valid. Show above
+                    return true
+                } else if secondInProgress {
+                    // Only second is valid. Show below
+                    return false
+                } else {
+                    // Both are either completed, pending, or cancelled. Sort by started
+                    return (first.started ?? 0) < (second.started ?? 0)
+                }
+            })
+        }
+    }
+
     private func updateLoanList(list: [LoanSummary]?, error: String?, noNetwork: Bool, unauthorized: Bool) {
         if list != nil {
             loanList = list
+            sortLoanList()
         } else {
-            // TODO: Display error or no network conditions in the loan list with a load button or something similar
             if noNetwork {
+                // TODO: Display error or no network conditions in the loan list with a load button or something similar
                 showErrorAlert(title: "No Network", message: "A network connection is required to fetch the list of loans application")
             } else if unauthorized {
                 performSegue(withIdentifier: SEGUE_LOGIN, sender: self)
@@ -170,6 +196,18 @@ class LoanListViewController: UITableViewController {
         }
 
         isLoading = false
+        tableView.reloadData()
+    }
+
+    // MARK: - Externals
+
+    func addLoan(_ loanInfo: LoanInfo) {
+        if loanList != nil {
+            loanList!.append(loanInfo.getSummary())
+        } else {
+            loanList = [ loanInfo.getSummary() ]
+        }
+        sortLoanList()
         tableView.reloadData()
     }
 }

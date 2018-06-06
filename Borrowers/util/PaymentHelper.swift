@@ -18,7 +18,6 @@ struct PaymentHelper {
         let totalYears = term.getTotalYears(monthsPerYear: MONTHS_PER_YEAR)
         let periodsPerYear = frequency.getPeriodsPerYear(daysPerYear: DAYS_PER_YEAR, monthsPerYear: MONTHS_PER_YEAR)
         let ratePerPeriod = powf(1 + rate / DAYS_PER_YEAR, DAYS_PER_YEAR / periodsPerYear) - 1
-        print("INFO: \(totalYears) , \(periodsPerYear) , \(ratePerPeriod)")
 
         return NSNumber(value: Float(principal) * ratePerPeriod / (1 - powf(1 + ratePerPeriod, -periodsPerYear * totalYears)))
     }

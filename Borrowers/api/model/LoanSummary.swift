@@ -37,6 +37,16 @@ class LoanSummary: BaseModel, AbstractProtocol, CustomStringConvertible {
         parse(json)
     }
 
+    init(reference: String?, principal: Int?, rate: Float?, started: Int64?, balance: Float?, nextPayment: LoanPayment?) {
+        super.init()
+        self.reference = reference
+        self.principal = principal
+        self.rate = rate
+        self.started = started
+        self.balance = balance
+        self.nextPayment = nextPayment
+    }
+
     func getRatePercent() -> NSNumber {
         if rate != nil {
             return (rate! * 100) as NSNumber

@@ -37,4 +37,14 @@ class LoanListNavController: UINavigationController, UINavigationControllerDeleg
             }
         }
     }
+
+    // MARK: - Externals
+
+    func addLoan(_ loanInfo: LoanInfo) {
+        for viewController in viewControllers {
+            if let loanListViewController = viewController as? LoanListViewController {
+                loanListViewController.addLoan(loanInfo)
+            }
+        }
+    }
 }
