@@ -11,7 +11,7 @@ import UIKit
 class MainTabController: UITabBarController, UITabBarControllerDelegate {
     // Statics
     let COLOR_TAB_BORDER = UIColorCompat(red: 199.0/255.0, green: 204.0/255.0, blue: 210.0/255.0, alpha: 0.3)
-    let ICON_MARGIN: CGFloat = 8.0
+    let ICON_MARGIN: CGFloat = 6.0
     let ICON_SIZE: CGFloat = 72.0
     let SEGUE_CREATE = "showCreate"
 
@@ -44,7 +44,8 @@ class MainTabController: UITabBarController, UITabBarControllerDelegate {
 
         // safe place to set the frame of button manually
         let iconHalf = (ICON_SIZE / 2)
-        createButton.frame = CGRect.init(x: self.tabBar.center.x - iconHalf, y: self.view.bounds.height - ICON_SIZE - ICON_MARGIN, width: ICON_SIZE, height: ICON_SIZE)
+        print(self.tabBar.bounds.height)
+        createButton.frame = CGRect.init(x: self.tabBar.center.x - iconHalf, y: self.view.bounds.height - self.tabBar.bounds.height - iconHalf + ICON_MARGIN, width: ICON_SIZE, height: ICON_SIZE)
 
         if !coreModelSent && coreModel != nil && viewControllers != nil {
             for viewController in viewControllers! {
