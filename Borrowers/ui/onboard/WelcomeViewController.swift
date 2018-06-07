@@ -49,6 +49,10 @@ class WelcomeViewController: UIViewController, NVActivityIndicatorViewable {
         if let bankCreateViewController = segue.destination as? BankCreateViewController {
             bankCreateViewController.coreModel = coreModel
         }
+        // Main navigation of the tab interface
+        else if let mainNavController = segue.destination as? MainNavController {
+            mainNavController.coreModel = coreModel
+        }
         // Welcome navigation
         else if let welcomeNavController = segue.destination as? WelcomeNavController {
             welcomeNavController.coreModel = coreModel
