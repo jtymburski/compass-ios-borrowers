@@ -2274,7 +2274,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="osg-Za-F0F" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="53V-5c-L2A" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2971.875" y="339.08450704225351"/>
+            <point key="canvasLocation" x="3219" y="340"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="QBQ-GN-MfX">
@@ -2532,7 +2532,7 @@
             <objects>
                 <viewController id="Bcc-JB-R7c" customClass="NewLoanViewController" customModule="Borrowers" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rJW-28-CHk">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="604"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="555"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="24u-iM-ibH">
@@ -2609,8 +2609,24 @@
                                     <constraint firstAttribute="bottom" secondItem="Lbl-pk-YCp" secondAttribute="bottom" constant="8" id="yxo-q2-ovB"/>
                                 </constraints>
                             </view>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aCK-Bv-gMk">
-                                <rect key="frame" x="0.0" y="82.5" width="320" height="521.5"/>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ihc-zY-miM">
+                                <rect key="frame" x="0.0" y="82" width="320" height="472.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have insufficient approved loan capacity remaining to take out another loan" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="96U-dL-QHT">
+                                        <rect key="frame" x="24" y="203.5" width="272" height="66"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="16"/>
+                                        <color key="textColor" red="0.098039215686274508" green="0.65490196078431373" blue="0.50980392156862742" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="96U-dL-QHT" firstAttribute="leading" secondItem="ihc-zY-miM" secondAttribute="leading" constant="24" id="3Ru-Tz-Gb8"/>
+                                    <constraint firstAttribute="trailing" secondItem="96U-dL-QHT" secondAttribute="trailing" constant="24" id="FeM-DX-kbW"/>
+                                    <constraint firstItem="96U-dL-QHT" firstAttribute="centerY" secondItem="ihc-zY-miM" secondAttribute="centerY" id="yP8-ds-FDa"/>
+                                </constraints>
+                            </view>
+                            <scrollView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aCK-Bv-gMk">
+                                <rect key="frame" x="0.0" y="82.5" width="320" height="472.5"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HP3-lT-oKc">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="521.5"/>
@@ -2833,12 +2849,16 @@
                         <color key="backgroundColor" red="0.94901960784313721" green="0.96470588235294119" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="9Jd-YF-XiX" firstAttribute="trailing" secondItem="aCK-Bv-gMk" secondAttribute="trailing" id="9ms-xX-EDb"/>
+                            <constraint firstItem="9Jd-YF-XiX" firstAttribute="trailing" secondItem="ihc-zY-miM" secondAttribute="trailing" id="CpS-uI-IQY"/>
                             <constraint firstItem="aCK-Bv-gMk" firstAttribute="top" secondItem="24u-iM-ibH" secondAttribute="bottom" id="Day-Vh-3hg"/>
                             <constraint firstItem="24u-iM-ibH" firstAttribute="trailing" secondItem="9Jd-YF-XiX" secondAttribute="trailing" id="GU9-Yi-ay6"/>
+                            <constraint firstItem="9Jd-YF-XiX" firstAttribute="bottom" secondItem="ihc-zY-miM" secondAttribute="bottom" id="RFb-Yp-hog"/>
                             <constraint firstItem="24u-iM-ibH" firstAttribute="leading" secondItem="9Jd-YF-XiX" secondAttribute="leading" id="Rwy-3z-oAh"/>
                             <constraint firstItem="aCK-Bv-gMk" firstAttribute="leading" secondItem="9Jd-YF-XiX" secondAttribute="leading" id="TqM-JF-k5E"/>
                             <constraint firstItem="9Jd-YF-XiX" firstAttribute="bottom" secondItem="aCK-Bv-gMk" secondAttribute="bottom" id="g43-Cv-U9F"/>
                             <constraint firstItem="24u-iM-ibH" firstAttribute="top" secondItem="9Jd-YF-XiX" secondAttribute="top" id="kYA-T3-Uss"/>
+                            <constraint firstItem="ihc-zY-miM" firstAttribute="leading" secondItem="9Jd-YF-XiX" secondAttribute="leading" id="nYc-Ya-66z"/>
+                            <constraint firstItem="ihc-zY-miM" firstAttribute="top" secondItem="24u-iM-ibH" secondAttribute="bottom" id="pQe-fn-za3"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="9Jd-YF-XiX"/>
                     </view>
@@ -2856,6 +2876,7 @@
                         <outlet property="labelPaymentAmount" destination="Zgb-MV-07Z" id="3Eb-SA-hik"/>
                         <outlet property="labelPaymentFrequency" destination="UOk-MG-6tg" id="DnW-zd-ovF"/>
                         <outlet property="labelRate" destination="eeb-23-HTP" id="KOV-07-8kh"/>
+                        <outlet property="noRoomView" destination="ihc-zY-miM" id="f9h-Vp-JBt"/>
                         <outlet property="scrollView" destination="aCK-Bv-gMk" id="D8d-PD-7Nn"/>
                         <outlet property="textAmount" destination="l4P-hp-G7C" id="0NP-Sf-fKU"/>
                         <outlet property="textFrequency" destination="v8k-fz-RQf" id="qsa-yR-bnQ"/>
@@ -3037,7 +3058,7 @@
         <image name="Logo" width="322" height="322"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="3LC-Op-apN"/>
+        <segue reference="BFY-Tx-1od"/>
         <segue reference="94w-lY-3R1"/>
         <segue reference="hI4-Ix-g3k"/>
     </inferredMetricsTieBreakers>

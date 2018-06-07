@@ -26,6 +26,7 @@ class NewLoanViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     @IBOutlet weak var labelPaymentAmount: UILabel!
     @IBOutlet weak var labelPaymentFrequency: UILabel!
     @IBOutlet weak var labelRate: UILabel!
+    @IBOutlet weak var noRoomView: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var textAmount: UITextField!
     @IBOutlet weak var textFrequency: UITextField!
@@ -308,7 +309,13 @@ class NewLoanViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         loanAvailableInfo = info
 
         if loanAvailableInfo != nil && loanAvailableInfo!.isValid() {
-            updateBaseView()
+            if loanAvailableInfo!.loanCap! >= Float(MIN_LOAN_AMOUNT) {
+                updateBaseView(headerOnly: false)
+                scrollView.isHidden = false
+            } else {
+                updateBaseView(headerOnly: true)
+                noRoomView.isHidden = false
+            }
         } else {
             if noNetwork {
                 showErrorAlert(title: "No Network", message: "A network connection is required to create a new loan application")
@@ -323,7 +330,7 @@ class NewLoanViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         }
     }
 
-    private func updateBaseView() {
+    private func updateBaseView(headerOnly: Bool) {
         // Amount available in header
         labelAmountAvailable.text = currencyFormatLarge.string(from: loanAvailableInfo!.loanCap! as NSNumber)
 
@@ -333,20 +340,22 @@ class NewLoanViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         rateFormatter.maximumFractionDigits = 1
         labelRate.text = rateFormatter.string(from: loanAvailableInfo!.assessment!.getRatePercent())
 
-        // Frequency text field custom picker
-        if pickerFrequency == nil {
-            pickerFrequency = UIPickerView()
-            textFrequency.inputView = pickerFrequency
-            pickerFrequency!.dataSource = self
-            pickerFrequency!.delegate = self
-        }
+        if !headerOnly {
+            // Frequency text field custom picker
+            if pickerFrequency == nil {
+                pickerFrequency = UIPickerView()
+                textFrequency.inputView = pickerFrequency
+                pickerFrequency!.dataSource = self
+                pickerFrequency!.delegate = self
+            }
 
-        // Term text field custom picker
-        if pickerTerm == nil {
-            pickerTerm = UIPickerView()
-            textTerm.inputView = pickerTerm
-            pickerTerm!.dataSource = self
-            pickerTerm!.delegate = self
+            // Term text field custom picker
+            if pickerTerm == nil {
+                pickerTerm = UIPickerView()
+                textTerm.inputView = pickerTerm
+                pickerTerm!.dataSource = self
+                pickerTerm!.delegate = self
+            }
         }
     }
 
