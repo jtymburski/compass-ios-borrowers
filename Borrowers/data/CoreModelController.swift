@@ -26,6 +26,14 @@ class CoreModelController {
         account = Account.getOrCreate()
     }
 
+    func addAssessment(_ summary: AssessmentSummary) {
+        if(assessments == nil) {
+            assessments = [summary]
+        } else {
+            assessments!.append(summary)
+        }
+    }
+
     func addBankSummary(_ summary: BankConnectionSummary) {
         if(bankConnections == nil) {
             bankConnections = [summary]

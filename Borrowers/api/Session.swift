@@ -55,7 +55,13 @@ struct Session {
     }
 
     static func assessmentInfo(account: Account, assessment: AssessmentSummary, completionHandler: @escaping (AssessmentInfo?, String?, Bool, Bool) -> Void) {
-        let function = "borrowers/" + account.userKey! + "/assessments/" + assessment.reference!
+
+        assessmentInfo(account: account, reference: assessment.reference!, completionHandler: completionHandler)
+    }
+
+    static func assessmentInfo(account: Account, reference: String, completionHandler: @escaping (_ info: AssessmentInfo?, _ error: String?, _ noNetwork: Bool, _ unauthorized: Bool) -> Void) {
+
+        let function = "borrowers/" + account.userKey! + "/assessments/" + reference
         let method = "GET"
 
         startRequest(function: function, method: method, accessKey: account.getAccessKey(), body: nil) { (data, response, error) in
@@ -68,7 +74,7 @@ struct Session {
             if let response = response as? HTTPURLResponse, let data = data {
                 // Check the HTTP result
                 if response.statusCodeEnum == HTTPStatusCode.ok {
-                    assessmentInfo = AssessmentInfo.init(data, reference: assessment.reference)
+                    assessmentInfo = AssessmentInfo.init(data, reference: reference)
                     if !assessmentInfo!.isValid() {
                         errorString = "The server received invalid response for the assessment info fetch request"
                     }

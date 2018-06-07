@@ -42,6 +42,14 @@ class AssessmentSummary: BaseModel, AbstractProtocol, CustomStringConvertible {
         parse(json)
     }
 
+    init(reference: String?, date: Int64?, status: Int?, rating: Int?) {
+        super.init()
+        self.reference = reference
+        self.date = date
+        self.status = status
+        self.rating = rating
+    }
+
     func getRatingLetter() -> String {
         switch rating {
         case .some(RATING_VERY_STRONG),

@@ -78,7 +78,11 @@ class LoanListViewController: UITableViewController {
             return LOADING_COUNT
         } else {
             if loanList != nil {
-                return loanList!.count + 1
+                if loanList!.count <= 1 {
+                    return loanList!.count + 1
+                } else {
+                    return loanList!.count
+                }
             } else {
                 return 0
             }

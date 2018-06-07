@@ -54,6 +54,10 @@ class AssessmentInfo: BaseModel, AbstractProtocol, CustomStringConvertible {
         return 0
     }
 
+    func getSummary() -> AssessmentSummary {
+        return AssessmentSummary(reference: reference, date: updated, status: status, rating: rating)
+    }
+
     func hasUploadedFiles() -> Bool {
         return files != nil && files!.count >= MIN_FILE_COUNT
     }

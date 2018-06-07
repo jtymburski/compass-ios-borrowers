@@ -101,14 +101,40 @@ class WelcomeViewController: UIViewController, NVActivityIndicatorViewable {
         self.present(alert, animated: true, completion: nil)
     }
 
-    func updateSubmitResult(success: Bool, error: String?, noNetwork: Bool, unauthorized: Bool) {
+    func updateAssessmentFetch(info: AssessmentInfo?, error: String?, noNetwork: Bool, unauthorized: Bool) {
         attemptingSubmit = false
         stopAnimating()
 
-        if success {
+        if info != nil && info!.isValid() {
             coreModel.activeAssessment = nil
+            coreModel.addAssessment(info!.getSummary())
             performSegue(withIdentifier: "showMain", sender: self)
         } else {
+            if noNetwork {
+                showErrorAlert(title: "No Network", message: "A network connection is required to validate the assessment")
+            } else if unauthorized {
+                performSegue(withIdentifier: UNWIND_SEGUE_LOGIN, sender: self)
+            } else {
+                showErrorAlert(title: "Failed To Validate", message: "The assessment failed to be validated. Try again later")
+            }
+        }
+    }
+
+    func updateSubmitResult(success: Bool, error: String?, noNetwork: Bool, unauthorized: Bool) {
+        if success {
+            // Fetch the current assessment and store
+            Session.assessmentInfo(account: coreModel.account, reference: coreModel.activeAssessment!.reference!, completionHandler: { (info, error, noNetwork, unauthorized) in
+
+                DispatchQueue.main.async {
+                    self.updateAssessmentFetch(info: info, error: error, noNetwork: noNetwork, unauthorized: unauthorized)
+                }
+            })
+        } else {
+            // Finish the animation, It ends prematurely here
+            attemptingSubmit = false
+            stopAnimating()
+
+            // Process the result
             if noNetwork {
                 showErrorAlert(title: "No Network", message: "A network connection is required to submit for assessment")
             } else if unauthorized {
