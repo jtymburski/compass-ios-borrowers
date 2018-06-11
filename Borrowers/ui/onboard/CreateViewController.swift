@@ -16,6 +16,7 @@ class CreateViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
     private let BORDER_COLOR_DEFAULT = UIColorCompat(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.5)
     private let BORDER_COLOR_ERROR = UIColorCompat(red: 1.0, green: 105.0/255.0, blue: 105.0/255.0, alpha: 1.0)
     private let BORDER_COLOR_SELECTED = UIColorCompat(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+    private let SMALL_PHONE_HEIGHT: CGFloat = 500.0
     private let UNWIND_SEGUE = "unwindToLogin"
 
     // UI
@@ -292,9 +293,14 @@ class CreateViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
 
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            let viewBottom = viewCountrySection.frame.origin.y + viewCountrySection.frame.height
-            let viewChange = keyboardSize.origin.y - viewBottom
-            self.view.frame.origin.y = viewChange
+
+            if self.view.frame.height < SMALL_PHONE_HEIGHT {
+                let viewBottom = viewCountrySection.frame.origin.y + viewCountrySection.frame.height
+                let viewChange = keyboardSize.origin.y - viewBottom
+                self.view.frame.origin.y = viewChange
+            } else {
+                self.view.frame.origin.y = -keyboardSize.height
+            }
 
             buttonBack.isHidden = true
             labelTitle.isHidden = true

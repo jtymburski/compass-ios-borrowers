@@ -258,7 +258,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, NVActivityIndi
     // MARK: - Keyboard Control
 
     @objc func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             imageLogo.isHidden = true
             if self.view.frame.height < SMALL_PHONE_HEIGHT {
                 let frame = self.view.convert(viewPasswordSection.frame, from: viewControl)
