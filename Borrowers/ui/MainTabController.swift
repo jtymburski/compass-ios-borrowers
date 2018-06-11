@@ -44,7 +44,6 @@ class MainTabController: UITabBarController, UITabBarControllerDelegate {
 
         // safe place to set the frame of button manually
         let iconHalf = (ICON_SIZE / 2)
-        print(self.tabBar.bounds.height)
         createButton.frame = CGRect.init(x: self.tabBar.center.x - iconHalf, y: self.view.bounds.height - self.tabBar.bounds.height - iconHalf + ICON_MARGIN, width: ICON_SIZE, height: ICON_SIZE)
 
         if !coreModelSent && coreModel != nil && viewControllers != nil {
