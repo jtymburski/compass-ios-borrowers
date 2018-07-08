@@ -23,9 +23,9 @@ class LoanListCellAdd: UITableViewCell {
 
     func isOnlyCell(_ noLoans: Bool) {
         if noLoans {
-            labelText.text = "Add your first loan"
+            labelText.text = "Apply for line of credit"
         } else {
-            labelText.text = "Add another loan"
+            labelText.text = "Apply for line of credit"
         }
     }
 

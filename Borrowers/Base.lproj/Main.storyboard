@@ -1928,7 +1928,7 @@
             </objects>
             <point key="canvasLocation" x="3705" y="-607"/>
         </scene>
-        <!--Loans-->
+        <!--Lines of Credit-->
         <scene sceneID="L8p-n9-CcK">
             <objects>
                 <tableViewController id="zEg-rJ-Eju" customClass="LoanListViewController" customModule="Borrowers" customModuleProvider="target" sceneMemberID="viewController">
@@ -1954,10 +1954,10 @@
                                                             <rect key="frame" x="32" y="30" width="60" height="60"/>
                                                             <subviews>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wEt-Kd-4O6">
-                                                                    <rect key="frame" x="30" y="0.0" width="30" height="30"/>
+                                                                    <rect key="frame" x="30" y="0.0" width="2" height="30"/>
                                                                     <color key="backgroundColor" red="0.098039215690000001" green="0.65490196079999996" blue="0.50980392159999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="width" constant="30" id="ACV-SO-7R0"/>
+                                                                        <constraint firstAttribute="width" constant="2" id="ACV-SO-7R0"/>
                                                                         <constraint firstAttribute="height" constant="30" id="oAS-gQ-JH2"/>
                                                                     </constraints>
                                                                 </view>
@@ -1978,7 +1978,7 @@
                                                             <color key="backgroundColor" red="0.90588235294117647" green="0.91764705882352937" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="60" id="76S-Bh-TPM"/>
-                                                                <constraint firstAttribute="trailing" secondItem="wEt-Kd-4O6" secondAttribute="trailing" id="Gu8-6z-Ag0"/>
+                                                                <constraint firstAttribute="trailing" secondItem="wEt-Kd-4O6" secondAttribute="trailing" constant="28" id="Gu8-6z-Ag0"/>
                                                                 <constraint firstItem="tcL-HG-7gd" firstAttribute="centerY" secondItem="s9S-oW-h8u" secondAttribute="centerY" id="Jq4-af-q3P"/>
                                                                 <constraint firstItem="wEt-Kd-4O6" firstAttribute="top" secondItem="s9S-oW-h8u" secondAttribute="top" id="Pqy-tZ-ClO"/>
                                                                 <constraint firstItem="tcL-HG-7gd" firstAttribute="centerX" secondItem="s9S-oW-h8u" secondAttribute="centerX" id="QoI-Dd-cPq"/>
@@ -2264,7 +2264,7 @@
                             <outlet property="delegate" destination="zEg-rJ-Eju" id="v6J-J4-n25"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Loans" id="6AL-Xo-fdn"/>
+                    <navigationItem key="navigationItem" title="Lines of Credit" id="6AL-Xo-fdn"/>
                     <size key="freeformSize" width="320" height="725"/>
                     <connections>
                         <segue destination="53V-5c-L2A" kind="unwind" identifier="unwindToLogin" unwindAction="unwindToLoginWithSegue:" id="SC2-Iw-Bdy"/>
@@ -2527,7 +2527,7 @@
             </objects>
             <point key="canvasLocation" x="2108" y="1396"/>
         </scene>
-        <!--New Loan-->
+        <!--New Line of Credit-->
         <scene sceneID="09q-9i-H1p">
             <objects>
                 <viewController id="Bcc-JB-R7c" customClass="NewLoanViewController" customModule="Borrowers" customModuleProvider="target" sceneMemberID="viewController">
@@ -2637,7 +2637,7 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X3t-SA-ETj">
                                                         <rect key="frame" x="0.0" y="0.0" width="280" height="97"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LOAN AMOUNT" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ukn-KN-gQa">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AMOUNT" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ukn-KN-gQa">
                                                                 <rect key="frame" x="24" y="24" width="232" height="16.5"/>
                                                                 <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="12"/>
                                                                 <color key="textColor" red="0.74117647058823533" green="0.77254901960784317" blue="0.81176470588235294" alpha="1" colorSpace="calibratedRGB"/>
@@ -2664,7 +2664,7 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7IX-OP-8oZ">
                                                         <rect key="frame" x="0.0" y="194" width="280" height="97"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LOAN TERM" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b4S-mR-Qab">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TERM" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b4S-mR-Qab">
                                                                 <rect key="frame" x="24" y="24" width="232" height="16.5"/>
                                                                 <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="12"/>
                                                                 <color key="textColor" red="0.74117647060000003" green="0.7725490196" blue="0.81176470590000005" alpha="1" colorSpace="calibratedRGB"/>
@@ -2862,7 +2862,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="9Jd-YF-XiX"/>
                     </view>
-                    <navigationItem key="navigationItem" title="New Loan" id="ibA-vU-rda">
+                    <navigationItem key="navigationItem" title="New Line of Credit" id="ibA-vU-rda">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="cp8-ou-euq">
                             <connections>
                                 <action selector="cancelClicked:" destination="Bcc-JB-R7c" id="72S-Vh-mKa"/>
@@ -3049,7 +3049,7 @@
         <image name="IconLocation" width="31" height="44"/>
         <image name="IconLock" width="37" height="44"/>
         <image name="IconMore" width="24" height="24"/>
-        <image name="IconNavLoans" width="64" height="18"/>
+        <image name="IconNavLoans" width="68" height="18"/>
         <image name="IconNavProfile" width="74" height="19"/>
         <image name="IconNext" width="18" height="33"/>
         <image name="IconOrganization" width="44" height="44"/>
