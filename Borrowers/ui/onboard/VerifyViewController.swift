@@ -122,7 +122,11 @@ class VerifyViewController: UITableViewController, UIImagePickerControllerDelega
             performSegue(withIdentifier: "showVerificationFile", sender: self)
         } else {
             // Fetch a picture
-            let sourceType = UIImagePickerControllerSourceType.photoLibrary
+            #if DEBUG
+                let sourceType = UIImagePickerControllerSourceType.photoLibrary
+            #else
+                let sourceType = UIImagePickerControllerSourceType.camera
+            #endif
             if UIImagePickerController.isSourceTypeAvailable(sourceType) {
                 // Set up the image properties
                 selectedRow = indexPath.row

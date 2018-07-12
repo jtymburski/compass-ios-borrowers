@@ -59,7 +59,11 @@ class VerifyPreviewController: UIViewController, UIScrollViewDelegate, UIImagePi
 
     @IBAction func retake(_ sender: UIBarButtonItem) {
         // Fetch a picture
-        let sourceType = UIImagePickerControllerSourceType.photoLibrary
+        #if DEBUG
+            let sourceType = UIImagePickerControllerSourceType.photoLibrary
+        #else
+            let sourceType = UIImagePickerControllerSourceType.camera
+        #endif
         if UIImagePickerController.isSourceTypeAvailable(sourceType) {
             // Set up and open the picker
             let imagePicker = UIImagePickerController()
