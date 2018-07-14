@@ -318,11 +318,11 @@ class NewLoanViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
             }
         } else {
             if noNetwork {
-                showErrorAlert(title: "No Network", message: "A network connection is required to create a new loan application")
+                showErrorAlert(title: "No Network", message: "A network connection is required to create a new line of credit application")
             } else if unauthorized {
                 performSegue(withIdentifier: SEGUE_LOGIN, sender: self)
             } else {
-                showErrorAlert(title: "Application Unavailable", message: "The loan application information could not be fetched. Please try again later")
+                showErrorAlert(title: "Application Unavailable", message: "The line of credit application information could not be fetched. Please try again later")
                 if error != nil {
                     print("Loan application info unavailable: \(error!)")
                 }
@@ -368,11 +368,11 @@ class NewLoanViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
             performSegue(withIdentifier: SEGUE_TAB_VIEW, sender: self)
         } else {
             if noNetwork {
-                showErrorAlert(title: "No Network", message: "A network connection is required to submit a new loan application", dismissOnOk: false)
+                showErrorAlert(title: "No Network", message: "A network connection is required to submit a new line of credit application", dismissOnOk: false)
             } else if unauthorized {
                 performSegue(withIdentifier: SEGUE_LOGIN, sender: self)
             } else {
-                showErrorAlert(title: "Failed To Submit", message: "A new loan application failed to be submitted. Try again later", dismissOnOk: false)
+                showErrorAlert(title: "Failed To Submit", message: "A new line of credit application failed to be submitted. Try again later", dismissOnOk: false)
             }
         }
     }

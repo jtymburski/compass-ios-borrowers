@@ -1954,10 +1954,10 @@
                                                             <rect key="frame" x="32" y="30" width="60" height="60"/>
                                                             <subviews>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wEt-Kd-4O6">
-                                                                    <rect key="frame" x="30" y="0.0" width="2" height="30"/>
+                                                                    <rect key="frame" x="30" y="0.0" width="1" height="30"/>
                                                                     <color key="backgroundColor" red="0.098039215690000001" green="0.65490196079999996" blue="0.50980392159999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="width" constant="2" id="ACV-SO-7R0"/>
+                                                                        <constraint firstAttribute="width" constant="1" id="ACV-SO-7R0"/>
                                                                         <constraint firstAttribute="height" constant="30" id="oAS-gQ-JH2"/>
                                                                     </constraints>
                                                                 </view>
@@ -1978,7 +1978,7 @@
                                                             <color key="backgroundColor" red="0.90588235294117647" green="0.91764705882352937" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="60" id="76S-Bh-TPM"/>
-                                                                <constraint firstAttribute="trailing" secondItem="wEt-Kd-4O6" secondAttribute="trailing" constant="28" id="Gu8-6z-Ag0"/>
+                                                                <constraint firstAttribute="trailing" secondItem="wEt-Kd-4O6" secondAttribute="trailing" constant="29" id="Gu8-6z-Ag0"/>
                                                                 <constraint firstItem="tcL-HG-7gd" firstAttribute="centerY" secondItem="s9S-oW-h8u" secondAttribute="centerY" id="Jq4-af-q3P"/>
                                                                 <constraint firstItem="wEt-Kd-4O6" firstAttribute="top" secondItem="s9S-oW-h8u" secondAttribute="top" id="Pqy-tZ-ClO"/>
                                                                 <constraint firstItem="tcL-HG-7gd" firstAttribute="centerX" secondItem="s9S-oW-h8u" secondAttribute="centerX" id="QoI-Dd-cPq"/>
@@ -2221,7 +2221,7 @@
                                                         <constraint firstAttribute="width" constant="20" id="IZT-bx-XZJ"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add another loan" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q6G-5Y-LLb">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Apply for line of credit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q6G-5Y-LLb">
                                                     <rect key="frame" x="75" y="23" width="201" height="25"/>
                                                     <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="18"/>
                                                     <color key="textColor" red="0.098039215686274508" green="0.65490196078431373" blue="0.50980392156862742" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -2612,7 +2612,7 @@
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ihc-zY-miM">
                                 <rect key="frame" x="0.0" y="82" width="320" height="472.5"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have insufficient loan capacity remaining to take out another loan" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="96U-dL-QHT">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have insufficient capacity remaining to take out another line of credit" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="96U-dL-QHT">
                                         <rect key="frame" x="24" y="200" width="272" height="74"/>
                                         <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="18"/>
                                         <color key="textColor" red="0.43529411764705883" green="0.45490196078431372" blue="0.4823529411764706" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
